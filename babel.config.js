@@ -6,7 +6,12 @@ module.exports = {
       {
         root: ["./"],
         extensions: [".ts", ".tsx", ".js", ".json"],
-        alias: {},
+        alias: {
+          "@app": "./src/app",
+          "@app/*": "./src/app/*",
+          "@core": "./src/core",
+          "@core/*": "./src/core/*",
+        },
       },
     ],
     "@babel/plugin-proposal-nullish-coalescing-operator",

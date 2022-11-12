@@ -12,7 +12,7 @@ const App = (): JSX.Element => {
       }}
     >
       <ScrollView>
-        <Text>asdasd</Text>
+        <Text>a</Text>
       </ScrollView>
     </SafeAreaView>
   );

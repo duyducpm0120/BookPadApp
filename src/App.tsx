@@ -1,6 +1,6 @@
+import { useMount } from "@core";
 import React from "react";
 import { SafeAreaView, ScrollView, Text } from "react-native";
-import { useMount } from "./core";
 
 const App = (): JSX.Element => {
   useMount(() => {});

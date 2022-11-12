@@ -15,7 +15,12 @@
     "strictNullChecks": true,
     "typeRoots": ["node_modules/@types"],
     "noImplicitAny": false,
-    "paths": {},
+    "paths": {
+      "@app": ["./src/app"],
+      "@app/*": ["./src/app/*"],
+      "@core": ["./src/core"],
+      "@core/*": ["./src/core/*"]
+    },
     "resolveJsonModule": true
   },
   "exclude": [

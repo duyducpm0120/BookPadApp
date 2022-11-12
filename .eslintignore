@@ -1,0 +1,7 @@
+node_modules
+typings
+src/app/helpers/ViewShotModule.js
+scripts
+react-native.config.js
+webpack.config.js
+index.js

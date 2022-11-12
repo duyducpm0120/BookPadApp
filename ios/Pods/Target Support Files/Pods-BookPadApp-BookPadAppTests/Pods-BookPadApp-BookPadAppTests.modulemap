@@ -1,0 +1,6 @@
+module Pods_BookPadApp_BookPadAppTests {
+  umbrella header "Pods-BookPadApp-BookPadAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -12,4 +12,19 @@ export const appStyle = StyleSheet.create({
     fontSize: 20,
     color: "#333",
   },
+  rowCenterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rowBetweenContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  columnCenterContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });

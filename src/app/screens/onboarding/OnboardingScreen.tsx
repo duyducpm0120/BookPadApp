@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import { BlankSpacer, BPText } from "@app/components";
-import { appStyle, COLORS, SPACE } from "@app/styles";
-import { IMAGES } from "@core/assets";
+import { BlankSpacer, BPButton, BPText } from "@app/components";
+import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
+import { IMAGES, strings } from "@core/assets";
 import React, { useRef, useState } from "react";
 import {
   Animated,
@@ -28,7 +28,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
     return (
       <View
         style={{
-          height: "90%",
+          height: "70%",
           justifyContent: "flex-start",
           alignItems: "center",
         }}
@@ -110,7 +110,6 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
             );
           })}
         </ScrollView>
-        <BPText textAlign="center">{slogans[screenIndex]}</BPText>
       </View>
     );
   };
@@ -152,10 +151,39 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
     );
   };
   return (
-    <SafeAreaView style={appStyle.container}>
+    <SafeAreaView
+      style={[
+        appStyle.container,
+        {
+          alignItems: "center",
+        },
+      ]}
+    >
       {renderImageSlider()}
-      <BlankSpacer height={SPACE.spacing8} />
+      <View
+        style={[
+          appStyle.rowCenterContainer,
+          {
+            height: 80,
+          },
+        ]}
+      >
+        <BPText textAlign="center" numberOfLines={3}>
+          {slogans[screenIndex]}
+        </BPText>
+      </View>
+      <BlankSpacer height={SPACE.spacing12} />
       {renderDots()}
+      <BlankSpacer height={SPACE.spacing36} />
+      <BPButton
+        type="text"
+        title={strings.get_started}
+        onPress={() => {}}
+        width={180}
+        labelStyle={{
+          fontSize: FONT_SIZE.fontSize16,
+        }}
+      />
     </SafeAreaView>
   );
 };

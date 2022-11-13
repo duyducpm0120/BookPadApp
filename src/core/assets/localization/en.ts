@@ -41,4 +41,11 @@ export const enStrings = {
   delete: "Delete",
   get_started: "Get started",
   go_back: "Go back",
+  user_name: "User name",
+  password: "Password",
+  login: "Login",
+  forgot_password: "Forgot password",
+  dont_have_account: "Don't have an account?",
+  sign_up: "Sign up",
+  email: "Email",
 };

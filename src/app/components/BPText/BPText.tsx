@@ -1,4 +1,4 @@
-import { FONT_FAMILY, FONT_SIZE } from "@app/styles";
+import { COLORS, FONT_FAMILY, FONT_SIZE } from "@app/styles";
 import React from "react";
 import { Text } from "react-native";
 import type { BPTextProps } from "./types";
@@ -6,7 +6,13 @@ import type { BPTextProps } from "./types";
 export const BPText: React.FC<BPTextProps> = (
   props: BPTextProps
 ): JSX.Element => {
-  const { style, fontSize = FONT_SIZE.fontSize24, textAlign, ...rest } = props;
+  const {
+    style,
+    fontSize = FONT_SIZE.fontSize24,
+    textAlign,
+    color = COLORS.black,
+    ...rest
+  } = props;
   return (
     <Text
       style={{
@@ -14,6 +20,7 @@ export const BPText: React.FC<BPTextProps> = (
         fontFamily: FONT_FAMILY.Montserrat,
         fontSize,
         textAlign,
+        color,
       }}
       {...rest}
     />

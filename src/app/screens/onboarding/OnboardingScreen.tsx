@@ -86,7 +86,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
                 windowWidth * index,
                 windowWidth * (index + 1),
               ],
-              outputRange: [100, 400, 100],
+              outputRange: [100, 300, 100],
               extrapolate: "clamp",
             });
             return (
@@ -103,7 +103,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
                   key={-index.toString()}
                   // resizeMode="cover"
                   style={{
-                    width: windowWidth - 40,
+                    width: windowWidth - 40, // marginHorizontal: 20 * 2,
                     height: h,
                     opacity: o,
                     borderRadius: 15,

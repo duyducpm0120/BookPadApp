@@ -20,4 +20,13 @@ export const IMAGES = {
   illustration7: {
     uri: "https://firebasestorage.googleapis.com/v0/b/bookpad-c62e3.appspot.com/o/BP_Illustration_7.png?alt=media&token=e616d3e4-8de4-43ad-80c3-f814a56c1cfe",
   },
+  appName: {
+    uri: "https://firebasestorage.googleapis.com/v0/b/bookpad-c62e3.appspot.com/o/AppName.png?alt=media&token=f42ca917-c28b-4c5d-ae3a-f6445011f4f7",
+  },
+  show: {
+    uri: "https://firebasestorage.googleapis.com/v0/b/bookpad-c62e3.appspot.com/o/Eye.png?alt=media&token=cbef1e02-6814-4666-bb26-7daf9c642536",
+  },
+  hide: {
+    uri: "https://firebasestorage.googleapis.com/v0/b/bookpad-c62e3.appspot.com/o/EyeSlash.png?alt=media&token=281bae1f-e65b-43b3-a07d-34c7bf06f865",
+  },
 };

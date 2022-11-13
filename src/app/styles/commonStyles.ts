@@ -13,11 +13,19 @@ export const appStyle = StyleSheet.create({
     color: "#333",
   },
   rowCenterContainer: {
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
+  rowRightContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
   rowBetweenContainer: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -26,5 +34,9 @@ export const appStyle = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+  },
+  centerContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

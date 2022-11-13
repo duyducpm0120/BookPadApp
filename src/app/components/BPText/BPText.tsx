@@ -6,13 +6,14 @@ import type { BPTextProps } from "./types";
 export const BPText: React.FC<BPTextProps> = (
   props: BPTextProps
 ): JSX.Element => {
-  const { style, fontSize = FONT_SIZE.fontSize24, ...rest } = props;
+  const { style, fontSize = FONT_SIZE.fontSize24, textAlign, ...rest } = props;
   return (
     <Text
       style={{
         ...style?.valueOf,
         fontFamily: FONT_FAMILY.Montserrat,
         fontSize,
+        textAlign,
       }}
       {...rest}
     />

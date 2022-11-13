@@ -2,7 +2,7 @@
 import { BlankSpacer, BPText } from "@app/components";
 import { appStyle, COLORS, SPACE } from "@app/styles";
 import { IMAGES } from "@core/assets";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   Animated,
   SafeAreaView,
@@ -22,6 +22,8 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
   const images = [illustration1, illustration2, illustration4];
   const scrollX = useRef(new Animated.Value(0)).current;
 
+  const [screenIndex, setScreenIndex] = useState(0);
+
   const renderImageSlider = () => {
     return (
       <View
@@ -38,7 +40,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
             alignItems: "center",
           }}
           showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={1}
+          scrollEventThrottle={16}
           pagingEnabled
           onScroll={Animated.event(
             [
@@ -51,8 +53,13 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
               },
             ],
             {
-              listener: (event) => {
+              listener: (event: any) => {
+                // console.log("width", windowWidth);
                 // console.log("event", event.nativeEvent.contentOffset.x);
+                const index = Math.round(
+                  event.nativeEvent.contentOffset.x / windowWidth
+                );
+                setScreenIndex(index);
               },
               useNativeDriver: false,
             }
@@ -103,7 +110,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
             );
           })}
         </ScrollView>
-        <BPText textAlign="center">{slogans[0]}</BPText>
+        <BPText textAlign="center">{slogans[screenIndex]}</BPText>
       </View>
     );
   };

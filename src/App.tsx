@@ -1,3 +1,4 @@
+import { BPButton } from "@app/components";
 import { useMount } from "@core";
 import React from "react";
 import { SafeAreaView, ScrollView, Text } from "react-native";
@@ -13,6 +14,7 @@ const App = (): JSX.Element => {
     >
       <ScrollView>
         <Text>a</Text>
+        <BPButton title="asdasd" onPress={() => {}} type="text" width={100} />
       </ScrollView>
     </SafeAreaView>
   );

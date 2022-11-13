@@ -1,7 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BlankSpacer, BPButton, BPText } from "@app/components";
+import { ScreenNameEnum } from "@app/navigator";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { IMAGES, strings } from "@core/assets";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useRef, useState } from "react";
 import {
   Animated,
@@ -23,6 +26,8 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const [screenIndex, setScreenIndex] = useState(0);
+
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const renderImageSlider = () => {
     return (
@@ -178,7 +183,9 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
       <BPButton
         type="text"
         title={strings.get_started}
-        onPress={() => {}}
+        onPress={() => {
+          navigation.navigate(ScreenNameEnum.Login);
+        }}
         width={180}
         labelStyle={{
           fontSize: FONT_SIZE.fontSize16,

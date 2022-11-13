@@ -40,4 +40,5 @@ export const enStrings = {
   author_id: "Author id",
   delete: "Delete",
   get_started: "Get started",
+  go_back: "Go back",
 };

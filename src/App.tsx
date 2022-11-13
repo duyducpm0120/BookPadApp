@@ -1,7 +1,8 @@
-import { BPButton } from "@app/components";
+import { BPButton, BPText } from "@app/components";
+import { appStyle, FONT_SIZE } from "@app/styles";
 import { useMount } from "@core";
 import React from "react";
-import { SafeAreaView, ScrollView, Text } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 
 const App = (): JSX.Element => {
   useMount(() => {});
@@ -12,8 +13,8 @@ const App = (): JSX.Element => {
         height: "100%",
       }}
     >
-      <ScrollView>
-        <Text>a</Text>
+      <ScrollView contentContainerStyle={appStyle.container}>
+        <BPText fontSize={FONT_SIZE.fontSize12}>a</BPText>
         <BPButton title="asdasd" onPress={() => {}} type="text" width={100} />
       </ScrollView>
     </SafeAreaView>

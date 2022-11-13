@@ -1,4 +1,4 @@
-import { COLORS, RADIUS } from "@app/styles";
+import { COLORS, FONT_FAMILY, RADIUS } from "@app/styles";
 import React from "react";
 import { Button } from "react-native-paper";
 import type { BPButtonProps } from "./types";
@@ -37,7 +37,7 @@ export const BPButton: React.FC<BPButtonProps> = (
         width,
         height,
       }}
-      labelStyle={labelStyle}
+      labelStyle={{ fontFamily: FONT_FAMILY.Montserrat, ...labelStyle }}
     >
       {title}
     </Button>

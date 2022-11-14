@@ -1,13 +1,14 @@
-import { useMount } from "@core";
+import { useGlobalLoading } from "@core";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ScreenNameEnum } from "@app/navigator";
 import { LoginScreen, OnboardingScreen } from "@app/screens";
+import { Loading } from "@app/components";
 
 const Stack = createNativeStackNavigator();
 const App = (): JSX.Element => {
-  useMount(() => {});
+  const { IS_LOADING } = useGlobalLoading();
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -22,6 +23,7 @@ const App = (): JSX.Element => {
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
+      <Loading isLoading={IS_LOADING} />
     </NavigationContainer>
   );
 };

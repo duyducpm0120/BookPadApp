@@ -31,7 +31,7 @@ export const LoginScreen: React.FC<any> = (props: any) => {
         resizeMode="contain"
       />
       <BlankSpacer height={SPACE.spacing12} />
-      <BPTextInput type="outlined" label={strings.email} />
+      <BPTextInput type="outlined" label={strings.email} autoFocus />
       <BlankSpacer height={SPACE.spacing12} />
       <BPTextInput
         type="outlined"
@@ -60,18 +60,22 @@ export const LoginScreen: React.FC<any> = (props: any) => {
       />
       <BlankSpacer height={SPACE.spacing16} />
       <View style={appStyle.rowCenterContainer}>
-        <BPText color={COLORS.black} fontSize={FONT_SIZE.fontSize14}>
+        <BPText
+          color={COLORS.black}
+          fontSize={FONT_SIZE.fontSize14}
+          style={{ justifyContent: "center", alignItems: "center" }}
+        >
           <BPText color={COLORS.black} fontSize={FONT_SIZE.fontSize14}>
             {`${strings.dont_have_account} `}
           </BPText>
-
-          <BPText
-            color={COLORS.primary.main}
-            fontSize={FONT_SIZE.fontSize14}
-            onPress={() => {}}
-          >
+          <TouchableOpacity>
+            <BPText color={COLORS.primary.main} fontSize={FONT_SIZE.fontSize14}>
+              {strings.sign_up}
+            </BPText>
+          </TouchableOpacity>
+          {/* <BPText color={COLORS.primary.main} fontSize={FONT_SIZE.fontSize14}>
             {strings.sign_up}
-          </BPText>
+          </BPText> */}
         </BPText>
       </View>
     </View>

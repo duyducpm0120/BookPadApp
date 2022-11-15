@@ -1,4 +1,4 @@
-import { useGlobalLoading } from "@core";
+import { strings, useGlobalLoading } from "@core";
 import { logIn } from "@core/services";
 import { getMessageFromErrorStatus } from "@core/utils/ErrorUtils";
 import { showAlert } from "@core/utils/PopupUtils";
@@ -22,18 +22,17 @@ export const useViewModel = (dependencies = defaultDependencies) => {
       });
       hideGlobalLoading();
       showAlert({
-        title: "Login Success",
-        message: "Login Success",
+        title: strings.loginSuccess,
+        message: strings.loginSuccessMessage,
         primaryButtonParams: {
-          text: "OK",
+          text: strings.ok,
           onPress: () => {},
         },
       });
     } catch (err: any) {
       hideGlobalLoading();
-      console.log("error status asdasd", err.response);
       showAlert({
-        title: "Login Failed",
+        title: strings.loginFailed,
         message: getMessageFromErrorStatus(err.response.status),
         primaryButtonParams: {
           text: "OK",

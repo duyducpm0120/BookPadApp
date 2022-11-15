@@ -48,4 +48,8 @@ export const enStrings = {
   dont_have_account: "Don't have an account?",
   sign_up: "Sign up",
   email: "Email",
+  loginSuccess: "Login Success",
+  loginSuccessMessage: "You have logged in successfully",
+  ok: "OK",
+  loginFailed: "Login Failed",
 };

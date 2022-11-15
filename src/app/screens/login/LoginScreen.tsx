@@ -5,9 +5,11 @@ import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useMemo } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
+import { useViewModel } from "./LoginScreen.ViewModel";
 
 export const LoginScreen: React.FC<any> = (props: any) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const { onLogin, email, setEmail, password, setPassword } = useViewModel();
   const passwordIcon = useMemo(() => {
     return (
       <TouchableOpacity>
@@ -31,13 +33,21 @@ export const LoginScreen: React.FC<any> = (props: any) => {
         resizeMode="contain"
       />
       <BlankSpacer height={SPACE.spacing12} />
-      <BPTextInput type="outlined" label={strings.email} autoFocus />
+      <BPTextInput
+        type="outlined"
+        label={strings.email}
+        autoFocus
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
       <BlankSpacer height={SPACE.spacing12} />
       <BPTextInput
         type="outlined"
         label={strings.password}
         passwordMode
         // right={passwordIcon}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
       />
       <BlankSpacer height={SPACE.spacing16} />
       <TouchableOpacity style={appStyle.rowRightContainer} onPress={() => {}}>
@@ -50,7 +60,8 @@ export const LoginScreen: React.FC<any> = (props: any) => {
         type="text"
         title={strings.login}
         onPress={() => {
-          navigation.goBack();
+          // navigation.goBack();
+          onLogin();
         }}
         width={180}
         labelStyle={{

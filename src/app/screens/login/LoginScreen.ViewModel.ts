@@ -1,8 +1,9 @@
-import { strings, useGlobalLoading } from "@core";
+import { strings, useGlobalLoading, useGlobalSnackBar } from "@core";
 import { logIn } from "@core/services";
 import { getMessageFromErrorStatus } from "@core/utils/ErrorUtils";
 import { showAlert } from "@core/utils/PopupUtils";
 import { useState } from "react";
+import { useGlobalNavigation } from "../../../core/hooks/useGlobalNavigation";
 
 const defaultDependencies = {
   logIn,
@@ -13,6 +14,9 @@ export const useViewModel = (dependencies = defaultDependencies) => {
   const [email, setEmail] = useState<string>("vuong.dt.23@gmail.com");
   const [password, setPassword] = useState<string>("emmawatson");
 
+  const { navigateToHomeScreen } = useGlobalNavigation();
+  const { showGlobalSnackBar } = useGlobalSnackBar();
+
   const onLogin = async () => {
     try {
       showGlobalLoading();
@@ -21,14 +25,20 @@ export const useViewModel = (dependencies = defaultDependencies) => {
         password,
       });
       hideGlobalLoading();
-      showAlert({
-        title: strings.loginSuccess,
+      // showAlert({
+      //   title: strings.loginSuccess,
+      //   message: strings.loginSuccessMessage,
+      //   primaryButtonParams: {
+      //     text: strings.ok,
+      //     onPress: () => {
+      //       navigateToHomeScreen();
+      //     },
+      //   },
+      // });
+      showGlobalSnackBar({
         message: strings.loginSuccessMessage,
-        primaryButtonParams: {
-          text: strings.ok,
-          onPress: () => {},
-        },
       });
+      navigateToHomeScreen();
     } catch (err: any) {
       hideGlobalLoading();
       showAlert({

@@ -12,6 +12,14 @@ export const initState: BookPadAppState = {
     MESSAGE: "",
     TYPE: AlertType.SUCCESS,
   },
+  SNACK_BAR: {
+    IS_SHOW_SNACK_BAR: false,
+    MESSAGE: "",
+    ACTION: {
+      label: "",
+      onPress: () => {},
+    },
+  },
 };
 export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
   initState
@@ -40,6 +48,19 @@ export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
           IS_SHOW_ALERT: action.payload.isShowAlert,
           MESSAGE: action.payload.message,
           TYPE: action.payload.type,
+        },
+      };
+    }
+  )
+  .handleAction(
+    globalActions.setGlobalSnackBar,
+    (state, action): BookPadAppState => {
+      return {
+        ...state,
+        SNACK_BAR: {
+          IS_SHOW_SNACK_BAR: action.payload.isShowSnackBar,
+          MESSAGE: action.payload.message,
+          ACTION: action.payload.action,
         },
       };
     }

@@ -1,14 +1,11 @@
 import { BlankSpacer, BPButton, BPText, BPTextInput } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { IMAGES, strings } from "@core/assets";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useMemo } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { useViewModel } from "./LoginScreen.ViewModel";
 
 export const LoginScreen: React.FC<any> = (props: any) => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const { onLogin, email, setEmail, password, setPassword } = useViewModel();
   const passwordIcon = useMemo(() => {
     return (

@@ -35,6 +35,8 @@ export const useLogInService = () => {
   };
   const { reset, mutateAsync } = useMutation({
     mutationFn: loginFunc,
+    mutationKey: ["login"],
+    // networkMode: "offlineFirst",
   });
 
   return {

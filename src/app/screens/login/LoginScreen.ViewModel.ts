@@ -1,9 +1,13 @@
-import { strings, useGlobalLoading, useGlobalSnackBar } from "@core";
+import {
+  strings,
+  useGlobalLoading,
+  useGlobalNavigation,
+  useGlobalSnackBar,
+} from "@core";
 import { logIn, useLogInService } from "@core/services";
 import { getMessageFromErrorStatus } from "@core/utils/ErrorUtils";
 import { showAlert } from "@core/utils/PopupUtils";
 import { useState } from "react";
-import { useGlobalNavigation } from "../../../core/hooks/useGlobalNavigation";
 
 const defaultDependencies = {
   logIn,

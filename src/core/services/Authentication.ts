@@ -1,6 +1,6 @@
 import { END_POINT } from "@core/const";
 import { LogInModel } from "@core/models";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
 const logInEndpoint = `${END_POINT}auth/login`;
@@ -18,27 +18,27 @@ export const logIn = async ({
   return LogInModel.instantiate(response);
 };
 
-export const useLogInService = ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) => {
-  const loginFunc = () =>
-    axios.post(logInEndpoint, {
+export const useLogInService = () => {
+  const loginFunc = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
+    const res = await axios.post(logInEndpoint, {
       Email: email,
       Password: password,
     });
-  const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["login"],
-    queryFn: loginFunc,
+    const returnData = LogInModel.instantiate(res);
+    return returnData;
+  };
+  const { reset, mutateAsync } = useMutation({
+    mutationFn: loginFunc,
   });
-  const returnData = LogInModel.instantiate(data);
+
   return {
-    data: returnData,
-    isLoading,
-    error,
-    refetch,
+    reset,
+    mutateAsync,
   };
 };

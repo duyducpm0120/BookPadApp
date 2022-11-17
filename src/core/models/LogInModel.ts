@@ -8,7 +8,7 @@ export class LogInModel {
   }
 
   public static instantiate = (json: any) => {
-    // console.log('json', json);
+    console.log("json asdasd", json);
     const data = safeGet(json, "data", { token: "" });
     const token = safeGetString(data, "token", "");
     return new LogInModel(token);

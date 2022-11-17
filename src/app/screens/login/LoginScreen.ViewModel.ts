@@ -1,5 +1,5 @@
 import { strings, useGlobalLoading, useGlobalSnackBar } from "@core";
-import { logIn } from "@core/services";
+import { logIn, useLogInService } from "@core/services";
 import { getMessageFromErrorStatus } from "@core/utils/ErrorUtils";
 import { showAlert } from "@core/utils/PopupUtils";
 import { useState } from "react";
@@ -17,24 +17,22 @@ export const useViewModel = (dependencies = defaultDependencies) => {
   const { navigateToHomeScreen } = useGlobalNavigation();
   const { showGlobalSnackBar } = useGlobalSnackBar();
 
+  const { mutateAsync, reset } = useLogInService();
+
   const onLogin = async () => {
     try {
       showGlobalLoading();
-      await dependencies.logIn({
-        email,
-        password,
-      });
+      const result = await mutateAsync(
+        {
+          email,
+          password,
+        },
+        {
+          onSuccess: () => {},
+          onError: (err) => {},
+        }
+      );
       hideGlobalLoading();
-      // showAlert({
-      //   title: strings.loginSuccess,
-      //   message: strings.loginSuccessMessage,
-      //   primaryButtonParams: {
-      //     text: strings.ok,
-      //     onPress: () => {
-      //       navigateToHomeScreen();
-      //     },
-      //   },
-      // });
       showGlobalSnackBar({
         message: strings.loginSuccessMessage,
       });

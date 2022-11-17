@@ -40,6 +40,7 @@ export const useViewModel = (dependencies = defaultDependencies) => {
       showGlobalSnackBar({
         message: strings.loginSuccessMessage,
       });
+      console.log("result asdasd", result);
       navigateToHomeScreen();
     } catch (err: any) {
       hideGlobalLoading();

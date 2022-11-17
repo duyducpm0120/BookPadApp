@@ -85,9 +85,8 @@ export class BookModel {
     );
   };
 
-  public static instantiateList = (json: any) => {
-    if (size(json) === 0) return [];
-    const books = safeGetArray(json, "getAllBooks", []);
+  public static instantiateList = (books: any[]) => {
+    if (size(books) === 0) return [];
     return books.map((book: any) => BookModel.instantiate(book));
   };
 }

@@ -11,6 +11,7 @@ export const BPText: React.FC<BPTextProps> = (
     fontSize = FONT_SIZE.fontSize24,
     textAlign,
     color = COLORS.black,
+    fontWeight = undefined,
     ...rest
   } = props;
   return (
@@ -21,6 +22,7 @@ export const BPText: React.FC<BPTextProps> = (
         fontSize,
         textAlign,
         color,
+        fontWeight,
       }}
       {...rest}
     />

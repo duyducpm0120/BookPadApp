@@ -1,5 +1,7 @@
 import {
+  globalActions,
   strings,
+  useGlobalDispatch,
   useGlobalLoading,
   useGlobalNavigation,
   useGlobalSnackBar,
@@ -23,6 +25,8 @@ export const useViewModel = (dependencies = defaultDependencies) => {
 
   const { mutateAsync, reset } = useLogInService();
 
+  const globalDispatch = useGlobalDispatch();
+
   const onLogin = async () => {
     try {
       showGlobalLoading();
@@ -40,7 +44,9 @@ export const useViewModel = (dependencies = defaultDependencies) => {
       showGlobalSnackBar({
         message: strings.loginSuccessMessage,
       });
-      console.log("result asdasd", result);
+      globalDispatch(globalActions.setGlobalToken(result.token));
+      globalDispatch(globalActions.setGlobalBooks(result.books));
+      globalDispatch(globalActions.setGlobalUserInfo(result.userInfo));
       navigateToHomeScreen();
     } catch (err: any) {
       hideGlobalLoading();

@@ -52,4 +52,5 @@ export const enStrings = {
   loginSuccessMessage: "You have logged in successfully",
   ok: "OK",
   loginFailed: "Login Failed",
+  hello: "Hello",
 };

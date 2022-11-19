@@ -167,7 +167,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
       {renderImageSlider()}
       <View
         style={[
-          appStyle.rowCenterContainer,
+          appStyle.rowFullWidthCenterContainer,
           {
             height: 80,
           },

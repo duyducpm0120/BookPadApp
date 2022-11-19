@@ -47,7 +47,10 @@ export const LoginScreen: React.FC<any> = (props: any) => {
         onChangeText={(text) => setPassword(text)}
       />
       <BlankSpacer height={SPACE.spacing16} />
-      <TouchableOpacity style={appStyle.rowRightContainer} onPress={() => {}}>
+      <TouchableOpacity
+        style={appStyle.rowFullWidthRightContainer}
+        onPress={() => {}}
+      >
         <BPText color={COLORS.primary.main} fontSize={FONT_SIZE.fontSize14}>
           {`${strings.forgot_password}?`}
         </BPText>
@@ -67,7 +70,7 @@ export const LoginScreen: React.FC<any> = (props: any) => {
         uppercase
       />
       <BlankSpacer height={SPACE.spacing16} />
-      <View style={appStyle.rowCenterContainer}>
+      <View style={appStyle.rowFullWidthCenterContainer}>
         <BPText
           color={COLORS.black}
           fontSize={FONT_SIZE.fontSize14}

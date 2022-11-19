@@ -1,5 +1,7 @@
 import type { ActionType } from "typesafe-actions";
 import { createAction } from "typesafe-actions";
+import type { BookModel } from "../models/BookModel";
+import type { UserInfoModel } from "../models/UserInfoModel";
 import type { AlertType, SnackBarActionType } from "./types";
 
 const setGlobal = createAction("global/setGlobal", (global: any) => ({
@@ -47,11 +49,35 @@ const setGlobalSnackBar = createAction(
   })
 )();
 
+const setGlobalUserInfo = createAction(
+  "global/setGlobalUserInfo",
+  (userInfo: UserInfoModel) => ({
+    userInfo,
+  })
+)();
+
+const setGlobalBooks = createAction(
+  "global/setGlobalBooks",
+  (books: BookModel[]) => ({
+    books,
+  })
+)();
+
+const setGlobalToken = createAction(
+  "global/setGlobalToken",
+  (token: string) => ({
+    token,
+  })
+)();
+
 export const globalActions = {
   setGlobal,
   setGlobalLoading,
   setGlobalAlert,
   setGlobalSnackBar,
+  setGlobalUserInfo,
+  setGlobalBooks,
+  setGlobalToken,
 };
 
 export type GlobalActionsType = ActionType<typeof globalActions>;

@@ -1,3 +1,6 @@
+import type { BookModel } from "../models/BookModel";
+import type { UserInfoModel } from "../models/UserInfoModel";
+
 export type SnackBarActionType = {
   label: string;
   onPress: () => void;
@@ -14,6 +17,9 @@ export interface BookPadAppState {
     MESSAGE: string;
     ACTION: SnackBarActionType;
   };
+  USER_INFO: UserInfoModel;
+  BOOKS: BookModel[];
+  TOKEN: string;
 }
 
 export enum AlertType {

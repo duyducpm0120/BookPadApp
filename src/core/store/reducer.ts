@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createReducer } from "typesafe-actions";
+import { UserInfoModel } from "../models/UserInfoModel";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { GlobalActionsType } from "./actions";
 import { globalActions } from "./actions";
 import type { BookPadAppState } from "./types";
@@ -20,6 +21,9 @@ export const initState: BookPadAppState = {
       onPress: () => {},
     },
   },
+  USER_INFO: UserInfoModel.instantiate({}),
+  BOOKS: [],
+  TOKEN: "",
 };
 export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
   initState
@@ -62,6 +66,33 @@ export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
           MESSAGE: action.payload.message,
           ACTION: action.payload.action,
         },
+      };
+    }
+  )
+  .handleAction(
+    globalActions.setGlobalUserInfo,
+    (state, action): BookPadAppState => {
+      return {
+        ...state,
+        USER_INFO: action.payload.userInfo,
+      };
+    }
+  )
+  .handleAction(
+    globalActions.setGlobalBooks,
+    (state, action): BookPadAppState => {
+      return {
+        ...state,
+        BOOKS: action.payload.books,
+      };
+    }
+  )
+  .handleAction(
+    globalActions.setGlobalToken,
+    (state, action): BookPadAppState => {
+      return {
+        ...state,
+        TOKEN: action.payload.token,
       };
     }
   );

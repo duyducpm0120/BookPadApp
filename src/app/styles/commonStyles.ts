@@ -6,26 +6,52 @@ export const appStyle = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background.default,
-    padding: SPACE.spacing16,
+    paddingHorizontal: SPACE.spacing16,
   },
   text: {
     fontSize: 20,
     color: "#333",
   },
-  rowCenterContainer: {
+  rowFullWidthCenterContainer: {
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
-  rowRightContainer: {
+  rowFullWidthRightContainer: {
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  rowBetweenContainer: {
+  rowFullWidthLeftContainer: {
     width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  rowFullWidthSpaceBetweenContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  rowCenterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rowRightContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  rowLeftContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  rowSpaceBetweenContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

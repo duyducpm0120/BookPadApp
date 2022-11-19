@@ -77,15 +77,16 @@ export const HomeScreen = (props: HomeScreenProps) => {
           width: Dimensions.get("window").width,
         }}
         tabBar={(tabBarProps) => <MyTabBar {...tabBarProps} />}
+        sceneContainerStyle={{ backgroundColor: COLORS.white }}
       >
-        <Tab.Screen name="Home" component={Item} />
-        <Tab.Screen name="Settings" component={Item} />
-        <Tab.Screen name="aaaaa" component={Item} />
-        <Tab.Screen name="sssssddddddddd" component={Item} />
-        <Tab.Screen name="dddddasdasdasdasd" component={Item} />
-        <Tab.Screen name="fffffasdasdasdasd" component={Item} />
-        <Tab.Screen name="ggggasdasdasd" component={Item} />
-        <Tab.Screen name="jjjjjjjasdasdasdsd" component={Item} />
+        <Tab.Screen name="For you" component={Item} />
+        <Tab.Screen name="Best Sellers" component={Item} />
+        <Tab.Screen name="Categories" component={Item} />
+        <Tab.Screen name="Authorsssssssss" component={Item} />
+        {/* <Tab.Screen name="Authorss" component={Item} />
+        <Tab.Screen name="Authorssss" component={Item} />
+        <Tab.Screen name="Authorsssss" component={Item} />
+        <Tab.Screen name="Authorssssss" component={Item} /> */}
       </Tab.Navigator>
     </SafeAreaView>
   );

@@ -5,11 +5,16 @@ import type { MaterialTopTabBarProps } from "@react-navigation/material-top-tabs
 import React from "react";
 import { TouchableOpacity, Animated, ScrollView, View } from "react-native";
 
+const HEADER_TAB_WIDTH = 80;
+const MARGIN_RIGHT = 24;
+
 export const MyTabBar = (props: MaterialTopTabBarProps) => {
   const { state, descriptors, navigation, position } = props;
+  const scrollViewRef = React.useRef<ScrollView>(null);
   return (
     <View style={appStyle.rowFullWidthLeftContainer}>
       <ScrollView
+        ref={scrollViewRef}
         contentContainerStyle={{ flexDirection: "row" }}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -40,6 +45,14 @@ export const MyTabBar = (props: MaterialTopTabBarProps) => {
                 params: { ...route.params },
               });
             }
+            scrollViewRef.current?.scrollTo({
+              x:
+                index * HEADER_TAB_WIDTH +
+                (index - 1) * MARGIN_RIGHT -
+                HEADER_TAB_WIDTH -
+                HEADER_TAB_WIDTH / 2,
+              animated: true,
+            });
           };
 
           const onLongPress = () => {
@@ -66,14 +79,18 @@ export const MyTabBar = (props: MaterialTopTabBarProps) => {
               onLongPress={onLongPress}
               style={{
                 flex: 1,
-                marginRight: SPACE.spacing12,
-                height: 30,
+                marginRight: SPACE.spacing24,
+                flexDirection: "row",
+                height: 50,
+                justifyContent: "flex-start",
+                alignItems: "center",
               }}
             >
               <Animated.View
                 style={{
                   borderBottomWidth: isFocused ? 3 : 0,
                   borderBottomColor: COLORS.black,
+                  paddingBottom: SPACE.spacing4,
                 }}
               >
                 <BPText fontSize={FONT_SIZE.fontSize14} fontWeight="600">

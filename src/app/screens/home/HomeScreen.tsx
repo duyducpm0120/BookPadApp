@@ -10,6 +10,7 @@ import { Avatar, IconButton } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useViewModel } from "./HomeScreen.ViewModel";
 import { MyTabBar } from "./items";
+import { ForYouTab } from "./items/ForYouTab";
 import type { HomeScreenProps } from "./types";
 
 const Tab = createMaterialTopTabNavigator();
@@ -67,7 +68,7 @@ export const HomeScreen = (props: HomeScreenProps) => {
   return (
     <SafeAreaView style={[appStyle.container, {}]}>
       {renderUserAndSearchBar()}
-      <BlankSpacer height={SPACE.spacing16} />
+      {/* <BlankSpacer height={SPACE.spacing8} /> */}
       <Tab.Navigator
         screenOptions={{
           tabBarScrollEnabled: true,
@@ -79,7 +80,7 @@ export const HomeScreen = (props: HomeScreenProps) => {
         tabBar={(tabBarProps) => <MyTabBar {...tabBarProps} />}
         sceneContainerStyle={{ backgroundColor: COLORS.white }}
       >
-        <Tab.Screen name={strings.for_you} component={Item} />
+        <Tab.Screen name={strings.for_you} component={ForYouTab} />
         <Tab.Screen name={strings.best_sellers} component={Item} />
         <Tab.Screen name={strings.new_releases} component={Item} />
         <Tab.Screen name={strings.categories} component={Item} />

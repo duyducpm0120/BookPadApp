@@ -6,13 +6,13 @@ import {
   useGlobalNavigation,
   useGlobalSnackBar,
 } from "@core";
-import { logIn, useLogInService } from "@core/services";
+import { useLogInService } from "@core/services";
 import { getMessageFromErrorStatus } from "@core/utils/ErrorUtils";
 import { showAlert } from "@core/utils/PopupUtils";
 import { useState } from "react";
 
 const defaultDependencies = {
-  logIn,
+  useLogInService,
 };
 
 export const useViewModel = (dependencies = defaultDependencies) => {
@@ -23,7 +23,7 @@ export const useViewModel = (dependencies = defaultDependencies) => {
   const { navigateToHomeScreen } = useGlobalNavigation();
   const { showGlobalSnackBar } = useGlobalSnackBar();
 
-  const { mutateAsync, reset } = useLogInService();
+  const { mutateAsync, reset } = dependencies.useLogInService();
 
   const globalDispatch = useGlobalDispatch();
 

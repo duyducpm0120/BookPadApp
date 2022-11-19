@@ -53,4 +53,10 @@ export const enStrings = {
   ok: "OK",
   loginFailed: "Login Failed",
   hello: "Hello",
+  for_you: "For you",
+  best_sellers: "Best sellers",
+  new_releases: "New releases",
+  categories: "Categories",
+  authors: "Authors",
+  publishers: "Publishers",
 };

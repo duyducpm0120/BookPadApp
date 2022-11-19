@@ -79,14 +79,12 @@ export const HomeScreen = (props: HomeScreenProps) => {
         tabBar={(tabBarProps) => <MyTabBar {...tabBarProps} />}
         sceneContainerStyle={{ backgroundColor: COLORS.white }}
       >
-        <Tab.Screen name="For you" component={Item} />
-        <Tab.Screen name="Best Sellers" component={Item} />
-        <Tab.Screen name="Categories" component={Item} />
-        <Tab.Screen name="Authorsssssssss" component={Item} />
-        {/* <Tab.Screen name="Authorss" component={Item} />
-        <Tab.Screen name="Authorssss" component={Item} />
-        <Tab.Screen name="Authorsssss" component={Item} />
-        <Tab.Screen name="Authorssssss" component={Item} /> */}
+        <Tab.Screen name={strings.for_you} component={Item} />
+        <Tab.Screen name={strings.best_sellers} component={Item} />
+        <Tab.Screen name={strings.new_releases} component={Item} />
+        <Tab.Screen name={strings.categories} component={Item} />
+        <Tab.Screen name={strings.authors} component={Item} />
+        <Tab.Screen name={strings.publishers} component={Item} />
       </Tab.Navigator>
     </SafeAreaView>
   );

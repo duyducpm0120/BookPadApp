@@ -50,7 +50,7 @@ export const MyTabBar = (props: MaterialTopTabBarProps) => {
                 index * HEADER_TAB_WIDTH +
                 (index - 1) * MARGIN_RIGHT -
                 HEADER_TAB_WIDTH -
-                HEADER_TAB_WIDTH / 2,
+                HEADER_TAB_WIDTH,
               animated: true,
             });
           };

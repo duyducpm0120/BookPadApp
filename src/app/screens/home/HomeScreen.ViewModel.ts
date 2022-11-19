@@ -1,11 +1,18 @@
-import { useGlobalState } from "@core";
+import type { AppTabEnum } from "@core";
+import { globalActions, useGlobalDispatch, useGlobalState } from "@core";
 
 export const useViewModel = (props: any) => {
-  const { USER_INFO, BOOKS } = useGlobalState();
+  const globalDispatch = useGlobalDispatch();
+  const { USER_INFO, BOOKS, CURRENT_TAB } = useGlobalState();
+  const setGlobalCurrentTab = (tab: AppTabEnum) => {
+    globalDispatch(globalActions.setGlobalCurrentTab(tab));
+  };
   return {
     selectors: {
-      USER_INFO,
-      BOOKS,
+      CURRENT_TAB,
+    },
+    handlers: {
+      setGlobalCurrentTab,
     },
   };
 };

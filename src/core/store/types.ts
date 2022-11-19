@@ -1,3 +1,4 @@
+import type { AppTabEnum } from "@core/const";
 import type { BookModel } from "../models/BookModel";
 import type { UserInfoModel } from "../models/UserInfoModel";
 
@@ -20,6 +21,7 @@ export interface BookPadAppState {
   USER_INFO: UserInfoModel;
   BOOKS: BookModel[];
   TOKEN: string;
+  CURRENT_TAB: AppTabEnum;
 }
 
 export enum AlertType {

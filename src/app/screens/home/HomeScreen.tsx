@@ -1,8 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/react-in-jsx-scope */
 import { appStyle, COLORS, SPACE } from "@app/styles";
-import { ICONS } from "@core";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { AppTabEnum, ICONS } from "@core";
 import React from "react";
 import { View } from "react-native";
 import { IconButton } from "react-native-paper";
@@ -12,11 +11,14 @@ import { HomeTab } from "./items";
 import { styles } from "./styles";
 import type { HomeScreenProps } from "./types";
 
-const Tab = createMaterialTopTabNavigator();
-
 export const HomeScreen = (props: HomeScreenProps) => {
-  const { selectors } = useViewModel({});
-  const { USER_INFO, BOOKS } = selectors;
+  const { selectors, handlers } = useViewModel({});
+  const { setGlobalCurrentTab } = handlers;
+  const { CURRENT_TAB } = selectors;
+
+  const getTabColor = (tab: AppTabEnum) => {
+    return tab === CURRENT_TAB ? COLORS.primary.dark : COLORS.secondary.light;
+  };
 
   return (
     <SafeAreaView style={[appStyle.containerPadding16]}>
@@ -28,18 +30,42 @@ export const HomeScreen = (props: HomeScreenProps) => {
           appStyle.shadowContainer,
         ]}
       >
-        {[0, 1, 2, 3].map((item, index) => (
-          <IconButton
-            key={-index}
-            icon={{ uri: ICONS.search }}
-            size={SPACE.spacing24}
-            iconColor={COLORS.black}
-            style={{ margin: 0 }}
-            onPress={() => {
-              console.log("search");
-            }}
-          />
-        ))}
+        <IconButton
+          icon={{ uri: ICONS.home }}
+          size={SPACE.spacing24}
+          iconColor={getTabColor(AppTabEnum.HOME)}
+          style={{ margin: 0 }}
+          onPress={() => {
+            setGlobalCurrentTab(AppTabEnum.HOME);
+          }}
+        />
+        <IconButton
+          icon={{ uri: ICONS.bookMark }}
+          size={SPACE.spacing24}
+          iconColor={getTabColor(AppTabEnum.BOOK_SELF)}
+          style={{ margin: 0 }}
+          onPress={() => {
+            setGlobalCurrentTab(AppTabEnum.BOOK_SELF);
+          }}
+        />
+        <IconButton
+          icon={{ uri: ICONS.user }}
+          size={SPACE.spacing24}
+          iconColor={getTabColor(AppTabEnum.USER)}
+          style={{ margin: 0 }}
+          onPress={() => {
+            setGlobalCurrentTab(AppTabEnum.USER);
+          }}
+        />
+        <IconButton
+          icon={{ uri: ICONS.chat }}
+          size={SPACE.spacing24}
+          iconColor={getTabColor(AppTabEnum.CHAT_BOT)}
+          style={{ margin: 0 }}
+          onPress={() => {
+            setGlobalCurrentTab(AppTabEnum.CHAT_BOT);
+          }}
+        />
       </View>
     </SafeAreaView>
   );

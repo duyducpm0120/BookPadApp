@@ -7,9 +7,9 @@ export const styles = StyleSheet.create({
     height: 70,
     position: "absolute",
     marginLeft: SPACE.spacing16,
-    bottom: SPACE.spacing32,
+    bottom: SPACE.spacing24,
     borderRadius: 22,
     justifyContent: "space-between",
-    padding: SPACE.spacing32,
+    paddingHorizontal: SPACE.spacing32,
   },
 });

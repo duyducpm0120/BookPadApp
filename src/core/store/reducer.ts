@@ -1,4 +1,5 @@
 import { createReducer } from "typesafe-actions";
+import { AppTabEnum } from "../const/AppTab";
 import { UserInfoModel } from "../models/UserInfoModel";
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { GlobalActionsType } from "./actions";
@@ -24,6 +25,7 @@ export const initState: BookPadAppState = {
   USER_INFO: UserInfoModel.instantiate({}),
   BOOKS: [],
   TOKEN: "",
+  CURRENT_TAB: AppTabEnum.HOME,
 };
 export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
   initState
@@ -93,6 +95,15 @@ export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
       return {
         ...state,
         TOKEN: action.payload.token,
+      };
+    }
+  )
+  .handleAction(
+    globalActions.setGlobalCurrentTab,
+    (state, action): BookPadAppState => {
+      return {
+        ...state,
+        CURRENT_TAB: action.payload.currentTab,
       };
     }
   );

@@ -1,5 +1,6 @@
 import type { ActionType } from "typesafe-actions";
 import { createAction } from "typesafe-actions";
+import type { AppTabEnum } from "../const/AppTab";
 import type { BookModel } from "../models/BookModel";
 import type { UserInfoModel } from "../models/UserInfoModel";
 import type { AlertType, SnackBarActionType } from "./types";
@@ -70,6 +71,13 @@ const setGlobalToken = createAction(
   })
 )();
 
+const setGlobalCurrentTab = createAction(
+  "global/setGlobalCurrentTab",
+  (currentTab: AppTabEnum) => ({
+    currentTab,
+  })
+)();
+
 export const globalActions = {
   setGlobal,
   setGlobalLoading,
@@ -78,6 +86,7 @@ export const globalActions = {
   setGlobalUserInfo,
   setGlobalBooks,
   setGlobalToken,
+  setGlobalCurrentTab,
 };
 
 export type GlobalActionsType = ActionType<typeof globalActions>;

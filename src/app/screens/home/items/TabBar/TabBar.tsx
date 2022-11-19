@@ -2,7 +2,7 @@
 import { BPText } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import type { MaterialTopTabBarProps } from "@react-navigation/material-top-tabs";
-import React from "react";
+import React, { useEffect } from "react";
 import { TouchableOpacity, Animated, ScrollView, View } from "react-native";
 
 const HEADER_TAB_WIDTH = 80;
@@ -11,6 +11,15 @@ const MARGIN_RIGHT = 24;
 export const MyTabBar = (props: MaterialTopTabBarProps) => {
   const { state, descriptors, navigation, position } = props;
   const scrollViewRef = React.useRef<ScrollView>(null);
+  useEffect(() => {
+    const { index } = state;
+    const offset =
+      index * HEADER_TAB_WIDTH +
+      (index - 1) * MARGIN_RIGHT -
+      HEADER_TAB_WIDTH -
+      HEADER_TAB_WIDTH;
+    scrollViewRef.current?.scrollTo({ x: offset, animated: true });
+  }, [state, state.index, state.key, state.routes]);
   return (
     <View style={appStyle.rowFullWidthLeftContainer}>
       <ScrollView
@@ -45,14 +54,6 @@ export const MyTabBar = (props: MaterialTopTabBarProps) => {
                 params: { ...route.params },
               });
             }
-            scrollViewRef.current?.scrollTo({
-              x:
-                index * HEADER_TAB_WIDTH +
-                (index - 1) * MARGIN_RIGHT -
-                HEADER_TAB_WIDTH -
-                HEADER_TAB_WIDTH,
-              animated: true,
-            });
           };
 
           const onLongPress = () => {

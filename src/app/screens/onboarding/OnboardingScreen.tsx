@@ -158,7 +158,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
   return (
     <SafeAreaView
       style={[
-        appStyle.container,
+        appStyle.containerPadding16,
         {
           alignItems: "center",
         },

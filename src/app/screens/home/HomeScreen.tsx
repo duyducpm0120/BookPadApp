@@ -65,8 +65,12 @@ export const HomeScreen = (props: HomeScreenProps) => {
       </ScrollView>
     );
   };
+
+  const ForYouTabComp = () => {
+    return <ForYouTab books={BOOKS} />;
+  };
   return (
-    <SafeAreaView style={[appStyle.container, {}]}>
+    <SafeAreaView style={[appStyle.containerPadding16, {}]}>
       {renderUserAndSearchBar()}
       {/* <BlankSpacer height={SPACE.spacing8} /> */}
       <Tab.Navigator
@@ -80,7 +84,7 @@ export const HomeScreen = (props: HomeScreenProps) => {
         tabBar={(tabBarProps) => <MyTabBar {...tabBarProps} />}
         sceneContainerStyle={{ backgroundColor: COLORS.white }}
       >
-        <Tab.Screen name={strings.for_you} component={ForYouTab} />
+        <Tab.Screen name={strings.for_you} component={ForYouTabComp} />
         <Tab.Screen name={strings.best_sellers} component={Item} />
         <Tab.Screen name={strings.new_releases} component={Item} />
         <Tab.Screen name={strings.categories} component={Item} />

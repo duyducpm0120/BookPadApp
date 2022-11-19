@@ -3,10 +3,14 @@ import { COLORS } from "./colors";
 import { SPACE } from "./space";
 
 export const appStyle = StyleSheet.create({
-  container: {
+  containerPadding16: {
     flex: 1,
     backgroundColor: COLORS.background.default,
     paddingHorizontal: SPACE.spacing16,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.background.default,
   },
   text: {
     fontSize: 20,

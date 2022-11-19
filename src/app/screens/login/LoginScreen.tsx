@@ -20,7 +20,7 @@ export const LoginScreen: React.FC<any> = (props: any) => {
   return (
     <View
       style={[
-        appStyle.container,
+        appStyle.containerPadding16,
         { justifyContent: "center", alignItems: "center" },
       ]}
     >

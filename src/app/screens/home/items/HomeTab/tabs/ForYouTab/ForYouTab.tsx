@@ -1,11 +1,13 @@
 import { BlankSpacer, Book, BPText } from "@app/components";
 import { appStyle, FONT_SIZE, SPACE } from "@app/styles";
+import { useGlobalNavigation } from "@core";
 import React from "react";
 import { FlatList, ScrollView, View } from "react-native";
 import { styles } from "./style";
 import type { ForYouTabProps } from "./types";
 
 export const ForYouTab = (props: ForYouTabProps) => {
+  const { navigateToBookDetailScreen } = useGlobalNavigation();
   const { books } = props;
   return (
     <ScrollView
@@ -20,7 +22,14 @@ export const ForYouTab = (props: ForYouTabProps) => {
         <FlatList
           data={books}
           keyExtractor={(item, index) => `${item.BookId} + ${index}`}
-          renderItem={({ item }) => <Book {...item} />}
+          renderItem={({ item }) => (
+            <Book
+              data={item}
+              onPress={() => {
+                navigateToBookDetailScreen();
+              }}
+            />
+          )}
           horizontal
           showsHorizontalScrollIndicator={false}
         />
@@ -34,7 +43,7 @@ export const ForYouTab = (props: ForYouTabProps) => {
         <FlatList
           data={books}
           keyExtractor={(item, index) => `${item.BookId} + ${index}`}
-          renderItem={({ item }) => <Book {...item} />}
+          renderItem={({ item }) => <Book data={item} />}
           horizontal
           showsHorizontalScrollIndicator={false}
           // style={{ height: 20 }}'

@@ -1,11 +1,13 @@
+/* eslint-disable react-native/no-inline-styles */
 import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
-import type { BookModel } from "@core";
+import { BookModel } from "@core";
 import React from "react";
 import { Image, TouchableOpacity } from "react-native";
 import { BlankSpacer } from "../BlankSpacer";
 import { BPText } from "../BPText";
 
-export const Book = (props: BookModel) => {
+export const Book = (props: { data: BookModel; onPress?: () => void }) => {
+  const { data = BookModel.instantiate({}), onPress = () => {} } = props;
   const {
     Authors,
     BookCoverImage,
@@ -16,18 +18,18 @@ export const Book = (props: BookModel) => {
     CreatedAt,
     Languages,
     PublishedAt,
-  } = props;
+  } = data;
   return (
     <TouchableOpacity
       style={[
         appStyle.columnLeftContainer,
         {
           width: 140,
-          // height: 260,
           marginRight: SPACE.spacing16,
           justifyContent: "flex-start",
         },
       ]}
+      onPress={onPress}
     >
       <Image
         source={{ uri: BookCoverImage }}

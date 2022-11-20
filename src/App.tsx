@@ -2,8 +2,7 @@ import { useGlobalLoading, useGlobalSnackBar } from "@core";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ScreenNameEnum } from "@app/navigator";
-import { HomeScreen, LoginScreen, OnboardingScreen } from "@app/screens";
+import { AppStack } from "@app/navigator";
 import { Loading } from "@app/components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Snackbar } from "react-native-paper";
@@ -21,23 +20,7 @@ const App = (): JSX.Element => {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name={ScreenNameEnum.Onboarding}
-            component={OnboardingScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name={ScreenNameEnum.Login}
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name={ScreenNameEnum.Home}
-            component={HomeScreen}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
+        <AppStack />
         <Loading isLoading={IS_LOADING} />
         <Snackbar
           visible={IS_SHOW_SNACK_BAR}

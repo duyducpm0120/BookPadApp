@@ -78,6 +78,13 @@ const setGlobalCurrentTab = createAction(
   })
 )();
 
+const setGlobalIsLoggedIn = createAction(
+  "global/setGlobalIsLoggedIn",
+  (isLoggedIn: boolean) => ({
+    isLoggedIn,
+  })
+)();
+
 export const globalActions = {
   setGlobal,
   setGlobalLoading,
@@ -87,6 +94,7 @@ export const globalActions = {
   setGlobalBooks,
   setGlobalToken,
   setGlobalCurrentTab,
+  setGlobalIsLoggedIn,
 };
 
 export type GlobalActionsType = ActionType<typeof globalActions>;

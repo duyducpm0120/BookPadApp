@@ -59,4 +59,6 @@ export const enStrings = {
   categories: "Categories",
   authors: "Authors",
   publishers: "Publishers",
+  retry: "Retry",
+  exit: "Exit",
 };

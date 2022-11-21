@@ -1,6 +1,7 @@
 import {
   globalActions,
   strings,
+  TimeToMillisecondsEnum,
   useGlobalDispatch,
   useGlobalLoading,
   useGlobalNavigation,
@@ -8,8 +9,10 @@ import {
 } from "@core";
 import { useLogInService } from "@core/services";
 import { getMessageFromErrorStatus } from "@core/utils/ErrorUtils";
+import LocalStorageHelper from "@core/utils/LocalStorageHelper";
 import { showAlert } from "@core/utils/PopupUtils";
 import { useState } from "react";
+import { CacheKeyEnum } from "../../../core/const/CacheKey";
 import { safeGetNumber } from "../../../core/utils/CommonUtils";
 
 const defaultDependencies = {
@@ -46,6 +49,13 @@ export const useViewModel = (dependencies = defaultDependencies) => {
         message: strings.loginSuccessMessage,
       });
       globalDispatch(globalActions.setGlobalToken(result.token));
+      // console.log("result.token asdasd", result.token);
+      LocalStorageHelper.setItem(
+        CacheKeyEnum.TOKEN,
+        result.token,
+        TimeToMillisecondsEnum.DAY
+      );
+      globalDispatch(globalActions.setGlobalIsLoggedIn(true));
       globalDispatch(globalActions.setGlobalBooks(result.books));
       globalDispatch(globalActions.setGlobalUserInfo(result.userInfo));
       navigateToHomeScreen();

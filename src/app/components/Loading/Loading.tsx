@@ -1,9 +1,22 @@
-import { COLORS } from "@app/styles";
+/* eslint-disable react-native/no-inline-styles */
+import { COLORS, SPACE } from "@app/styles";
+import { IMAGES } from "@core";
 import React from "react";
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, Image } from "react-native";
+import { BlankSpacer } from "../BlankSpacer";
 
-export const Loading = (props: { isLoading: boolean }) => {
-  const { isLoading } = props;
+export const Loading = (props: {
+  isLoading: boolean;
+  backgroundColor?: string;
+  opacity?: number;
+  showLogo?: boolean;
+}) => {
+  const {
+    isLoading,
+    backgroundColor = COLORS.black,
+    opacity = 0.6,
+    showLogo = false,
+  } = props;
   if (isLoading)
     return (
       <View
@@ -11,12 +24,20 @@ export const Loading = (props: { isLoading: boolean }) => {
           position: "absolute",
           width: "100%",
           height: "100%",
-          backgroundColor: COLORS.black,
-          opacity: 0.6,
+          backgroundColor,
+          opacity,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
+        {showLogo && (
+          <Image
+            source={IMAGES.appName}
+            style={{ height: 60, width: "100%" }}
+            resizeMode="contain"
+          />
+        )}
+        {showLogo && <BlankSpacer height={SPACE.spacing16} />}
         <ActivityIndicator size="large" color={COLORS.primary.main} />
       </View>
     );

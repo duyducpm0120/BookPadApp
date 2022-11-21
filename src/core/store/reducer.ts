@@ -26,6 +26,7 @@ export const initState: BookPadAppState = {
   BOOKS: [],
   TOKEN: "",
   CURRENT_TAB: AppTabEnum.HOME,
+  IS_LOGGED_IN: false,
 };
 export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
   initState
@@ -104,6 +105,15 @@ export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
       return {
         ...state,
         CURRENT_TAB: action.payload.currentTab,
+      };
+    }
+  )
+  .handleAction(
+    globalActions.setGlobalIsLoggedIn,
+    (state, action): BookPadAppState => {
+      return {
+        ...state,
+        IS_LOGGED_IN: action.payload.isLoggedIn,
       };
     }
   );

@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/react-in-jsx-scope */
+import { Loading } from "@app/components";
 import { appStyle, COLORS, SPACE } from "@app/styles";
 import { AppTabEnum, ICONS } from "@core";
 import React from "react";
@@ -14,11 +15,17 @@ import type { HomeScreenProps } from "./types";
 export const HomeScreen = (props: HomeScreenProps) => {
   const { selectors, handlers } = useViewModel({});
   const { setGlobalCurrentTab } = handlers;
-  const { CURRENT_TAB } = selectors;
+  const { CURRENT_TAB, BOOKS } = selectors;
 
   const getTabColor = (tab: AppTabEnum) => {
     return tab === CURRENT_TAB ? COLORS.primary.dark : COLORS.secondary.light;
   };
+
+  if (BOOKS.length === 0) {
+    return (
+      <Loading isLoading backgroundColor={COLORS.white} opacity={1} showLogo />
+    );
+  }
 
   return (
     <SafeAreaView style={[appStyle.containerPadding16]}>

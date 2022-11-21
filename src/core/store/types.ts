@@ -22,6 +22,7 @@ export interface BookPadAppState {
   BOOKS: BookModel[];
   TOKEN: string;
   CURRENT_TAB: AppTabEnum;
+  IS_LOGGED_IN: boolean;
 }
 
 export enum AlertType {

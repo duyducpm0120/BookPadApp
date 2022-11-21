@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { BookModel } from "@core";
+import { size } from "lodash";
 import React from "react";
 import { Image, TouchableOpacity } from "react-native";
 import { BlankSpacer } from "../BlankSpacer";
@@ -45,17 +46,16 @@ export const Book = (props: { data: BookModel; onPress?: () => void }) => {
         fontSize={FONT_SIZE.fontSize16}
         fontWeight="600"
         style={{
-          minHeight: 40,
-          maxHeight: 40,
+          bottom: 0,
         }}
-        numberOfLines={2}
+        numberOfLines={1}
       >
         {BookName}
       </BPText>
       <BlankSpacer height={SPACE.spacing4} />
       <BPText fontSize={FONT_SIZE.fontSize12} color={TEXT_COLOR.light}>
-        {/* {size(Authors) > 0 ? Authors[0].AuthorName : ""} */}
-        Nguyen Du
+        {size(Authors) > 0 ? Authors[0].AuthorName : ""}
+        {/* Nguyen Du */}
       </BPText>
     </TouchableOpacity>
   );

@@ -17,11 +17,10 @@ export const BaseScreen = (props: BaseScreenProps) => {
       onPress: goBack,
     },
     headerRightParams = {
-      icon: { uri: LOCAL_ICONS.leftArrowIcon },
-      onPress: () => {},
+      icon: LOCAL_ICONS.bookmarkIcon,
+      onPress: goBack,
     },
   } = props;
-  console.log("props asdasd", props);
   return (
     <SafeAreaView style={appStyle.containerPadding16}>
       <View
@@ -33,7 +32,7 @@ export const BaseScreen = (props: BaseScreenProps) => {
         <IconButton
           icon={headerLeftParams.icon}
           size={SPACE.spacing24}
-          iconColor={COLORS.black}
+          iconColor={COLORS.secondary.dark}
           style={{ margin: 0, backgroundColor: COLORS.white }}
           onPress={() => {
             goBack();

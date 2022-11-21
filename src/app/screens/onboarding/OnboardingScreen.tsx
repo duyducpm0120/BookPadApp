@@ -1,10 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BlankSpacer, BPButton, BPText } from "@app/components";
-import { ScreenNameEnum } from "@app/navigator";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { IMAGES, strings } from "@core/assets";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useRef, useState } from "react";
 import {
   Animated,
@@ -13,6 +10,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+import { useViewModel } from "./OnboardingScreen.ViewModel";
 
 export const OnboardingScreen: React.FC<any> = (props: any) => {
   const { illustration1, illustration2, illustration4 } = IMAGES;
@@ -27,7 +25,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
 
   const [screenIndex, setScreenIndex] = useState(0);
 
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const { navigate } = useViewModel();
 
   const renderImageSlider = () => {
     return (
@@ -184,7 +182,7 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
         type="text"
         title={strings.get_started}
         onPress={() => {
-          navigation.navigate(ScreenNameEnum.Login);
+          navigate();
         }}
         width={180}
         labelStyle={{

@@ -6,6 +6,7 @@ import { AppStack } from "@app/navigator";
 import { Loading } from "@app/components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Snackbar } from "react-native-paper";
+import { AppContext } from "@core/contexts/MainApp";
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
@@ -18,26 +19,28 @@ const App = (): JSX.Element => {
     hideGlobalSnackBar,
   } = useGlobalSnackBar();
   return (
-    <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <AppStack />
-        <Loading isLoading={IS_LOADING} />
-        <Snackbar
-          visible={IS_SHOW_SNACK_BAR}
-          onDismiss={hideGlobalSnackBar}
-          action={{
-            label: SNACK_BAR_ACTION.label,
-            onPress: () => {
-              // Do something
-              SNACK_BAR_ACTION.onPress();
-            },
-          }}
-          duration={3000}
-        >
-          {SNACK_BAR_MESSAGE}
-        </Snackbar>
-      </NavigationContainer>
-    </QueryClientProvider>
+    <AppContext>
+      <QueryClientProvider client={queryClient}>
+        <NavigationContainer>
+          <AppStack />
+          <Loading isLoading={IS_LOADING} />
+          <Snackbar
+            visible={IS_SHOW_SNACK_BAR}
+            onDismiss={hideGlobalSnackBar}
+            action={{
+              label: SNACK_BAR_ACTION.label,
+              onPress: () => {
+                // Do something
+                SNACK_BAR_ACTION.onPress();
+              },
+            }}
+            duration={3000}
+          >
+            {SNACK_BAR_MESSAGE}
+          </Snackbar>
+        </NavigationContainer>
+      </QueryClientProvider>
+    </AppContext>
   );
 };
 

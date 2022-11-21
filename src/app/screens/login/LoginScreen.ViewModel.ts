@@ -10,6 +10,7 @@ import { useLogInService } from "@core/services";
 import { getMessageFromErrorStatus } from "@core/utils/ErrorUtils";
 import { showAlert } from "@core/utils/PopupUtils";
 import { useState } from "react";
+import { safeGetNumber } from "../../../core/utils/CommonUtils";
 
 const defaultDependencies = {
   useLogInService,
@@ -50,9 +51,10 @@ export const useViewModel = (dependencies = defaultDependencies) => {
       navigateToHomeScreen();
     } catch (err: any) {
       hideGlobalLoading();
+      const errStatus = safeGetNumber(err, "response.status", 500);
       showAlert({
         title: strings.loginFailed,
-        message: getMessageFromErrorStatus(err.response.status),
+        message: getMessageFromErrorStatus(errStatus),
         primaryButtonParams: {
           text: "OK",
           onPress: () => {},

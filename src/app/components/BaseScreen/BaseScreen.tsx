@@ -9,27 +9,48 @@ import type { BaseScreenProps } from "./types";
 
 export const BaseScreen = (props: BaseScreenProps) => {
   const { goBack } = useGlobalNavigation();
-  const { tittle, children = null } = props;
+  const {
+    tittle,
+    children = null,
+    headerLeftParams = {
+      icon: LOCAL_ICONS.leftArrowIcon,
+      onPress: goBack,
+    },
+    headerRightParams = {
+      icon: { uri: LOCAL_ICONS.leftArrowIcon },
+      onPress: () => {},
+    },
+  } = props;
   console.log("props asdasd", props);
   return (
     <SafeAreaView style={appStyle.containerPadding16}>
-      <ScrollView>
-        <View style={appStyle.rowCenterContainer}>
-          <IconButton
-            icon={LOCAL_ICONS.leftArrowIcon}
-            size={SPACE.spacing24}
-            iconColor={COLORS.black}
-            style={{ margin: 0 }}
-            onPress={() => {
-              goBack();
-            }}
-          />
-          <BPText fontSize={FONT_SIZE.fontSize16} fontWeight="600">
-            {tittle}
-          </BPText>
-        </View>
-        {children}
-      </ScrollView>
+      <View
+        style={[
+          appStyle.rowSpaceBetweenContainer,
+          { paddingHorizontal: SPACE.spacing8 },
+        ]}
+      >
+        <IconButton
+          icon={headerLeftParams.icon}
+          size={SPACE.spacing24}
+          iconColor={COLORS.black}
+          style={{ margin: 0, backgroundColor: COLORS.white }}
+          onPress={() => {
+            goBack();
+          }}
+        />
+        <BPText fontSize={FONT_SIZE.fontSize16} fontWeight="600">
+          {tittle}
+        </BPText>
+        <IconButton
+          icon={headerRightParams.icon}
+          size={SPACE.spacing24}
+          iconColor={COLORS.black}
+          style={{ margin: 0, backgroundColor: COLORS.white }}
+          onPress={headerRightParams.onPress}
+        />
+      </View>
+      <ScrollView>{children}</ScrollView>
     </SafeAreaView>
   );
 };

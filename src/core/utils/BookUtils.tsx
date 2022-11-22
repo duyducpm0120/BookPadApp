@@ -2,7 +2,7 @@
 import type { BookModel } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/img";
 import React from "react";
-import { Image } from "react-native";
+import FastImage from "react-native-fast-image";
 
 export const getBookAuthor = (book: BookModel) => {
   const { Authors } = book;
@@ -23,7 +23,7 @@ export const renderBookStars = (book: BookModel) => {
   const stars: JSX.Element[] = [];
 
   const fullStar = (
-    <Image
+    <FastImage
       source={LOCAL_ICONS.fullStar}
       style={{
         height: 20,
@@ -34,7 +34,7 @@ export const renderBookStars = (book: BookModel) => {
     />
   );
   const halfStar = (
-    <Image
+    <FastImage
       source={LOCAL_ICONS.halfStar}
       style={{
         height: 20,
@@ -45,7 +45,7 @@ export const renderBookStars = (book: BookModel) => {
     />
   );
   const emptyStar = (
-    <Image
+    <FastImage
       source={LOCAL_ICONS.emptyStar}
       style={{
         height: 20,

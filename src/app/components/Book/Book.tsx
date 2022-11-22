@@ -3,7 +3,8 @@ import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { BookModel } from "@core";
 import { getBookAuthor } from "@core/utils/BookUtils";
 import React from "react";
-import { Image, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
+import FastImage from "react-native-fast-image";
 import { BlankSpacer } from "../BlankSpacer";
 import { BPText } from "../BPText";
 
@@ -32,13 +33,13 @@ export const Book = (props: { data: BookModel; onPress?: () => void }) => {
       ]}
       onPress={onPress}
     >
-      <Image
-        source={{ uri: BookCoverImage }}
+      <FastImage
+        source={{ uri: BookCoverImage, priority: FastImage.priority.normal }}
         style={{
           height: 190,
           width: "100%",
         }}
-        resizeMode="cover"
+        resizeMode={FastImage.resizeMode.cover}
       />
       <BlankSpacer height={SPACE.spacing12} />
       <BPText

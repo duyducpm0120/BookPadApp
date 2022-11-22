@@ -2,7 +2,8 @@
 import { COLORS, SPACE } from "@app/styles";
 import { IMAGES } from "@core";
 import React from "react";
-import { View, ActivityIndicator, Image } from "react-native";
+import { View, ActivityIndicator } from "react-native";
+import FastImage from "react-native-fast-image";
 import { BlankSpacer } from "../BlankSpacer";
 
 export const Loading = (props: {
@@ -31,7 +32,7 @@ export const Loading = (props: {
         }}
       >
         {showLogo && (
-          <Image
+          <FastImage
             source={IMAGES.appName}
             style={{ height: 60, width: "100%" }}
             resizeMode="contain"

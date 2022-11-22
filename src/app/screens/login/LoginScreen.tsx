@@ -2,7 +2,8 @@ import { BlankSpacer, BPButton, BPText, BPTextInput } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { IMAGES, strings } from "@core/assets";
 import React, { useMemo } from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import FastImage from "react-native-fast-image";
 import { useViewModel } from "./LoginScreen.ViewModel";
 
 export const LoginScreen: React.FC<any> = (props: any) => {
@@ -10,7 +11,7 @@ export const LoginScreen: React.FC<any> = (props: any) => {
   const passwordIcon = useMemo(() => {
     return (
       <TouchableOpacity>
-        <Image
+        <FastImage
           style={{ width: 24, height: 24, backgroundColor: "red" }}
           source={IMAGES.show}
         />
@@ -24,7 +25,7 @@ export const LoginScreen: React.FC<any> = (props: any) => {
         { justifyContent: "center", alignItems: "center" },
       ]}
     >
-      <Image
+      <FastImage
         source={IMAGES.appName}
         style={{ height: 60, width: "100%" }}
         resizeMode="contain"

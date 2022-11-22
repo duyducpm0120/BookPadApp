@@ -3,7 +3,8 @@ import { BaseScreen, BlankSpacer, BPText } from "@app/components";
 import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
-import { Image, View } from "react-native";
+import { View } from "react-native";
+import FastImage from "react-native-fast-image";
 
 import type { BookDetailScreenProps } from "./types";
 
@@ -37,8 +38,8 @@ export const BookDetailScreen: React.FC<any> = (
             appStyle.shadowContainer,
           ]}
         >
-          <Image
-            source={{ uri: BookCoverImage, cache: "force-cache" }}
+          <FastImage
+            source={{ uri: BookCoverImage }}
             style={[
               {
                 width: 200,

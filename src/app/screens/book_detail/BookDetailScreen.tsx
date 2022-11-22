@@ -50,7 +50,12 @@ export const BookDetailScreen: React.FC<any> = (
           />
         </View>
         <BlankSpacer height={SPACE.spacing12} />
-        <BPText fontSize={FONT_SIZE.fontSize24} fontWeight="bold">
+        <BPText
+          fontSize={FONT_SIZE.fontSize24}
+          fontWeight="bold"
+          numberOfLines={2}
+          textAlign="center"
+        >
           {BookName}
         </BPText>
         <BlankSpacer height={SPACE.spacing4} />

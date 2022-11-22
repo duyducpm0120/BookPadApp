@@ -49,7 +49,6 @@ export const useViewModel = (
       // showGlobalSnackBar({
       //   message: strings.loginSuccessMessage,
       // });
-      globalDispatch(globalActions.setGlobalToken(result.token));
       globalDispatch(globalActions.setGlobalIsLoggedIn(true));
       globalDispatch(globalActions.setGlobalBooks(result.books));
       globalDispatch(globalActions.setGlobalUserInfo(result.userInfo));

@@ -29,7 +29,7 @@ const App = (): JSX.Element => {
 
   const getGlobalToken = async () => {
     const token = await LocalStorageHelper.getItem(CacheKeyEnum.TOKEN);
-    if (token) {
+    if (token !== null) {
       globalDispatch(globalActions.setGlobalToken(token.toString()));
     }
   };

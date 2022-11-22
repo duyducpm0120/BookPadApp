@@ -65,7 +65,7 @@ export class BookModel {
   }
 
   public static instantiate = (json: any) => {
-    const bookId = safeGetString(json, "BookId", "");
+    const bookId = safeGetNumber(json, "BookId", -1);
     const bookName = safeGetString(json, "BookName", "");
     const bookDescription = safeGetString(json, "BookDescription", "");
     const publishedAt = safeGetString(json, "PublishedAt", "");
@@ -79,7 +79,7 @@ export class BookModel {
     const reviewStars = safeGetNumber(json, "ReviewStars", 3.5);
     // console.log('authors', authors);
     return new BookModel(
-      bookId,
+      bookId.toString(),
       bookName,
       bookDescription,
       publishedAt,

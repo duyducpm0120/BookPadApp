@@ -86,7 +86,7 @@ export const BookDetailScreen: React.FC<any> = (
         <BPButton
           title={strings.read.toUpperCase()}
           onPress={() => {
-            navigateToReadingBookScreen();
+            navigateToReadingBookScreen({ bookData });
           }}
           type="text"
           labelStyle={{

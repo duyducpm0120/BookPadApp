@@ -1,5 +1,6 @@
 import { ScreenNameEnum } from "@app/navigator";
 import type { BookDetailScreenParams } from "@app/screens/book_detail";
+import type { ReadingBookScreenParams } from "@app/screens/reading_book/types";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -21,8 +22,8 @@ export const useGlobalNavigation = () => {
     navigation.navigate(ScreenNameEnum.BookDetail, { ...params });
   };
 
-  const navigateToReadingBookScreen = () => {
-    navigation.navigate(ScreenNameEnum.ReadingBook, {});
+  const navigateToReadingBookScreen = (params: ReadingBookScreenParams) => {
+    navigation.navigate(ScreenNameEnum.ReadingBook, { ...params });
   };
 
   return {

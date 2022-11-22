@@ -22,7 +22,7 @@ export const renderBookStars = (book: BookModel) => {
   const emptyStars = 5 - fullStars - halfStars;
   const stars: JSX.Element[] = [];
 
-  const fullStar = (
+  const fullStar = (index: number) => (
     <FastImage
       source={LOCAL_ICONS.fullStar}
       style={{
@@ -31,9 +31,10 @@ export const renderBookStars = (book: BookModel) => {
         marginRight: 5,
       }}
       resizeMode="contain"
+      key={`fullStar${index}`}
     />
   );
-  const halfStar = (
+  const halfStar = (index: number) => (
     <FastImage
       source={LOCAL_ICONS.halfStar}
       style={{
@@ -42,9 +43,10 @@ export const renderBookStars = (book: BookModel) => {
         marginRight: 5,
       }}
       resizeMode="contain"
+      key={`halfStar${index}`}
     />
   );
-  const emptyStar = (
+  const emptyStar = (index: number) => (
     <FastImage
       source={LOCAL_ICONS.emptyStar}
       style={{
@@ -53,17 +55,18 @@ export const renderBookStars = (book: BookModel) => {
         marginRight: 5,
       }}
       resizeMode="contain"
+      key={`emptyStar${index}`}
     />
   );
 
   for (let i = 0; i < fullStars; i += 1) {
-    stars.push(fullStar);
+    stars.push(fullStar(i));
   }
   for (let i = 0; i < halfStars; i += 1) {
-    stars.push(halfStar);
+    stars.push(halfStar(i));
   }
   for (let i = 0; i < emptyStars; i += 1) {
-    stars.push(emptyStar);
+    stars.push(emptyStar(i));
   }
   return stars;
 };

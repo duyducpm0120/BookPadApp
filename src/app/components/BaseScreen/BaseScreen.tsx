@@ -2,7 +2,7 @@ import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/img";
 import React from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import { IconButton } from "react-native-paper";
 import { BPText } from "../BPText";
 import type { BaseScreenProps } from "./types";
@@ -49,7 +49,7 @@ export const BaseScreen = (props: BaseScreenProps) => {
           onPress={headerRightParams.onPress}
         />
       </View>
-      <ScrollView style={appStyle.containerPadding16}>{children}</ScrollView>
+      {children}
     </SafeAreaView>
   );
 };

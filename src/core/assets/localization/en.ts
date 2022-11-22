@@ -61,4 +61,5 @@ export const enStrings = {
   publishers: "Publishers",
   retry: "Retry",
   exit: "Exit",
+  read: "Read",
 };

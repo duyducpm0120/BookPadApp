@@ -12,16 +12,17 @@ export const ReadingBookScreen: React.FC<any> = (
   const { navigation, route } = props;
   const { width, height } = useWindowDimensions();
   const { bookData } = route.params;
-  const { bookData: data } = useViewModel({ bookData });
+  const { bookData: data, bookDownloadLink } = useViewModel({ bookData });
   return (
     <SafeAreaView style={appStyle.centerContainer}>
       <ReaderProvider>
         <Reader
-          src="https://s3.amazonaws.com/moby-dick/OPS/package.opf"
+          src={bookDownloadLink}
           width={width}
           height={height}
           fileSystem={useFileSystem}
           enableSwipe
+          enableSelection
         />
       </ReaderProvider>
     </SafeAreaView>

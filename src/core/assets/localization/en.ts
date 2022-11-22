@@ -62,4 +62,5 @@ export const enStrings = {
   retry: "Retry",
   exit: "Exit",
   read: "Read",
+  book_detail: "Book detail",
 };

@@ -25,7 +25,7 @@ export const BookDetailScreen: React.FC<any> = (
   } = bookData;
 
   return (
-    <BaseScreen tittle="">
+    <BaseScreen tittle={strings.book_detail}>
       <ScrollView
         style={appStyle.containerPadding16}
         showsVerticalScrollIndicator={false}
@@ -56,7 +56,7 @@ export const BookDetailScreen: React.FC<any> = (
           <BPText
             fontSize={FONT_SIZE.fontSize24}
             fontWeight="bold"
-            numberOfLines={2}
+            // numberOfLines={2}
             textAlign="center"
           >
             {BookName}

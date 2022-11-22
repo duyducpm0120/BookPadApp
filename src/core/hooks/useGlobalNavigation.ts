@@ -1,4 +1,5 @@
 import { ScreenNameEnum } from "@app/navigator";
+import type { BookDetailScreenParams } from "@app/screens/book_detail";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -16,8 +17,8 @@ export const useGlobalNavigation = () => {
     navigation.navigate(ScreenNameEnum.Home);
   };
 
-  const navigateToBookDetailScreen = () => {
-    navigation.navigate(ScreenNameEnum.BookDetail, {});
+  const navigateToBookDetailScreen = (params: BookDetailScreenParams) => {
+    navigation.navigate(ScreenNameEnum.BookDetail, { ...params });
   };
 
   return {

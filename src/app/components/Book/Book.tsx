@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { BookModel } from "@core";
-import { size } from "lodash";
+import { getBookAuthor } from "@core/utils/BookUtils";
 import React from "react";
 import { Image, TouchableOpacity } from "react-native";
 import { BlankSpacer } from "../BlankSpacer";
@@ -37,7 +37,6 @@ export const Book = (props: { data: BookModel; onPress?: () => void }) => {
         style={{
           height: 190,
           width: "100%",
-          borderRadius: 8,
         }}
         resizeMode="cover"
       />
@@ -53,8 +52,12 @@ export const Book = (props: { data: BookModel; onPress?: () => void }) => {
         {BookName}
       </BPText>
       <BlankSpacer height={SPACE.spacing4} />
-      <BPText fontSize={FONT_SIZE.fontSize12} color={TEXT_COLOR.light}>
-        {size(Authors) > 0 ? Authors[0].AuthorName : ""}
+      <BPText
+        fontSize={FONT_SIZE.fontSize12}
+        color={TEXT_COLOR.light}
+        numberOfLines={1}
+      >
+        {getBookAuthor(data)}
         {/* Nguyen Du */}
       </BPText>
     </TouchableOpacity>

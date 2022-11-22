@@ -1,6 +1,7 @@
 import { size } from "lodash";
 import { PublisherModel } from "@core/models";
 import { safeGet, safeGetArray, safeGetString } from "@core/utils";
+import { safeGetNumber } from "../utils/CommonUtils";
 
 export interface BookAuthor {
   AuthorId: string;
@@ -37,6 +38,8 @@ export class BookModel {
 
   Authors: BookAuthor[];
 
+  ReviewStars: number;
+
   constructor(
     BookId: string,
     BookName: string,
@@ -46,7 +49,8 @@ export class BookModel {
     BookCoverImage: string,
     BookPublisher: PublisherModel,
     Languages: any[],
-    Authors: BookAuthor[]
+    Authors: BookAuthor[],
+    ReviewStars: number
   ) {
     this.BookId = BookId;
     this.BookName = BookName;
@@ -57,6 +61,7 @@ export class BookModel {
     this.BookPublisher = BookPublisher;
     this.Languages = Languages;
     this.Authors = Authors;
+    this.ReviewStars = ReviewStars;
   }
 
   public static instantiate = (json: any) => {
@@ -71,6 +76,7 @@ export class BookModel {
     );
     const languages = safeGet(json, "Languages", []);
     const authors = safeGetArray(json, "Authors", []);
+    const reviewStars = safeGetNumber(json, "ReviewStars", 3.5);
     // console.log('authors', authors);
     return new BookModel(
       bookId,
@@ -81,7 +87,8 @@ export class BookModel {
       bookCoverImage,
       bookPublisher,
       languages,
-      authors
+      authors,
+      reviewStars
     );
   };
 

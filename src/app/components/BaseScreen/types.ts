@@ -3,7 +3,7 @@ import type { IconSource } from "react-native-paper/lib/typescript/components/Ic
 export type BaseScreenProps = {
   //
   tittle: string;
-  children?: JSX.Element | never[];
+  children?: JSX.Element | JSX.Element[] | null;
 
   headerLeftParams?: {
     icon: IconSource;

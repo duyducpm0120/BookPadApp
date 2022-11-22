@@ -6,4 +6,7 @@ export const LOCAL_ICONS = {
   leftArrowIcon: require("./leftArrowIcon.png"),
   searchIcon: require("./searchIcon.png"),
   userIcon: require("./userIcon.png"),
+  fullStar: require("./FullStar.png"),
+  halfStar: require("./HalfStar.png"),
+  emptyStar: require("./EmptyStar.png"),
 };

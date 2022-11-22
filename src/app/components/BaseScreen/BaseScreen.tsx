@@ -49,7 +49,7 @@ export const BaseScreen = (props: BaseScreenProps) => {
           onPress={headerRightParams.onPress}
         />
       </View>
-      <ScrollView>{children}</ScrollView>
+      <ScrollView style={appStyle.containerPadding16}>{children}</ScrollView>
     </SafeAreaView>
   );
 };

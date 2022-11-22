@@ -26,7 +26,7 @@ export const ForYouTab = (props: ForYouTabProps) => {
             <Book
               data={item}
               onPress={() => {
-                navigateToBookDetailScreen();
+                navigateToBookDetailScreen({ bookData: item });
               }}
             />
           )}

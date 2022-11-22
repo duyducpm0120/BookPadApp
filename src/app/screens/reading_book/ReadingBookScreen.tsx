@@ -1,8 +1,8 @@
-import { appStyle } from "@app/styles";
+import { BaseScreen } from "@app/components";
 import { Reader, ReaderProvider } from "@epubjs-react-native/core";
 import { useFileSystem } from "@epubjs-react-native/file-system";
 import React from "react";
-import { SafeAreaView, useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 import { useViewModel } from "./ReadingBookScreen.ViewModel";
 import type { ReadingBookScreenProps } from "./types";
 
@@ -14,7 +14,7 @@ export const ReadingBookScreen: React.FC<any> = (
   const { bookData } = route.params;
   const { bookData: data, bookDownloadLink } = useViewModel({ bookData });
   return (
-    <SafeAreaView style={appStyle.centerContainer}>
+    <BaseScreen tittle={bookData.BookName}>
       <ReaderProvider>
         <Reader
           src={bookDownloadLink}
@@ -25,6 +25,6 @@ export const ReadingBookScreen: React.FC<any> = (
           enableSelection
         />
       </ReaderProvider>
-    </SafeAreaView>
+    </BaseScreen>
   );
 };

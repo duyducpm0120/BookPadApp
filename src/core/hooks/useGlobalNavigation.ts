@@ -21,11 +21,16 @@ export const useGlobalNavigation = () => {
     navigation.navigate(ScreenNameEnum.BookDetail, { ...params });
   };
 
+  const navigateToReadingBookScreen = () => {
+    navigation.navigate(ScreenNameEnum.ReadingBook, {});
+  };
+
   return {
     navigation,
     navigateToLoginScreen,
     navigateToHomeScreen,
     navigateToBookDetailScreen,
+    navigateToReadingBookScreen,
     goBack,
   };
 };

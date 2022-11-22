@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BaseScreen, BlankSpacer, BPButton, BPText } from "@app/components";
 import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
-import { strings } from "@core";
+import { strings, useGlobalNavigation } from "@core";
 import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
 import { ScrollView, View } from "react-native";
@@ -15,14 +15,9 @@ export const BookDetailScreen: React.FC<any> = (
   const { navigation, route } = props;
   console.log("props asdasd", props);
   const { bookData } = route.params;
-  const {
-    BookCoverImage,
-    BookDescription,
-    BookName,
-    BookPublisher,
-    Authors,
-    ReviewStars,
-  } = bookData;
+  const { BookCoverImage, BookDescription, BookName, ReviewStars } = bookData;
+
+  const { navigateToReadingBookScreen } = useGlobalNavigation();
 
   return (
     <BaseScreen tittle={strings.book_detail}>
@@ -90,7 +85,9 @@ export const BookDetailScreen: React.FC<any> = (
       >
         <BPButton
           title={strings.read.toUpperCase()}
-          onPress={() => {}}
+          onPress={() => {
+            navigateToReadingBookScreen();
+          }}
           type="text"
           labelStyle={{
             fontWeight: "600",

@@ -1,5 +1,5 @@
 import { BaseScreen } from "@app/components";
-import { Reader, ReaderProvider } from "@epubjs-react-native/core";
+import { Reader } from "@epubjs-react-native/core";
 import { useFileSystem } from "@epubjs-react-native/file-system";
 import React from "react";
 import { useWindowDimensions } from "react-native";
@@ -15,16 +15,14 @@ export const ReadingBookScreen: React.FC<any> = (
   const { bookData: data, bookDownloadLink } = useViewModel({ bookData });
   return (
     <BaseScreen tittle={bookData.BookName}>
-      <ReaderProvider>
-        <Reader
-          src={bookDownloadLink}
-          width={width}
-          height={height}
-          fileSystem={useFileSystem}
-          enableSwipe
-          enableSelection
-        />
-      </ReaderProvider>
+      <Reader
+        src={bookDownloadLink}
+        width={width}
+        height={height}
+        fileSystem={useFileSystem}
+        enableSwipe
+        enableSelection
+      />
     </BaseScreen>
   );
 };

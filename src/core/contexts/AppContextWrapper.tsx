@@ -5,7 +5,7 @@ import React, { useReducer } from "react";
 import { DispatchContextProvider } from "./dispatch_context";
 import { StateContextProvider } from "./state_context";
 
-export const AppContext = ({
+export const AppContextWrapper = ({
   children,
   globalState = initState,
 }: {

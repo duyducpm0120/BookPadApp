@@ -6,6 +6,7 @@ import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import FastImage from "react-native-fast-image";
+import { useViewModel } from "./BookDetailScreen.ViewModel";
 
 import type { BookDetailScreenProps } from "./types";
 
@@ -16,7 +17,7 @@ export const BookDetailScreen: React.FC<any> = (
   console.log("props asdasd", props);
   const { bookData } = route.params;
   const { BookCoverImage, BookDescription, BookName, ReviewStars } = bookData;
-
+  const { fetchBookDownLoadLink } = useViewModel({ bookData });
   const { navigateToReadingBookScreen } = useGlobalNavigation();
 
   return (
@@ -85,8 +86,9 @@ export const BookDetailScreen: React.FC<any> = (
       >
         <BPButton
           title={strings.read.toUpperCase()}
-          onPress={() => {
-            navigateToReadingBookScreen({ bookData });
+          onPress={async () => {
+            const link = await fetchBookDownLoadLink();
+            navigateToReadingBookScreen({ bookData, bookDownLoadLink: link });
           }}
           type="text"
           labelStyle={{

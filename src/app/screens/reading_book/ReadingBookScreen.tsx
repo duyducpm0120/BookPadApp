@@ -3,7 +3,6 @@ import { Reader } from "@epubjs-react-native/core";
 import { useFileSystem } from "@epubjs-react-native/file-system";
 import React from "react";
 import { useWindowDimensions } from "react-native";
-import { useViewModel } from "./ReadingBookScreen.ViewModel";
 import type { ReadingBookScreenProps } from "./types";
 
 export const ReadingBookScreen: React.FC<any> = (
@@ -11,12 +10,12 @@ export const ReadingBookScreen: React.FC<any> = (
 ) => {
   const { navigation, route } = props;
   const { width, height } = useWindowDimensions();
-  const { bookData } = route.params;
-  const { bookData: data, bookDownloadLink } = useViewModel({ bookData });
+  const { bookData, bookDownLoadLink } = route.params;
+  // const { bookData: data, bookDownloadLink } = useViewModel({ bookData });
   return (
     <BaseScreen tittle={bookData.BookName}>
       <Reader
-        src={bookDownloadLink}
+        src={bookDownLoadLink}
         width={width}
         height={height}
         fileSystem={useFileSystem}

@@ -14,4 +14,5 @@ export type ReadingBookScreenProps = {
 
 export type ReadingBookScreenParams = {
   bookData: BookModel;
+  bookDownLoadLink: string;
 };

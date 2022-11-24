@@ -1,8 +1,8 @@
 import { BaseScreen } from "@app/components";
-import { Reader } from "@epubjs-react-native/core";
+import { Reader, ReaderProvider } from "@epubjs-react-native/core";
 import { useFileSystem } from "@epubjs-react-native/file-system";
 import React from "react";
-import { useWindowDimensions } from "react-native";
+import { useWindowDimensions, View } from "react-native";
 import type { ReadingBookScreenProps } from "./types";
 
 export const ReadingBookScreen: React.FC<any> = (
@@ -12,16 +12,28 @@ export const ReadingBookScreen: React.FC<any> = (
   const { width, height } = useWindowDimensions();
   const { bookData, bookDownLoadLink } = route.params;
   // const { bookData: data, bookDownloadLink } = useViewModel({ bookData });
+  // const { changeFontFamily } = useReader();
+
+  const renderReader = () => {
+    try {
+      return (
+        <Reader
+          src={bookDownLoadLink}
+          width={width}
+          height={height * 0.8}
+          fileSystem={useFileSystem}
+          enableSwipe
+          enableSelection
+        />
+      );
+    } catch (err) {
+      return <View />;
+    }
+  };
+
   return (
     <BaseScreen tittle={bookData.BookName}>
-      <Reader
-        src={bookDownLoadLink}
-        width={width}
-        height={height}
-        fileSystem={useFileSystem}
-        enableSwipe
-        enableSelection
-      />
+      <ReaderProvider>{renderReader()}</ReaderProvider>
     </BaseScreen>
   );
 };

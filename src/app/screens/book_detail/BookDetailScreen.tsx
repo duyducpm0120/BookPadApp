@@ -88,7 +88,8 @@ export const BookDetailScreen: React.FC<any> = (
           title={strings.read.toUpperCase()}
           onPress={async () => {
             const link = await fetchBookDownLoadLink();
-            navigateToReadingBookScreen({ bookData, bookDownLoadLink: link });
+            if (link !== "")
+              navigateToReadingBookScreen({ bookData, bookDownLoadLink: link });
           }}
           type="text"
           labelStyle={{

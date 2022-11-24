@@ -67,7 +67,7 @@ export const useViewModel = (
         primaryButtonParams: {
           text: strings.retry,
           onPress: async () => {
-            await logInWithTokenMutateAsync({ token: TOKEN });
+            await loginWithToken();
           },
         },
       });

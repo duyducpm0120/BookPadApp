@@ -63,4 +63,6 @@ export const enStrings = {
   exit: "Exit",
   read: "Read",
   book_detail: "Book detail",
+  error_occurred: "Error occurred. Please try again later",
+  get_book_link_failed: "Get book link failed",
 };

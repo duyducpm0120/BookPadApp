@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BlankSpacer, BPButton, BPText } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
+import { useGlobalNavigation, useGlobalState } from "@core";
 import { IMAGES, strings } from "@core/assets";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   SafeAreaView,
@@ -22,6 +23,12 @@ export const OnboardingScreen: React.FC<any> = (props: any) => {
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const images = [illustration1, illustration2, illustration4];
   const scrollX = useRef(new Animated.Value(0)).current;
+  const { TOKEN } = useGlobalState();
+  const { navigateToHomeScreen } = useGlobalNavigation();
+
+  useEffect(() => {
+    if (TOKEN !== "") navigateToHomeScreen();
+  }, [TOKEN, navigateToHomeScreen]);
 
   const [screenIndex, setScreenIndex] = useState(0);
 

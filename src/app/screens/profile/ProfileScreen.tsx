@@ -65,7 +65,7 @@ export const ProfileScreen: React.FC<any> = () => {
           <BPText
             fontSize={FONT_SIZE.fontSize16}
             color={COLORS.white}
-            fontWeight="bold"
+            // fontWeight="bold"
           >
             {USER_INFO.NickName}
           </BPText>

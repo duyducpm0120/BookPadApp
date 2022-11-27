@@ -5,3 +5,4 @@ export * from "./BPTextInput";
 export * from "./Loading";
 export * from "./Book";
 export * from "./BaseScreen";
+export * from "./BPIconButton";

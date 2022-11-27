@@ -4,8 +4,8 @@ import { useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/local_icon";
 import React, { useMemo } from "react";
 import { SafeAreaView, useWindowDimensions, View } from "react-native";
-import { IconButton } from "react-native-paper";
 import { BPButton } from "../BPButton";
+import { BPIconButton } from "../BPIconButton";
 import { BPText } from "../BPText";
 import type { BaseScreenProps } from "./types";
 
@@ -55,11 +55,10 @@ export const BaseScreen = (props: BaseScreenProps) => {
             },
           ]}
         >
-          <IconButton
+          <BPIconButton
             icon={headerLeftParams.icon}
             size={SPACE.spacing24}
             iconColor={headerLeftParams.iconColor}
-            style={{ margin: 0, backgroundColor: COLORS.white }}
             onPress={() => {
               goBack();
             }}
@@ -68,11 +67,10 @@ export const BaseScreen = (props: BaseScreenProps) => {
             {tittle}
           </BPText>
           {headerRightParams ? (
-            <IconButton
+            <BPIconButton
               icon={headerRightParams.icon}
               size={SPACE.spacing24}
               iconColor={headerRightParams.iconColor}
-              style={{ margin: 0, backgroundColor: COLORS.white }}
               onPress={headerRightParams.onPress}
             />
           ) : (

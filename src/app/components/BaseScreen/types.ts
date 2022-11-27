@@ -1,4 +1,4 @@
-import type { IconSource } from "react-native-paper/lib/typescript/components/Icon";
+import type { ImageSourcePropType } from "react-native";
 
 export type BaseScreenProps = {
   //
@@ -6,12 +6,12 @@ export type BaseScreenProps = {
   children?: JSX.Element | JSX.Element[] | null;
 
   headerLeftParams?: {
-    icon: IconSource;
+    icon: ImageSourcePropType;
     onPress: () => void;
     iconColor: string;
   };
   headerRightParams?: {
-    icon: IconSource;
+    icon: ImageSourcePropType;
     onPress: () => void;
     iconColor: string;
   };

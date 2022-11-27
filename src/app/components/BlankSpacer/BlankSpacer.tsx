@@ -8,12 +8,14 @@ export const BlankSpacer = (props: {
   color?: string;
 }): JSX.Element => {
   const colorProps =
-    props.color !== undefined ? { backGroundColor: props.color } : {};
+    props.color !== undefined ? { backgroundColor: props.color } : {};
+
+  console.log("colorProps", colorProps);
   return (
     <View
       style={{
-        width: props?.width ?? 0,
-        height: props?.height ?? 0,
+        width: props?.width ?? "100%",
+        height: props?.height ?? "100%",
         ...colorProps,
       }}
     />

@@ -13,4 +13,5 @@ export const LOCAL_ICONS = {
   exit: require("./ExitIcon.png"),
   setting: require("./SettingIcon.png"),
   userProfile: require("./UserProfileIcon.png"),
+  rightArrowIcon: require("./RightArrowIcon.png"),
 };

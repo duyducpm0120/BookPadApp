@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { COLORS } from "@app/styles";
+import { appStyle, COLORS } from "@app/styles";
 import React, { forwardRef } from "react";
 import { TextInput } from "react-native-paper";
 import type { BPTextInputProps } from "./types";
@@ -21,8 +21,15 @@ export const BPTextInput = forwardRef(
       label,
       onChangeText = () => {},
       passwordMode,
+      useShadow = false,
       ...rest
     } = props;
+
+    const shadowStype = useShadow
+      ? {
+          ...appStyle.shadowContainer,
+        }
+      : {};
 
     return (
       <TextInput
@@ -32,6 +39,7 @@ export const BPTextInput = forwardRef(
           width: "100%",
           height: 50,
           ...style,
+          ...shadowStype,
         }}
         mode={type}
         label={label}
@@ -41,6 +49,7 @@ export const BPTextInput = forwardRef(
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={passwordMode}
+        outlineColor={COLORS.transparent}
       />
     );
   }

@@ -82,6 +82,7 @@ export const ProfileScreen: React.FC<any> = () => {
           {strings.nick_name}
         </BPText>
         <BPTextInput
+          useShadow
           type="outlined"
           label=""
           autoFocus
@@ -93,10 +94,12 @@ export const ProfileScreen: React.FC<any> = () => {
           {strings.email}
         </BPText>
         <BPTextInput
+          useShadow
           type="outlined"
           label=""
           value={email}
           onChangeText={(text) => {}}
+          editable={false}
         />
         <BlankSpacer height={SPACE.spacing16} />
         <BPText fontSize={FONT_SIZE.fontSize14} fontWeight="bold">
@@ -140,6 +143,7 @@ export const ProfileScreen: React.FC<any> = () => {
           {strings.Phone}
         </BPText>
         <BPTextInput
+          useShadow
           type="outlined"
           label=""
           value={phone}

@@ -10,4 +10,5 @@ export type BPTextInputProps = TextInputPropsWithoutTheme & {
   passwordMode?: boolean;
   value?: string;
   onChangeText?: (text: string) => void;
+  useShadow?: boolean;
 };

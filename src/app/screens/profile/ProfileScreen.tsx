@@ -148,6 +148,7 @@ export const ProfileScreen: React.FC<any> = () => {
           label=""
           value={phone}
           onChangeText={(text) => {}}
+          keyboardType="numeric"
         />
       </View>
     );

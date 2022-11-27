@@ -8,10 +8,12 @@ export type BaseScreenProps = {
   headerLeftParams?: {
     icon: IconSource;
     onPress: () => void;
+    iconColor: string;
   };
   headerRightParams?: {
     icon: IconSource;
     onPress: () => void;
+    iconColor: string;
   };
   primaryButtonParams?: {
     title: string;
@@ -23,4 +25,5 @@ export type BaseScreenProps = {
   };
   headerType?: "normal" | "transparent";
   headerFloating?: boolean;
+  useHeaderPadding?: boolean;
 };

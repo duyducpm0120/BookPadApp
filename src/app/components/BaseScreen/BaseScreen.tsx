@@ -18,12 +18,14 @@ export const BaseScreen = (props: BaseScreenProps) => {
     headerLeftParams = {
       icon: LOCAL_ICONS.leftArrowIcon,
       onPress: goBack,
+      iconColor: COLORS.black,
     },
     headerRightParams = null,
     primaryButtonParams = null,
     secondaryButtonParams = null,
     headerType = "normal",
     headerFloating = false,
+    useHeaderPadding = false,
   } = props;
 
   const buttonWidth = useMemo(() => {
@@ -49,15 +51,14 @@ export const BaseScreen = (props: BaseScreenProps) => {
                   ? COLORS.transparent
                   : COLORS.white,
               position: headerFloating ? "absolute" : "relative",
+              zIndex: 1,
             },
           ]}
         >
           <IconButton
             icon={headerLeftParams.icon}
             size={SPACE.spacing24}
-            iconColor={
-              headerType === "transparent" ? COLORS.white : COLORS.black
-            }
+            iconColor={headerLeftParams.iconColor}
             style={{ margin: 0, backgroundColor: COLORS.white }}
             onPress={() => {
               goBack();
@@ -70,9 +71,7 @@ export const BaseScreen = (props: BaseScreenProps) => {
             <IconButton
               icon={headerRightParams.icon}
               size={SPACE.spacing24}
-              iconColor={
-                headerType === "transparent" ? COLORS.white : COLORS.black
-              }
+              iconColor={headerRightParams.iconColor}
               style={{ margin: 0, backgroundColor: COLORS.white }}
               onPress={headerRightParams.onPress}
             />
@@ -80,6 +79,7 @@ export const BaseScreen = (props: BaseScreenProps) => {
             <View style={{ width: 40 }} />
           )}
         </View>
+        {useHeaderPadding ? <View style={{ height: 40 }} /> : null}
         {children}
         <View
           style={[

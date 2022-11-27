@@ -4,4 +4,5 @@ export enum ScreenNameEnum {
   Home = "Home",
   BookDetail = "BookDetail",
   ReadingBook = "ReadingBook",
+  Profile = "Profile",
 }

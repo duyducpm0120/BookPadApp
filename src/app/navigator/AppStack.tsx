@@ -3,6 +3,7 @@ import { OnboardingScreen, LoginScreen, HomeScreen } from "@app/screens";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BookDetailScreen } from "@app/screens/book_detail";
 import { ReadingBookScreen } from "@app/screens/reading_book/ReadingBookScreen";
+import { ProfileScreen } from "@app/screens/profile/ProfileScreen";
 import { ScreenNameEnum } from "./screenName";
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,11 @@ export const AppStack = () => {
       <Stack.Screen
         name={ScreenNameEnum.ReadingBook}
         component={ReadingBookScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={ScreenNameEnum.Profile}
+        component={ProfileScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

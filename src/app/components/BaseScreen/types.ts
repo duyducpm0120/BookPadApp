@@ -21,4 +21,6 @@ export type BaseScreenProps = {
     title: string;
     onPress: () => void;
   };
+  headerType?: "normal" | "transparent";
+  headerFloating?: boolean;
 };

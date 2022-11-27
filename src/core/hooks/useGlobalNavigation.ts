@@ -26,12 +26,17 @@ export const useGlobalNavigation = () => {
     navigation.navigate(ScreenNameEnum.ReadingBook, { ...params });
   };
 
+  const navigateToProfileScreen = () => {
+    navigation.navigate(ScreenNameEnum.Profile);
+  };
+
   return {
     navigation,
     navigateToLoginScreen,
     navigateToHomeScreen,
     navigateToBookDetailScreen,
     navigateToReadingBookScreen,
+    navigateToProfileScreen,
     goBack,
   };
 };

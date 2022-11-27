@@ -14,12 +14,15 @@ export const ProfileTab = () => {
   const { selectors, handlers } = useViewModel();
   const { logout } = handlers;
   const { USER_INFO, BOOKS } = selectors;
-  const { navigateToLoginScreen } = useGlobalNavigation();
+  const { navigateToLoginScreen, navigateToProfileScreen } =
+    useGlobalNavigation();
   const renderData: ProfileTabRenderDataType[] = [
     {
       title: strings.update_profile,
       icon: LOCAL_ICONS.userProfile,
-      onPress: () => {},
+      onPress: () => {
+        navigateToProfileScreen();
+      },
     },
     {
       title: strings.settings,

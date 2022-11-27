@@ -19,12 +19,11 @@ export const BaseScreen = (props: BaseScreenProps) => {
       icon: LOCAL_ICONS.leftArrowIcon,
       onPress: goBack,
     },
-    headerRightParams = {
-      icon: LOCAL_ICONS.bookmarkIcon,
-      onPress: goBack,
-    },
+    headerRightParams = null,
     primaryButtonParams = null,
     secondaryButtonParams = null,
+    headerType = "normal",
+    headerFloating = false,
   } = props;
 
   const buttonWidth = useMemo(() => {
@@ -38,71 +37,88 @@ export const BaseScreen = (props: BaseScreenProps) => {
     return 0;
   }, [primaryButtonParams, secondaryButtonParams, width]);
   return (
-    <SafeAreaView style={appStyle.containerPadding16}>
-      <View
-        style={[
-          appStyle.rowSpaceBetweenContainer,
-          { paddingHorizontal: SPACE.spacing8 },
-        ]}
-      >
-        <IconButton
-          icon={headerLeftParams.icon}
-          size={SPACE.spacing24}
-          iconColor={COLORS.secondary.dark}
-          style={{ margin: 0, backgroundColor: COLORS.white }}
-          onPress={() => {
-            goBack();
-          }}
-        />
-        <BPText fontSize={FONT_SIZE.fontSize16} fontWeight="600">
-          {tittle}
-        </BPText>
-        <IconButton
-          icon={headerRightParams.icon}
-          size={SPACE.spacing24}
-          iconColor={COLORS.black}
-          style={{ margin: 0, backgroundColor: COLORS.white }}
-          onPress={headerRightParams.onPress}
-        />
-      </View>
-      {children}
-      <View
-        style={[
-          appStyle.rowFullWidthSpaceAroundContainer,
-          appStyle.shadowContainer,
-          {
-            backgroundColor: COLORS.transparent,
-            position: "absolute",
-            bottom: 30,
-          },
-        ]}
-      >
-        {secondaryButtonParams ? (
-          <BPButton
-            title={secondaryButtonParams.title.toUpperCase()}
+    <SafeAreaView style={[appStyle.container]}>
+      <View style={[appStyle.container]}>
+        <View
+          style={[
+            appStyle.rowSpaceBetweenContainer,
+            {
+              paddingHorizontal: SPACE.spacing8,
+              backgroundColor:
+                headerType === "transparent"
+                  ? COLORS.transparent
+                  : COLORS.white,
+              position: headerFloating ? "absolute" : "relative",
+            },
+          ]}
+        >
+          <IconButton
+            icon={headerLeftParams.icon}
+            size={SPACE.spacing24}
+            iconColor={
+              headerType === "transparent" ? COLORS.white : COLORS.black
+            }
+            style={{ margin: 0, backgroundColor: COLORS.white }}
             onPress={() => {
-              secondaryButtonParams.onPress();
+              goBack();
             }}
-            type="outlined"
-            labelStyle={{
-              fontWeight: "600",
-            }}
-            width={buttonWidth}
           />
-        ) : null}
-        {primaryButtonParams ? (
-          <BPButton
-            title={primaryButtonParams.title.toUpperCase()}
-            onPress={() => {
-              primaryButtonParams.onPress();
-            }}
-            labelStyle={{
-              fontWeight: "600",
-            }}
-            width={buttonWidth}
-            type="contained"
-          />
-        ) : null}
+          <BPText fontSize={FONT_SIZE.fontSize16} fontWeight="600">
+            {tittle}
+          </BPText>
+          {headerRightParams ? (
+            <IconButton
+              icon={headerRightParams.icon}
+              size={SPACE.spacing24}
+              iconColor={
+                headerType === "transparent" ? COLORS.white : COLORS.black
+              }
+              style={{ margin: 0, backgroundColor: COLORS.white }}
+              onPress={headerRightParams.onPress}
+            />
+          ) : (
+            <View style={{ width: 40 }} />
+          )}
+        </View>
+        {children}
+        <View
+          style={[
+            appStyle.rowFullWidthSpaceAroundContainer,
+            appStyle.shadowContainer,
+            {
+              backgroundColor: COLORS.transparent,
+              position: "absolute",
+              bottom: 0,
+            },
+          ]}
+        >
+          {secondaryButtonParams ? (
+            <BPButton
+              title={secondaryButtonParams.title.toUpperCase()}
+              onPress={() => {
+                secondaryButtonParams.onPress();
+              }}
+              type="outlined"
+              labelStyle={{
+                fontWeight: "600",
+              }}
+              width={buttonWidth}
+            />
+          ) : null}
+          {primaryButtonParams ? (
+            <BPButton
+              title={primaryButtonParams.title.toUpperCase()}
+              onPress={() => {
+                primaryButtonParams.onPress();
+              }}
+              labelStyle={{
+                fontWeight: "600",
+              }}
+              width={buttonWidth}
+              type="contained"
+            />
+          ) : null}
+        </View>
       </View>
     </SafeAreaView>
   );

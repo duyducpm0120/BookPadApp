@@ -9,7 +9,8 @@ import { useViewModel } from "./HomeTab.ViewModel";
 import { ForYouTab, MyTabBar } from "./tabs";
 
 const Tab = createMaterialTopTabNavigator();
-export const HomeTab = () => {
+export const HomeTab = (props: any) => {
+  console.log("create home tab");
   const { selectors } = useViewModel({});
   const { USER_INFO, BOOKS } = selectors;
   const renderUserAndSearchBar = () => {

@@ -3,23 +3,43 @@
 import { Loading } from "@app/components";
 import { appStyle, COLORS, SPACE } from "@app/styles";
 import { AppTabEnum, ICONS } from "@core";
-import React from "react";
+import React, { memo, useMemo, useState } from "react";
 import { View } from "react-native";
 import { IconButton } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useViewModel } from "./HomeScreen.ViewModel";
-import { HomeTab } from "./items";
+import { HomeTab, ProfileTab } from "./items";
 import { styles } from "./styles";
 import type { HomeScreenProps } from "./types";
 
-export const HomeScreen = (props: HomeScreenProps) => {
+export const HomeScreen = memo((props: HomeScreenProps) => {
+  console.log("create home screen");
   const { selectors, handlers } = useViewModel({});
   const { setGlobalCurrentTab } = handlers;
   const { CURRENT_TAB, BOOKS } = selectors;
 
+  const [currentTab, setCurrentTab] = useState<AppTabEnum>(AppTabEnum.HOME);
+
   const getTabColor = (tab: AppTabEnum) => {
-    return tab === CURRENT_TAB ? COLORS.primary.dark : COLORS.secondary.light;
+    return tab === currentTab ? COLORS.primary.dark : COLORS.secondary.light;
   };
+  const renderHomeTab = useMemo(() => {
+    return <HomeTab />;
+  }, []);
+  const renderProfileTab = useMemo(() => {
+    return <ProfileTab />;
+  }, []);
+
+  const renderContent = useMemo(() => {
+    switch (currentTab) {
+      case AppTabEnum.HOME:
+        return renderHomeTab;
+      case AppTabEnum.USER:
+        return renderProfileTab;
+      default:
+        return renderHomeTab;
+    }
+  }, [currentTab, renderHomeTab, renderProfileTab]);
 
   if (BOOKS.length === 0) {
     return (
@@ -29,7 +49,7 @@ export const HomeScreen = (props: HomeScreenProps) => {
 
   return (
     <SafeAreaView style={[appStyle.containerPadding16]}>
-      <HomeTab />
+      {renderContent}
       <View
         style={[
           appStyle.rowFullWidthLeftContainer,
@@ -43,7 +63,7 @@ export const HomeScreen = (props: HomeScreenProps) => {
           iconColor={getTabColor(AppTabEnum.HOME)}
           style={{ margin: 0 }}
           onPress={() => {
-            setGlobalCurrentTab(AppTabEnum.HOME);
+            setCurrentTab(AppTabEnum.HOME);
           }}
         />
         <IconButton
@@ -52,7 +72,7 @@ export const HomeScreen = (props: HomeScreenProps) => {
           iconColor={getTabColor(AppTabEnum.BOOK_SELF)}
           style={{ margin: 0 }}
           onPress={() => {
-            setGlobalCurrentTab(AppTabEnum.BOOK_SELF);
+            setCurrentTab(AppTabEnum.BOOK_SELF);
           }}
         />
         <IconButton
@@ -61,7 +81,7 @@ export const HomeScreen = (props: HomeScreenProps) => {
           iconColor={getTabColor(AppTabEnum.USER)}
           style={{ margin: 0 }}
           onPress={() => {
-            setGlobalCurrentTab(AppTabEnum.USER);
+            setCurrentTab(AppTabEnum.USER);
           }}
         />
         <IconButton
@@ -70,10 +90,10 @@ export const HomeScreen = (props: HomeScreenProps) => {
           iconColor={getTabColor(AppTabEnum.CHAT_BOT)}
           style={{ margin: 0 }}
           onPress={() => {
-            setGlobalCurrentTab(AppTabEnum.CHAT_BOT);
+            setCurrentTab(AppTabEnum.CHAT_BOT);
           }}
         />
       </View>
     </SafeAreaView>
   );
-};
+});

@@ -4,7 +4,7 @@ import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { strings, useGlobalNavigation } from "@core";
 import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
-import { ScrollView, useWindowDimensions, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import { useViewModel } from "./BookDetailScreen.ViewModel";
 
@@ -13,7 +13,6 @@ import type { BookDetailScreenProps } from "./types";
 export const BookDetailScreen: React.FC<any> = (
   props: BookDetailScreenProps
 ) => {
-  const { width } = useWindowDimensions();
   const { navigation, route } = props;
   console.log("props asdasd", props);
   const { bookData } = route.params;

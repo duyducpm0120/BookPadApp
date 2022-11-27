@@ -9,4 +9,8 @@ export const LOCAL_ICONS = {
   fullStar: require("./FullStar.png"),
   halfStar: require("./HalfStar.png"),
   emptyStar: require("./EmptyStar.png"),
+  changePassword: require("./ChangePasswordIcon.png"),
+  exit: require("./ExitIcon.png"),
+  setting: require("./SettingIcon.png"),
+  userProfile: require("./UserProfileIcon.png"),
 };

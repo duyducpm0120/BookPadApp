@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BaseScreen, BlankSpacer, BPText } from "@app/components";
-import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
+import { appStyle, COLORS, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { strings, useGlobalNavigation } from "@core";
+import { LOCAL_ICONS } from "@core/assets/images/local_icon";
 import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
 import { ScrollView, View } from "react-native";
@@ -30,6 +31,11 @@ export const BookDetailScreen: React.FC<any> = (
           if (link !== "")
             navigateToReadingBookScreen({ bookData, bookDownLoadLink: link });
         },
+      }}
+      headerRightParams={{
+        icon: LOCAL_ICONS.bookmarkIcon,
+        iconColor: COLORS.black,
+        onPress: () => {},
       }}
     >
       <ScrollView

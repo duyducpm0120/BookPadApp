@@ -9,6 +9,11 @@ export enum TimeToMillisecondsEnum {
   DAY = 1000 * 60 * 60 * 24,
 }
 
+export const Gender = {
+  MALE: "MALE",
+  FEMALE: "FEMALE",
+};
+
 export * from "./ErrorCode";
 export * from "./AppTab";
 export * from "./CacheKey";

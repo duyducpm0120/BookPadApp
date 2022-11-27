@@ -69,4 +69,9 @@ export const enStrings = {
   settings: "Settings",
   change_password: "Change Password",
   logout: "Logout",
+  nick_name: "Nickname",
+  gender: "Gender",
+  Phone: "Phone",
+  male: "Male",
+  female: "Female",
 };

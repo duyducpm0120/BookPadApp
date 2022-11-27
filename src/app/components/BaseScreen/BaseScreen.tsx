@@ -45,13 +45,15 @@ export const BaseScreen = (props: BaseScreenProps) => {
           style={[
             appStyle.rowSpaceBetweenContainer,
             {
-              paddingHorizontal: SPACE.spacing8,
               backgroundColor:
                 headerType === "transparent"
                   ? COLORS.transparent
                   : COLORS.white,
               position: headerFloating ? "absolute" : "relative",
               zIndex: 1,
+              paddingTop: SPACE.spacing12,
+              width: "100%",
+              alignItems: "center",
             },
           ]}
         >

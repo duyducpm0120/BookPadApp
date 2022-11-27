@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 export const AppStack = () => {
   const { TOKEN } = useGlobalState();
-  const introStack = () => {
+  const stackWithoutToken = () => {
     return (
       <>
         <Stack.Screen
@@ -23,6 +23,53 @@ export const AppStack = () => {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name={ScreenNameEnum.Home}
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.BookDetail}
+          component={BookDetailScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.ReadingBook}
+          component={ReadingBookScreen}
+          options={{ headerShown: false }}
+        />
+      </>
+    );
+  };
+  const stackWithToken = () => {
+    return (
+      <>
+        <Stack.Screen
+          name={ScreenNameEnum.Home}
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.Onboarding}
+          component={OnboardingScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.Login}
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name={ScreenNameEnum.BookDetail}
+          component={BookDetailScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.ReadingBook}
+          component={ReadingBookScreen}
+          options={{ headerShown: false }}
+        />
       </>
     );
   };
@@ -31,24 +78,9 @@ export const AppStack = () => {
     <Stack.Navigator>
       {
         // If user is not logged in, show intro stack
-        TOKEN === "" ? introStack() : null
+        TOKEN === "" ? stackWithoutToken() : stackWithToken()
         // introStack()
       }
-      <Stack.Screen
-        name={ScreenNameEnum.Home}
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={ScreenNameEnum.BookDetail}
-        component={BookDetailScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={ScreenNameEnum.ReadingBook}
-        component={ReadingBookScreen}
-        options={{ headerShown: false }}
-      />
     </Stack.Navigator>
   );
 };

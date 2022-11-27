@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BlankSpacer, BPText } from "@app/components";
 import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
-import { strings } from "@core";
+import { strings, useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/local_icon";
 import React from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
@@ -11,8 +11,10 @@ import { useViewModel } from "./ProfileTab.ViewModel";
 import type { ProfileTabRenderDataType } from "./types";
 
 export const ProfileTab = () => {
-  const { selectors } = useViewModel();
+  const { selectors, handlers } = useViewModel();
+  const { logout } = handlers;
   const { USER_INFO, BOOKS } = selectors;
+  const { navigateToLoginScreen } = useGlobalNavigation();
   const renderData: ProfileTabRenderDataType[] = [
     {
       title: strings.update_profile,
@@ -32,7 +34,10 @@ export const ProfileTab = () => {
     {
       title: strings.logout,
       icon: LOCAL_ICONS.exit,
-      onPress: () => {},
+      onPress: () => {
+        logout();
+        navigateToLoginScreen();
+      },
     },
   ];
   const renderUserAndSearchBar = () => {
@@ -78,6 +83,7 @@ export const ProfileTab = () => {
                 appStyle.columnLeftContainer,
                 { marginVertical: SPACE.spacing12 },
               ]}
+              onPress={item.onPress}
             >
               <View style={appStyle.rowFullWidthSpaceBetweenContainer}>
                 <View style={appStyle.rowLeftContainer}>

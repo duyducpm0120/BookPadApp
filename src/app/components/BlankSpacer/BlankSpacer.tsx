@@ -10,7 +10,6 @@ export const BlankSpacer = (props: {
   const colorProps =
     props.color !== undefined ? { backgroundColor: props.color } : {};
 
-  console.log("colorProps", colorProps);
   return (
     <View
       style={{

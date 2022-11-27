@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { COLORS, FONT_FAMILY, RADIUS } from "@app/styles";
 import React from "react";
 import { Button } from "react-native-paper";
@@ -8,7 +9,7 @@ export const BPButton: React.FC<BPButtonProps> = (
 ): JSX.Element => {
   const {
     icon,
-    type,
+    type = "contained",
     title,
     color = COLORS.primary.main,
     textColor = COLORS.white,
@@ -28,16 +29,29 @@ export const BPButton: React.FC<BPButtonProps> = (
       textColor={textColor}
       buttonColor={color}
       style={{
-        borderRadius: RADIUS.radius8,
         ...style,
         width,
         height,
+        borderRadius: RADIUS.radius8,
+        justifyContent: "center",
+        alignItems: "center",
+        borderWidth: 2,
+        borderColor:
+          type === "outlined" ? COLORS.primary.main : COLORS.primary.main,
+        backgroundColor: COLORS.white,
       }}
       contentStyle={{
         width,
         height,
+        backgroundColor:
+          type === "outlined" ? COLORS.transparent : COLORS.primary.main,
+        borderRadius: RADIUS.radius8,
       }}
-      labelStyle={{ fontFamily: FONT_FAMILY.Montserrat, ...labelStyle }}
+      labelStyle={{
+        fontFamily: FONT_FAMILY.Montserrat,
+        ...labelStyle,
+        color: type === "outlined" ? COLORS.primary.dark : COLORS.white,
+      }}
     >
       {title}
     </Button>

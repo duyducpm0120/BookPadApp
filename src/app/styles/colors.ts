@@ -7,6 +7,7 @@ export const TEXT_COLOR = {
 export const COLORS = {
   black: "#000000",
   white: "#ffffff",
+  transparent: "transparent",
   primary: {
     main: "#67be23",
     light: "AEDB8E",

@@ -87,7 +87,9 @@ export const ProfileScreen: React.FC<any> = () => {
           label=""
           autoFocus
           value={nickname}
-          onChangeText={(text) => {}}
+          onChangeText={(text) => {
+            setNickname(text);
+          }}
         />
         <BlankSpacer height={SPACE.spacing16} />
         <BPText fontSize={FONT_SIZE.fontSize14} fontWeight="bold">
@@ -147,7 +149,9 @@ export const ProfileScreen: React.FC<any> = () => {
           type="outlined"
           label=""
           value={phone}
-          onChangeText={(text) => {}}
+          onChangeText={(text) => {
+            setPhone(text);
+          }}
           keyboardType="numeric"
         />
       </View>

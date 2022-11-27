@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import { BaseScreen, BlankSpacer, BPButton, BPText } from "@app/components";
+import { BaseScreen, BlankSpacer, BPText } from "@app/components";
 import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { strings, useGlobalNavigation } from "@core";
 import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, useWindowDimensions, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import { useViewModel } from "./BookDetailScreen.ViewModel";
 
@@ -13,6 +13,7 @@ import type { BookDetailScreenProps } from "./types";
 export const BookDetailScreen: React.FC<any> = (
   props: BookDetailScreenProps
 ) => {
+  const { width } = useWindowDimensions();
   const { navigation, route } = props;
   console.log("props asdasd", props);
   const { bookData } = route.params;
@@ -21,9 +22,19 @@ export const BookDetailScreen: React.FC<any> = (
   const { navigateToReadingBookScreen } = useGlobalNavigation();
 
   return (
-    <BaseScreen tittle={strings.book_detail}>
+    <BaseScreen
+      tittle={strings.book_detail}
+      primaryButtonParams={{
+        title: strings.read,
+        onPress: async () => {
+          const link = await fetchBookDownLoadLink();
+          if (link !== "")
+            navigateToReadingBookScreen({ bookData, bookDownLoadLink: link });
+        },
+      }}
+    >
       <ScrollView
-        style={appStyle.containerPadding16}
+        style={[appStyle.containerPadding16]}
         showsVerticalScrollIndicator={false}
       >
         <BlankSpacer height={SPACE.spacing16} />
@@ -81,22 +92,6 @@ export const BookDetailScreen: React.FC<any> = (
         </View>
         <BlankSpacer height={100} />
       </ScrollView>
-      <View
-        style={[appStyle.rowFullWidthCenterContainer, appStyle.shadowContainer]}
-      >
-        <BPButton
-          title={strings.read.toUpperCase()}
-          onPress={async () => {
-            const link = await fetchBookDownLoadLink();
-            if (link !== "")
-              navigateToReadingBookScreen({ bookData, bookDownLoadLink: link });
-          }}
-          type="text"
-          labelStyle={{
-            fontWeight: "600",
-          }}
-        />
-      </View>
     </BaseScreen>
   );
 };

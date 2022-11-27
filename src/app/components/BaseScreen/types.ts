@@ -13,4 +13,12 @@ export type BaseScreenProps = {
     icon: IconSource;
     onPress: () => void;
   };
+  primaryButtonParams?: {
+    title: string;
+    onPress: () => void;
+  };
+  secondaryButtonParams?: {
+    title: string;
+    onPress: () => void;
+  };
 };

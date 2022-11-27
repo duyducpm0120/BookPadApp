@@ -50,6 +50,12 @@ export const appStyle = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  rowFullWidthSpaceAroundContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
   rowCenterContainer: {
     flexDirection: "row",
     alignItems: "center",

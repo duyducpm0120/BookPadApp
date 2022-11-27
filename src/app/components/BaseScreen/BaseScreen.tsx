@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { useGlobalNavigation } from "@core";
-import { LOCAL_ICONS } from "@core/assets/images/img";
+import { LOCAL_ICONS } from "@core/assets/images/local_icon";
 import React, { useMemo } from "react";
 import { SafeAreaView, useWindowDimensions, View } from "react-native";
 import { IconButton } from "react-native-paper";

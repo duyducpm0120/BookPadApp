@@ -8,6 +8,7 @@ export const COLORS = {
   black: "#000000",
   white: "#ffffff",
   transparent: "transparent",
+  gray: "E0E0E0",
   primary: {
     main: "#67be23",
     light: "AEDB8E",
@@ -15,7 +16,7 @@ export const COLORS = {
   },
   secondary: {
     main: "#626262",
-    light: "#9F9F9F",
+    light: "#E0E0E0",
     dark: "#000000",
   },
   background: {

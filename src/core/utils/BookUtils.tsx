@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import type { BookModel } from "@core";
-import { LOCAL_ICONS } from "@core/assets/images/img";
+import { LOCAL_ICONS } from "@core/assets/images/local_icon";
 import React from "react";
 import FastImage from "react-native-fast-image";
 

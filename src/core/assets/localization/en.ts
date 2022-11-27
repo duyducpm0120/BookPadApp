@@ -65,4 +65,8 @@ export const enStrings = {
   book_detail: "Book detail",
   error_occurred: "Error occurred. Please try again later",
   get_book_link_failed: "Get book link failed",
+  update_profile: "Update Profile",
+  settings: "Settings",
+  change_password: "Change Password",
+  logout: "Logout",
 };

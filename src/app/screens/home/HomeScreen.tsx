@@ -13,7 +13,6 @@ import { styles } from "./styles";
 import type { HomeScreenProps } from "./types";
 
 export const HomeScreen = memo((props: HomeScreenProps) => {
-  console.log("create home screen");
   const { selectors, handlers } = useViewModel({});
   const { setGlobalCurrentTab } = handlers;
   const { CURRENT_TAB, BOOKS } = selectors;

@@ -1,4 +1,5 @@
 import type { AppTabEnum } from "@core/const";
+import type { CategoryModel } from "@core/models/CategoryModel";
 import type { BookModel } from "../models/BookModel";
 import type { UserInfoModel } from "../models/UserInfoModel";
 
@@ -23,6 +24,7 @@ export interface BookPadAppState {
   TOKEN: string;
   CURRENT_TAB: AppTabEnum;
   IS_LOGGED_IN: boolean;
+  HOME_PAGE_CATEGORY_LIST: CategoryModel[];
 }
 
 export enum AlertType {

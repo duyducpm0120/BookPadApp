@@ -1,5 +1,6 @@
 import type { ActionType } from "typesafe-actions";
 import { createAction } from "typesafe-actions";
+import type { CategoryModel } from "../models/CategoryModel";
 import type { AppTabEnum } from "../const/AppTab";
 import type { BookModel } from "../models/BookModel";
 import type { UserInfoModel } from "../models/UserInfoModel";
@@ -85,6 +86,13 @@ const setGlobalIsLoggedIn = createAction(
   })
 )();
 
+const setGlobalHomePageCategoryList = createAction(
+  "global/setGlobalHomePageCategoryList",
+  (homePageCategoryList: CategoryModel[]) => ({
+    homePageCategoryList,
+  })
+)();
+
 export const globalActions = {
   setGlobal,
   setGlobalLoading,
@@ -95,6 +103,7 @@ export const globalActions = {
   setGlobalToken,
   setGlobalCurrentTab,
   setGlobalIsLoggedIn,
+  setGlobalHomePageCategoryList,
 };
 
 export type GlobalActionsType = ActionType<typeof globalActions>;

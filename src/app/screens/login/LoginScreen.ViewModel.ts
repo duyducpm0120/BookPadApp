@@ -58,6 +58,9 @@ export const useViewModel = (dependencies = defaultDependencies) => {
       globalDispatch(globalActions.setGlobalIsLoggedIn(true));
       globalDispatch(globalActions.setGlobalBooks(result.books));
       globalDispatch(globalActions.setGlobalUserInfo(result.userInfo));
+      globalDispatch(
+        globalActions.setGlobalHomePageCategoryList(result.categoryList)
+      );
       navigateToHomeScreen();
     } catch (err: any) {
       hideGlobalLoading();

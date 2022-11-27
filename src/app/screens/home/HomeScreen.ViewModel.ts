@@ -52,6 +52,9 @@ export const useViewModel = (
       globalDispatch(globalActions.setGlobalIsLoggedIn(true));
       globalDispatch(globalActions.setGlobalBooks(result.books));
       globalDispatch(globalActions.setGlobalUserInfo(result.userInfo));
+      globalDispatch(
+        globalActions.setGlobalHomePageCategoryList(result.categoryList)
+      );
       navigateToHomeScreen();
     } catch (err: any) {
       const errStatus = safeGetNumber(err, "response.status", 500);

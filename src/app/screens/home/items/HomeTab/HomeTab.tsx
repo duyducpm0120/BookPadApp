@@ -10,7 +10,6 @@ import { ForYouTab, MyTabBar } from "./tabs";
 
 const Tab = createMaterialTopTabNavigator();
 export const HomeTab = (props: any) => {
-  console.log("create home tab");
   const { selectors } = useViewModel({});
   const { USER_INFO, BOOKS } = selectors;
   const renderUserAndSearchBar = () => {

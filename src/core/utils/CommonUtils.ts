@@ -2,9 +2,6 @@
 import type { PropertyPath } from "lodash";
 import _ from "lodash";
 
-export const delay = async <Number>(t: number): Promise<number> =>
-  new Promise<number>(() => setTimeout(() => {}, t));
-
 export const safeGetNumber = (
   object: unknown,
   path: PropertyPath,

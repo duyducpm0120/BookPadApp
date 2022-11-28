@@ -4,6 +4,7 @@ import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
 import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/local_icon";
 import { delay } from "lodash";
+
 import React from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import FastImage from "react-native-fast-image";
@@ -29,26 +30,21 @@ export const ProfileTab = () => {
     {
       title: strings.settings,
       icon: LOCAL_ICONS.setting,
-      onPress: async () => {
-        showGlobalLoading();
-        delay(() => {
-          hideGlobalLoading();
-        }, 2000);
-      },
+      onPress: async () => {},
     },
     {
       title: strings.change_password,
       icon: LOCAL_ICONS.changePassword,
-      onPress: () => {
-        hideGlobalLoading();
-      },
+      onPress: () => {},
     },
     {
       title: strings.logout,
       icon: LOCAL_ICONS.exit,
-      onPress: () => {
+      onPress: async () => {
         logout();
-        navigateToLoginScreen();
+        delay(() => {
+          navigateToLoginScreen();
+        }, 1500);
       },
     },
   ];

@@ -63,8 +63,8 @@ export const HomeTab = (props: any) => {
         tabBar={(tabBarProps) => <MyTabBar {...tabBarProps} />}
         sceneContainerStyle={{ backgroundColor: COLORS.white }}
       >
-        <Tab.Screen name={strings.best_sellers} component={ForYouTabComp} />
         <Tab.Screen name={strings.for_you} component={ForYouTabComp} />
+        <Tab.Screen name={strings.best_sellers} component={ForYouTabComp} />
         <Tab.Screen name={strings.new_releases} component={ForYouTabComp} />
         <Tab.Screen name={strings.categories} component={ForYouTabComp} />
         <Tab.Screen name={strings.authors} component={ForYouTabComp} />

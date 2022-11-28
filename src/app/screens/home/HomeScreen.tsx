@@ -3,7 +3,7 @@
 import { Loading } from "@app/components";
 import { appStyle, COLORS, SPACE } from "@app/styles";
 import { AppTabEnum, ICONS } from "@core";
-import React, { memo, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { View } from "react-native";
 import { IconButton } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -12,7 +12,9 @@ import { HomeTab, ProfileTab } from "./items";
 import { styles } from "./styles";
 import type { HomeScreenProps } from "./types";
 
-export const HomeScreen = memo((props: HomeScreenProps) => {
+export const HomeScreen: React.FC<HomeScreenProps> = (
+  props: HomeScreenProps
+) => {
   const { selectors, handlers } = useViewModel({});
   const { setGlobalCurrentTab } = handlers;
   const { CURRENT_TAB, BOOKS } = selectors;
@@ -29,7 +31,7 @@ export const HomeScreen = memo((props: HomeScreenProps) => {
     return <ProfileTab />;
   }, []);
 
-  const renderContent = useMemo(() => {
+  const renderContent = useCallback(() => {
     switch (currentTab) {
       case AppTabEnum.HOME:
         return renderHomeTab;
@@ -48,7 +50,7 @@ export const HomeScreen = memo((props: HomeScreenProps) => {
 
   return (
     <SafeAreaView style={[appStyle.containerPadding16]}>
-      {renderContent}
+      {renderContent()}
       <View
         style={[
           appStyle.rowFullWidthLeftContainer,
@@ -95,4 +97,4 @@ export const HomeScreen = memo((props: HomeScreenProps) => {
       </View>
     </SafeAreaView>
   );
-});
+};

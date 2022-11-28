@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BlankSpacer, BPText } from "@app/components";
 import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
-import { strings, useGlobalNavigation } from "@core";
+import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/local_icon";
+import { delay } from "lodash";
 import React from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import FastImage from "react-native-fast-image";
@@ -16,6 +17,7 @@ export const ProfileTab = () => {
   const { USER_INFO, BOOKS } = selectors;
   const { navigateToLoginScreen, navigateToProfileScreen } =
     useGlobalNavigation();
+  const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
   const renderData: ProfileTabRenderDataType[] = [
     {
       title: strings.update_profile,
@@ -27,12 +29,19 @@ export const ProfileTab = () => {
     {
       title: strings.settings,
       icon: LOCAL_ICONS.setting,
-      onPress: () => {},
+      onPress: async () => {
+        showGlobalLoading();
+        delay(() => {
+          hideGlobalLoading();
+        }, 2000);
+      },
     },
     {
       title: strings.change_password,
       icon: LOCAL_ICONS.changePassword,
-      onPress: () => {},
+      onPress: () => {
+        hideGlobalLoading();
+      },
     },
     {
       title: strings.logout,

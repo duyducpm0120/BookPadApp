@@ -3,7 +3,7 @@ import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
 import { strings, ICONS } from "@core";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React, { useCallback } from "react";
-import { Dimensions, View } from "react-native";
+import { View } from "react-native";
 import { Avatar, IconButton } from "react-native-paper";
 import { useViewModel } from "./HomeTab.ViewModel";
 import { ForYouTab, MyTabBar } from "./tabs";
@@ -57,14 +57,14 @@ export const HomeTab = (props: any) => {
           tabBarScrollEnabled: true,
           swipeEnabled: true,
         }}
-        initialLayout={{
-          width: Dimensions.get("window").width,
-        }}
+        // initialLayout={{
+        //   width: Dimensions.get("window").width,
+        // }}
         tabBar={(tabBarProps) => <MyTabBar {...tabBarProps} />}
         sceneContainerStyle={{ backgroundColor: COLORS.white }}
       >
-        <Tab.Screen name={strings.for_you} component={ForYouTabComp} />
         <Tab.Screen name={strings.best_sellers} component={ForYouTabComp} />
+        <Tab.Screen name={strings.for_you} component={ForYouTabComp} />
         <Tab.Screen name={strings.new_releases} component={ForYouTabComp} />
         <Tab.Screen name={strings.categories} component={ForYouTabComp} />
         <Tab.Screen name={strings.authors} component={ForYouTabComp} />

@@ -14,11 +14,13 @@ import App from "./src/App";
 const queryClient = new QueryClient();
 const AppWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <AppContextWrapper>
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>{children}</NavigationContainer>
-      </QueryClientProvider>
-    </AppContextWrapper>
+    <NavigationContainer>
+      <AppContextWrapper>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </AppContextWrapper>
+    </NavigationContainer>
   );
 };
 const app = () => (

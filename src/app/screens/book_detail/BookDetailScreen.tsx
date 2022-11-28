@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BaseScreen, BlankSpacer, BPText } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
-import { strings, useGlobalNavigation } from "@core";
+import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/local_icon";
 import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
@@ -15,11 +15,19 @@ export const BookDetailScreen: React.FC<any> = (
   props: BookDetailScreenProps
 ) => {
   const { navigation, route } = props;
-  console.log("props asdasd", props);
   const { bookData } = route.params;
   const { BookCoverImage, BookDescription, BookName, ReviewStars } = bookData;
   const { fetchBookDownLoadLink } = useViewModel({ bookData });
   const { navigateToReadingBookScreen } = useGlobalNavigation();
+  const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
+
+  const getBookLinkAndNavigate = async () => {
+    showGlobalLoading();
+    const link = await fetchBookDownLoadLink();
+    if (link !== "")
+      navigateToReadingBookScreen({ bookData, bookDownLoadLink: link });
+    hideGlobalLoading();
+  };
 
   return (
     <BaseScreen
@@ -27,9 +35,7 @@ export const BookDetailScreen: React.FC<any> = (
       primaryButtonParams={{
         title: strings.read,
         onPress: async () => {
-          const link = await fetchBookDownLoadLink();
-          if (link !== "")
-            navigateToReadingBookScreen({ bookData, bookDownLoadLink: link });
+          getBookLinkAndNavigate();
         },
       }}
       headerRightParams={{

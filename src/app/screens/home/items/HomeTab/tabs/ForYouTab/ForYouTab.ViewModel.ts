@@ -18,7 +18,6 @@ export const useViewModel = (props: ForYouTabViewModelProps) => {
       };
     });
   }, [books, HOME_PAGE_CATEGORY_LIST]);
-  console.log("section data asdasd", sectionData);
 
   return {
     selectors: {

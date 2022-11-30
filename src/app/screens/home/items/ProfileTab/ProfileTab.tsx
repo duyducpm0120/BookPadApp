@@ -3,7 +3,6 @@ import { BlankSpacer, BPText } from "@app/components";
 import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
 import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/local_icon";
-import { delay } from "lodash";
 
 import React from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
@@ -41,8 +40,10 @@ export const ProfileTab = () => {
       title: strings.logout,
       icon: LOCAL_ICONS.exit,
       onPress: async () => {
+        showGlobalLoading();
         logout();
-        delay(() => {
+        setTimeout(() => {
+          hideGlobalLoading();
           navigateToLoginScreen();
         }, 1500);
       },

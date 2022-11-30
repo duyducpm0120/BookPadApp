@@ -12,7 +12,7 @@ export const useGlobalNavigation = () => {
   };
 
   const navigateToLoginScreen = () => {
-    navigation.navigate(ScreenNameEnum.Login);
+    navigation.replace(ScreenNameEnum.Login);
   };
   const navigateToHomeScreen = () => {
     navigation.navigate(ScreenNameEnum.Home);

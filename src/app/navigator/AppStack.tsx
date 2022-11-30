@@ -3,6 +3,7 @@ import {
   OnboardingScreen,
   LoginScreen,
   HomeScreen,
+  SettingScreen,
   ProfileScreen,
 } from "@app/screens";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -57,6 +58,11 @@ export const AppStack = React.memo(() => {
         <Stack.Screen
           name={ScreenNameEnum.Profile}
           component={ProfileScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.Setting}
+          component={SettingScreen}
           options={{ headerShown: false }}
         />
       </>

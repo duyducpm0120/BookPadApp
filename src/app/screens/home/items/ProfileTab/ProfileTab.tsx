@@ -15,8 +15,11 @@ export const ProfileTab = () => {
   const { selectors, handlers } = useViewModel();
   const { logout } = handlers;
   const { USER_INFO, BOOKS } = selectors;
-  const { navigateToLoginScreen, navigateToProfileScreen } =
-    useGlobalNavigation();
+  const {
+    navigateToLoginScreen,
+    navigateToProfileScreen,
+    navigateToSettingScreen,
+  } = useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
   const renderData: ProfileTabRenderDataType[] = [
     {
@@ -29,7 +32,9 @@ export const ProfileTab = () => {
     {
       title: strings.settings,
       icon: LOCAL_ICONS.setting,
-      onPress: async () => {},
+      onPress: async () => {
+        navigateToSettingScreen();
+      },
     },
     {
       title: strings.change_password,

@@ -30,6 +30,10 @@ export const useGlobalNavigation = () => {
     navigation.navigate(ScreenNameEnum.Profile);
   };
 
+  const navigateToSettingScreen = () => {
+    navigation.navigate(ScreenNameEnum.Setting);
+  };
+
   return {
     navigation,
     navigateToLoginScreen,
@@ -38,5 +42,6 @@ export const useGlobalNavigation = () => {
     navigateToReadingBookScreen,
     navigateToProfileScreen,
     goBack,
+    navigateToSettingScreen,
   };
 };

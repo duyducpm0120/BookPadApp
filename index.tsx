@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import React from "react";
 import { AppRegistry } from "react-native";
+import { Provider } from "react-native-paper";
 import { name as appName } from "./app.json";
 import App from "./src/App";
 
@@ -17,7 +18,7 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
     <NavigationContainer>
       <AppContextWrapper>
         <QueryClientProvider client={queryClient}>
-          {children}
+          <Provider>{children}</Provider>
         </QueryClientProvider>
       </AppContextWrapper>
     </NavigationContainer>

@@ -74,4 +74,6 @@ export const enStrings = {
   Phone: "Phone",
   male: "Male",
   female: "Female",
+  language: "Language",
+  theme: "Theme",
 };

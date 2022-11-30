@@ -52,9 +52,12 @@ export const SettingScreen: React.FC<any> = () => {
             }}
             style={{
               borderColor: COLORS.primary.main,
+              borderWidth: 2,
             }}
             dropDownContainerStyle={{
               borderColor: COLORS.primary.main,
+              borderWidth: 2,
+              borderTopWidth: 0,
             }}
             placeholder={language}
           />
@@ -88,10 +91,13 @@ export const SettingScreen: React.FC<any> = () => {
             style={{
               borderColor: COLORS.primary.main,
               zIndex: -1,
+              borderWidth: 2,
             }}
             dropDownContainerStyle={{
               borderColor: COLORS.primary.main,
               zIndex: -1,
+              borderWidth: 2,
+              borderTopWidth: 0,
             }}
             placeholder={theme}
           />

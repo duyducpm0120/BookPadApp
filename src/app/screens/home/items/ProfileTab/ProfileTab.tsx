@@ -99,8 +99,8 @@ export const ProfileTab = () => {
                   <FastImage
                     source={item.icon}
                     style={{
-                      height: 28,
-                      width: 28,
+                      height: 24,
+                      width: 24,
                     }}
                     tintColor={COLORS.black}
                   />

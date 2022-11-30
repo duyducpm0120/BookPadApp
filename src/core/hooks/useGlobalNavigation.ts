@@ -33,6 +33,9 @@ export const useGlobalNavigation = () => {
   const navigateToSettingScreen = () => {
     navigation.navigate(ScreenNameEnum.Setting);
   };
+  const navigateToChangePasswordScreen = () => {
+    navigation.navigate(ScreenNameEnum.ChangePassword);
+  };
 
   return {
     navigation,
@@ -43,5 +46,6 @@ export const useGlobalNavigation = () => {
     navigateToProfileScreen,
     goBack,
     navigateToSettingScreen,
+    navigateToChangePasswordScreen,
   };
 };

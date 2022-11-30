@@ -19,6 +19,7 @@ export const ProfileTab = () => {
     navigateToLoginScreen,
     navigateToProfileScreen,
     navigateToSettingScreen,
+    navigateToChangePasswordScreen,
   } = useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
   const renderData: ProfileTabRenderDataType[] = [
@@ -39,7 +40,9 @@ export const ProfileTab = () => {
     {
       title: strings.change_password,
       icon: LOCAL_ICONS.changePassword,
-      onPress: () => {},
+      onPress: () => {
+        navigateToChangePasswordScreen();
+      },
     },
     {
       title: strings.logout,

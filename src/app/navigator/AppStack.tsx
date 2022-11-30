@@ -5,6 +5,7 @@ import {
   HomeScreen,
   SettingScreen,
   ProfileScreen,
+  ChangePasswordScreen,
 } from "@app/screens";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BookDetailScreen } from "@app/screens/book_detail";
@@ -63,6 +64,11 @@ export const AppStack = React.memo(() => {
         <Stack.Screen
           name={ScreenNameEnum.Setting}
           component={SettingScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.ChangePassword}
+          component={ChangePasswordScreen}
           options={{ headerShown: false }}
         />
       </>

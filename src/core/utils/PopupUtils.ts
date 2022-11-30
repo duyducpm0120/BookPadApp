@@ -8,11 +8,11 @@ export type BPAlertParams = {
   title: string;
   message: string;
   primaryButtonParams?: {
-    text: string;
+    label: string;
     onPress: () => void;
   };
   secondaryButtonParams?: {
-    text: string;
+    label: string;
     onPress: () => void;
   };
 };
@@ -41,13 +41,13 @@ export const showAlert = (params: BPAlertParams) => {
   const alertButtons: AlertButton[] = [];
   if (primaryButtonParams) {
     alertButtons.push({
-      text: primaryButtonParams.text,
+      text: primaryButtonParams.label,
       onPress: primaryButtonParams.onPress,
     });
   }
   if (secondaryButtonParams) {
     alertButtons.push({
-      text: secondaryButtonParams.text,
+      text: secondaryButtonParams.label,
       onPress: secondaryButtonParams.onPress,
     });
   }

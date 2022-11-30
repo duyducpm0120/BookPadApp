@@ -76,4 +76,11 @@ export const enStrings = {
   female: "Female",
   language: "Language",
   theme: "Theme",
+  new_password: "New password",
+  confirm_password: "Confirm password",
+  password_is_not_standard:
+    "Password must be at least 12 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+  error: "Error",
+  alert_empty_password: "Password can not be empty",
+  alert_confirm_password: "Confirm password must be the same as new password",
 };

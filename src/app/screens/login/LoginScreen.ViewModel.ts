@@ -69,7 +69,7 @@ export const useViewModel = (dependencies = defaultDependencies) => {
         title: strings.loginFailed,
         message: getMessageFromErrorStatus(errStatus),
         primaryButtonParams: {
-          text: "OK",
+          label: "OK",
           onPress: () => {},
         },
       });

@@ -62,13 +62,13 @@ export const useViewModel = (
         title: strings.loginFailed,
         message: getMessageFromErrorStatus(errStatus),
         secondaryButtonParams: {
-          text: strings.exit,
+          label: strings.exit,
           onPress: () => {
             BackHandler.exitApp();
           },
         },
         primaryButtonParams: {
-          text: strings.retry,
+          label: strings.retry,
           onPress: async () => {
             await loginWithToken();
           },

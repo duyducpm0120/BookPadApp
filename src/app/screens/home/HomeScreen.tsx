@@ -8,7 +8,8 @@ import { View } from "react-native";
 import { IconButton } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useViewModel } from "./HomeScreen.ViewModel";
-import { HomeTab, ProfileTab } from "./items";
+import { ChatbotTab, HomeTab, ProfileTab } from "./items";
+import { BookSelfTab } from "./items/BookSelfTab";
 import { styles } from "./styles";
 import type { HomeScreenProps } from "./types";
 
@@ -30,6 +31,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = (
   const renderProfileTab = useMemo(() => {
     return <ProfileTab />;
   }, []);
+  const renderBookSelfTab = useMemo(() => {
+    return <BookSelfTab />;
+  }, []);
+  const renderChatbotTab = useMemo(() => {
+    return <ChatbotTab />;
+  }, []);
 
   const renderContent = useCallback(() => {
     switch (currentTab) {
@@ -37,10 +44,20 @@ export const HomeScreen: React.FC<HomeScreenProps> = (
         return renderHomeTab;
       case AppTabEnum.USER:
         return renderProfileTab;
+      case AppTabEnum.BOOK_SELF:
+        return renderBookSelfTab;
+      case AppTabEnum.CHAT_BOT:
+        return renderChatbotTab;
       default:
         return renderHomeTab;
     }
-  }, [currentTab, renderHomeTab, renderProfileTab]);
+  }, [
+    currentTab,
+    renderBookSelfTab,
+    renderChatbotTab,
+    renderHomeTab,
+    renderProfileTab,
+  ]);
 
   if (BOOKS.length === 0) {
     return (

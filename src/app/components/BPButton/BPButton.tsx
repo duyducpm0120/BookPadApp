@@ -16,7 +16,7 @@ export const BPButton: React.FC<BPButtonProps> = (
     onPress,
     uppercase = false,
     style = {},
-    width = "100%",
+    width = 180,
     height = 50,
     labelStyle = {},
   } = props;

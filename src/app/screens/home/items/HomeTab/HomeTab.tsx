@@ -48,8 +48,9 @@ export const HomeTab = (props: any) => {
   const ForYouTabComp = useCallback(() => {
     return <ForYouTab books={BOOKS} />;
   }, [BOOKS]);
+
   return (
-    <>
+    <View style={appStyle.container}>
       {renderUserAndSearchBar()}
       {/* <BlankSpacer height={SPACE.spacing8} /> */}
       <Tab.Navigator
@@ -70,6 +71,6 @@ export const HomeTab = (props: any) => {
         <Tab.Screen name={strings.authors} component={ForYouTabComp} />
         <Tab.Screen name={strings.publishers} component={ForYouTabComp} />
       </Tab.Navigator>
-    </>
+    </View>
   );
 };

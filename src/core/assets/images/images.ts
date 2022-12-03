@@ -29,4 +29,7 @@ export const IMAGES = {
   hide: {
     uri: "https://firebasestorage.googleapis.com/v0/b/bookpad-c62e3.appspot.com/o/EyeSlash.png?alt=media&token=281bae1f-e65b-43b3-a07d-34c7bf06f865",
   },
+  chatbot: {
+    uri: "https://firebasestorage.googleapis.com/v0/b/bookpad-c62e3.appspot.com/o/chatbot.png?alt=media&token=c02c8f50-a6c9-4e47-8d61-e1008fb82ba8",
+  },
 };

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
+import { appStyle, COLORS, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { BookModel } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/local_icon";
 import { getBookAuthor } from "@core/utils/BookUtils";
@@ -8,9 +8,57 @@ import { TouchableOpacity, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import { BlankSpacer } from "../BlankSpacer";
 import { BPText } from "../BPText";
+import type { BookPropsType } from "./type";
 
-export const Book = (props: { data: BookModel; onPress?: () => void }) => {
-  const { data = BookModel.instantiate({}), onPress = () => {} } = props;
+export const Book = (props: BookPropsType) => {
+  const {
+    data = BookModel.instantiate({}),
+    onPress = () => {},
+    readingData = {
+      isShowReadingStatus: false,
+      readingStatus: 0,
+    },
+  } = props;
+  const renderReadingPercent = () => {
+    if (readingData.isShowReadingStatus) {
+      return (
+        <>
+          <View
+            style={{
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 3,
+              backgroundColor: COLORS.secondary.light,
+              justifyContent: "center",
+              alignItems: "flex-start",
+              width: "70%",
+              borderRadius: 20,
+            }}
+          >
+            <View
+              style={{
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 3,
+                backgroundColor: COLORS.primary.dark,
+                justifyContent: "center",
+                alignItems: "center",
+                width: `${readingData.readingStatus}%`,
+                borderRadius: 20,
+              }}
+            />
+          </View>
+          <BPText fontSize={FONT_SIZE.fontSize12} color={TEXT_COLOR.light}>
+            {readingData.readingStatus}%
+          </BPText>
+        </>
+      );
+    }
+    return null;
+  };
+
   const {
     Authors,
     BookCoverImage,
@@ -80,6 +128,9 @@ export const Book = (props: { data: BookModel; onPress?: () => void }) => {
           }}
           resizeMode="contain"
         />
+      </View>
+      <View style={appStyle.rowFullWidthSpaceBetweenContainer}>
+        {renderReadingPercent()}
       </View>
     </TouchableOpacity>
   );

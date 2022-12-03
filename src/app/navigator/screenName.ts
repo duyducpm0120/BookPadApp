@@ -7,4 +7,5 @@ export enum ScreenNameEnum {
   Profile = "Profile",
   Setting = "Setting",
   ChangePassword = "ChangePassword",
+  Chatbot = "Chatbot",
 }

@@ -83,4 +83,7 @@ export const enStrings = {
   error: "Error",
   alert_empty_password: "Password can not be empty",
   alert_confirm_password: "Confirm password must be the same as new password",
+  chatbot_hello:
+    "Hi, I am BookPad Chatbot. I can help you to find your favorite books. You can also ask me to recommend you some books. Let's get started!",
+  bookpad_chatbot: "BookPad Chatbot",
 };

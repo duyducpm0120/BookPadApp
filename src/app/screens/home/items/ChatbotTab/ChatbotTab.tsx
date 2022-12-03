@@ -1,17 +1,13 @@
 import { BlankSpacer, BPButton, BPText } from "@app/components";
 import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
-import { IMAGES } from "@core";
+import { IMAGES, strings, useGlobalNavigation } from "@core";
 import React from "react";
 import { ScrollView } from "react-native";
 import FastImage from "react-native-fast-image";
-import { useViewModel } from "./ChatbotTab.ViewModel";
 
 export const ChatbotTab = () => {
-  const { selectors, handlers } = useViewModel();
-  const { USER_INFO, BOOKS } = selectors;
-
-  const bookLibraryChatbotIntroduction =
-    "Hi, I am your book library chatbot. I can help you to find your favorite books. You can also ask me to recommend you some books. Let's get started!";
+  const { navigateToChatbotScreen } = useGlobalNavigation();
+  const bookLibraryChatbotIntroduction = strings.chatbot_hello;
 
   return (
     <ScrollView
@@ -45,6 +41,7 @@ export const ChatbotTab = () => {
         title="GET STARTED"
         onPress={() => {
           console.log("get started");
+          navigateToChatbotScreen();
         }}
         width={180}
       />

@@ -36,6 +36,9 @@ export const useGlobalNavigation = () => {
   const navigateToChangePasswordScreen = () => {
     navigation.navigate(ScreenNameEnum.ChangePassword);
   };
+  const navigateToChatbotScreen = () => {
+    navigation.navigate(ScreenNameEnum.Chatbot);
+  };
 
   return {
     navigation,
@@ -47,5 +50,6 @@ export const useGlobalNavigation = () => {
     goBack,
     navigateToSettingScreen,
     navigateToChangePasswordScreen,
+    navigateToChatbotScreen,
   };
 };

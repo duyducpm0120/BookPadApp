@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BookDetailScreen } from "@app/screens/book_detail";
 import { ReadingBookScreen } from "@app/screens/reading_book/ReadingBookScreen";
 import { useGlobalState } from "@core";
+import { ChatbotScreen } from "@app/screens/chatbot";
 import { ScreenNameEnum } from "./screenName";
 
 const Stack = createNativeStackNavigator();
@@ -69,6 +70,11 @@ export const AppStack = React.memo(() => {
         <Stack.Screen
           name={ScreenNameEnum.ChangePassword}
           component={ChangePasswordScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.Chatbot}
+          component={ChatbotScreen}
           options={{ headerShown: false }}
         />
       </>

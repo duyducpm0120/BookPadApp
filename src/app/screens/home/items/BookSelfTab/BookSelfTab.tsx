@@ -4,7 +4,7 @@ import type { BookModel } from "@core";
 import { strings, ICONS, useGlobalNavigation, BookLibrarySection } from "@core";
 import { isNil } from "lodash";
 import React, { useCallback } from "react";
-import { FlatList, SectionList, View } from "react-native";
+import { FlatList, ScrollView, SectionList, View } from "react-native";
 import { Avatar, IconButton } from "react-native-paper";
 import { useViewModel } from "./BookSelfTab.ViewModel";
 
@@ -80,24 +80,26 @@ export const BookSelfTab = () => {
       {isNil(BOOK_LIBRARY_LIST) ? (
         <Loading isLoading />
       ) : (
-        <SectionList
-          sections={sectionData}
-          keyExtractor={(item, index) => `${item.BookId} + ${index}`}
-          renderItem={({ item }) => null}
-          renderSectionHeader={({ section: { title, data } }) => (
-            <>
-              <BPText fontSize={FONT_SIZE.fontSize24} fontWeight="bold">
-                {title}
-              </BPText>
-              <BlankSpacer height={SPACE.spacing12} />
-              {renderList(data, title)}
-              <BlankSpacer height={SPACE.spacing16} />
-            </>
-          )}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          ListFooterComponent={() => <BlankSpacer height={50} />}
-        />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <SectionList
+            sections={sectionData}
+            keyExtractor={(item, index) => `${item.BookId} + ${index}`}
+            renderItem={({ item }) => null}
+            renderSectionHeader={({ section: { title, data } }) => (
+              <>
+                <BPText fontSize={FONT_SIZE.fontSize24} fontWeight="bold">
+                  {title}
+                </BPText>
+                <BlankSpacer height={SPACE.spacing12} />
+                {renderList(data, title)}
+                <BlankSpacer height={SPACE.spacing16} />
+              </>
+            )}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            ListFooterComponent={<BlankSpacer height={50} />}
+          />
+        </ScrollView>
       )}
     </View>
   );

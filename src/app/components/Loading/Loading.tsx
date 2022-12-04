@@ -14,7 +14,7 @@ export const Loading = (props: {
 }) => {
   const {
     isLoading,
-    backgroundColor = COLORS.black,
+    backgroundColor = COLORS.white,
     opacity = 0.6,
     showLogo = false,
   } = props;

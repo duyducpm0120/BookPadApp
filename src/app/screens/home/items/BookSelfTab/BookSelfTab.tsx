@@ -1,34 +1,17 @@
-import { BlankSpacer, Book, BPText } from "@app/components";
+import { BlankSpacer, Book, BPText, Loading } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import type { BookModel } from "@core";
 import { strings, ICONS, useGlobalNavigation } from "@core";
-import React from "react";
+import { isNil } from "lodash";
+import React, { useCallback } from "react";
 import { FlatList, SectionList, View } from "react-native";
 import { Avatar, IconButton } from "react-native-paper";
 import { useViewModel } from "./BookSelfTab.ViewModel";
 
 export const BookSelfTab = () => {
   const { selectors, handlers } = useViewModel();
-  const { USER_INFO, BOOKS, sectionData } = selectors;
+  const { USER_INFO, BOOK_LIBRARY_LIST, sectionData } = selectors;
   const { navigateToBookDetailScreen } = useGlobalNavigation();
-  const renderList = (data: BookModel[]) => {
-    return (
-      <FlatList
-        data={data}
-        keyExtractor={(item, index) => `${item.BookId} + ${index}`}
-        renderItem={({ item }) => (
-          <Book
-            data={item}
-            onPress={() => {
-              navigateToBookDetailScreen({ bookData: item });
-            }}
-          />
-        )}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      />
-    );
-  };
   const renderUserAndSearchBar = () => {
     return (
       <View
@@ -61,28 +44,54 @@ export const BookSelfTab = () => {
       </View>
     );
   };
+  const renderList = useCallback(
+    (data: BookModel[]) => {
+      return (
+        <FlatList
+          data={data}
+          keyExtractor={(item, index) => `${item.BookId} + ${index}`}
+          renderItem={({ item }) => (
+            <Book
+              data={item}
+              onPress={() => {
+                navigateToBookDetailScreen({ bookData: item });
+              }}
+            />
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+      );
+    },
+    [navigateToBookDetailScreen]
+  );
+
   return (
     <View style={appStyle.container}>
       {renderUserAndSearchBar()}
       <BlankSpacer height={SPACE.spacing16} />
-      <SectionList
-        sections={sectionData}
-        keyExtractor={(item, index) => `${item.BookId} + ${index}`}
-        renderItem={({ item }) => null}
-        renderSectionHeader={({ section: { title, data } }) => (
-          <>
-            <BPText fontSize={FONT_SIZE.fontSize24} fontWeight="bold">
-              {title}
-            </BPText>
-            <BlankSpacer height={SPACE.spacing12} />
-            {renderList(data)}
-            <BlankSpacer height={SPACE.spacing16} />
-          </>
-        )}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        ListFooterComponent={() => <BlankSpacer height={100} />}
-      />
+      {isNil(BOOK_LIBRARY_LIST) ? (
+        <Loading isLoading />
+      ) : (
+        <SectionList
+          sections={sectionData}
+          keyExtractor={(item, index) => `${item.BookId} + ${index}`}
+          renderItem={({ item }) => null}
+          renderSectionHeader={({ section: { title, data } }) => (
+            <>
+              <BPText fontSize={FONT_SIZE.fontSize24} fontWeight="bold">
+                {title}
+              </BPText>
+              <BlankSpacer height={SPACE.spacing12} />
+              {renderList(data)}
+              <BlankSpacer height={SPACE.spacing16} />
+            </>
+          )}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          ListFooterComponent={() => <BlankSpacer height={100} />}
+        />
+      )}
     </View>
   );
 };

@@ -73,7 +73,7 @@ export const useViewModel = () => {
   return {
     selectors: {
       USER_INFO,
-      BOOKS,
+      BOOK_LIBRARY_LIST,
       sectionData,
     },
     handlers: {},

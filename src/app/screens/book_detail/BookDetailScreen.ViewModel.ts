@@ -63,9 +63,11 @@ export const useViewModel = (params: { bookData: BookModel }) => {
         token: TOKEN,
         bookId,
       });
+      console.log("result asdasd", result);
+      const message = safeGetString(result, "data.message", "");
       await getUserBookLibrary();
       showGlobalSnackBar({
-        message: strings.remove_book_from_library_success,
+        message,
       });
     } catch (err: any) {
       const errStatus = safeGetNumber(err, "response.status", 500);
@@ -82,10 +84,11 @@ export const useViewModel = (params: { bookData: BookModel }) => {
         token: TOKEN,
         bookId,
       });
-
+      console.log("result asdasd", result);
+      const message = safeGetString(result, "data.message", "");
       await getUserBookLibrary();
       showGlobalSnackBar({
-        message: strings.add_book_to_library_success,
+        message,
       });
     } catch (err: any) {
       const errStatus = safeGetNumber(err, "response.status", 500);

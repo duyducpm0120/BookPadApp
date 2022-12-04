@@ -40,31 +40,47 @@ export const useGetBookDownLoadLink = (params: { bookId: string }) => {
   };
 };
 
-export const useGetBookLibrary = () => {
-  const getBookLibrary = async ({ token }: { token: string }) => {
-    const endPoint = getBookLibraryEndPoint;
-    const res = await axios.post(
-      endPoint,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    const books = safeGetArray(res.data, "books", []);
-    const returnData = BookModel.instantiateList(books);
-    return returnData;
-  };
-  const { reset, mutateAsync } = useMutation({
-    mutationFn: getBookLibrary,
-    mutationKey: [`getBookLibrary`],
-    cacheTime: TimeToMillisecondsEnum.DAY,
-    networkMode: "offlineFirst",
-  });
-
-  return {
-    reset,
-    mutateAsync,
-  };
+export const getBookLibrary = async ({ token }: { token: string }) => {
+  const endPoint = getBookLibraryEndPoint;
+  const res = await axios.post(
+    endPoint,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const books = safeGetArray(res.data, "books", []);
+  const returnData = BookModel.instantiateList(books);
+  return returnData;
 };
+
+// export const useGetBookLibrary = () => {
+//   const getBookLibrary = async ({ token }: { token: string }) => {
+//     const endPoint = getBookLibraryEndPoint;
+//     const res = await axios.post(
+//       endPoint,
+//       {},
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     );
+//     const books = safeGetArray(res.data, "books", []);
+//     const returnData = BookModel.instantiateList(books);
+//     return returnData;
+//   };
+//   const { reset, mutateAsync } = useMutation({
+//     mutationFn: getBookLibrary,
+//     mutationKey: [`getBookLibrary`],
+//     cacheTime: TimeToMillisecondsEnum.DAY,
+//     networkMode: "offlineFirst",
+//   });
+
+//   return {
+//     reset,
+//     mutateAsync,
+//   };
+// };

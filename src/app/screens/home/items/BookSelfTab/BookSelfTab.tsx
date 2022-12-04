@@ -95,7 +95,7 @@ export const BookSelfTab = () => {
           )}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          ListFooterComponent={() => <BlankSpacer height={100} />}
+          ListFooterComponent={() => <BlankSpacer height={50} />}
         />
       )}
     </View>

@@ -6,10 +6,18 @@ import { useCallback } from "react";
 export const useViewModel = (params: { bookData: BookModel }) => {
   const { bookData } = params;
   const { BookId } = bookData;
-  const { TOKEN } = useGlobalState();
+  const { TOKEN, BOOK_LIBRARY_LIST } = useGlobalState();
   const { mutateAsync, reset } = useGetBookDownLoadLink({
     bookId: bookData.BookId,
   });
+
+  const isBookInLibrary = useCallback(() => {
+    if (!BOOK_LIBRARY_LIST) {
+      return false;
+    }
+    const book = BOOK_LIBRARY_LIST.find((item) => item.BookId === BookId);
+    return !!book;
+  }, [BOOK_LIBRARY_LIST, BookId]);
   const fetchBookDownLoadLink = useCallback(async () => {
     try {
       // showGlobalLoading();
@@ -34,5 +42,6 @@ export const useViewModel = (params: { bookData: BookModel }) => {
   return {
     bookData,
     fetchBookDownLoadLink,
+    isBookInLibrary,
   };
 };

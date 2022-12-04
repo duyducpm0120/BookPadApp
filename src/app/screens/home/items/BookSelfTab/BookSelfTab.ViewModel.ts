@@ -9,7 +9,8 @@ import {
   showAlert,
   strings,
 } from "@core";
-import { useGetBookLibrary } from "@core/services";
+import { getBookLibrary } from "@core/services";
+
 import { useMemo, useState } from "react";
 import { BackHandler } from "react-native";
 
@@ -26,11 +27,10 @@ export const useViewModel = () => {
   const { USER_INFO, BOOKS, TOKEN, BOOK_LIBRARY_LIST } = useGlobalState();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const globalDispatch = useGlobalDispatch();
-  const { mutateAsync: getBookLibraryMutateAsync } = useGetBookLibrary();
 
-  const getBookLibrary = async () => {
+  const getUserBookLibrary = async () => {
     try {
-      const result = await getBookLibraryMutateAsync({
+      const result = await getBookLibrary({
         token: TOKEN,
       });
       console.log("result asdasd", result);
@@ -49,7 +49,7 @@ export const useViewModel = () => {
         primaryButtonParams: {
           label: strings.retry,
           onPress: async () => {
-            await getBookLibrary();
+            await getUserBookLibrary();
           },
         },
       });
@@ -58,7 +58,7 @@ export const useViewModel = () => {
 
   useMount(async () => {
     if (!BOOK_LIBRARY_LIST) {
-      getBookLibrary();
+      getUserBookLibrary();
     }
   });
 

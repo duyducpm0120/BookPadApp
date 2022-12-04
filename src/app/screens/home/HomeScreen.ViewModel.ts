@@ -11,19 +11,26 @@ import {
   useGlobalDispatch,
   useGlobalState,
 } from "@core";
-import { useLogInWithTokenService } from "@core/services";
+import { getBookLibrary, useLogInWithTokenService } from "@core/services";
 import { BackHandler } from "react-native";
 
 const defaultDependencies = {
   useLogInWithTokenService,
+  getBookLibrary,
 };
 export const useViewModel = (
   props: any,
   dependencies = defaultDependencies
 ) => {
   const globalDispatch = useGlobalDispatch();
-  const { USER_INFO, BOOKS, CURRENT_TAB, IS_LOGGED_IN, TOKEN } =
-    useGlobalState();
+  const {
+    USER_INFO,
+    BOOKS,
+    CURRENT_TAB,
+    IS_LOGGED_IN,
+    TOKEN,
+    BOOK_LIBRARY_LIST,
+  } = useGlobalState();
   const setGlobalCurrentTab = (tab: AppTabEnum) => {
     globalDispatch(globalActions.setGlobalCurrentTab(tab));
   };
@@ -76,10 +83,40 @@ export const useViewModel = (
       });
     }
   };
+  const getUserBookLibrary = async () => {
+    try {
+      const result = await dependencies.getBookLibrary({
+        token: TOKEN,
+      });
+      console.log("result asdasd", result);
+      globalDispatch(globalActions.setGlobalBookLibraryList(result));
+    } catch (err: any) {
+      const errStatus = safeGetNumber(err, "response.status", 500);
+      showAlert({
+        title: strings.get_book_self_failed,
+        message: getMessageFromErrorStatus(errStatus),
+        secondaryButtonParams: {
+          label: strings.exit,
+          onPress: () => {
+            BackHandler.exitApp();
+          },
+        },
+        primaryButtonParams: {
+          label: strings.retry,
+          onPress: async () => {
+            await getUserBookLibrary();
+          },
+        },
+      });
+    }
+  };
 
   useMount(async () => {
     if (!IS_LOGGED_IN) {
       await loginWithToken();
+    }
+    if (!BOOK_LIBRARY_LIST) {
+      await getUserBookLibrary();
     }
   });
 

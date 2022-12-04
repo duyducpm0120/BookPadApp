@@ -17,7 +17,7 @@ export const BookDetailScreen: React.FC<any> = (
   const { navigation, route } = props;
   const { bookData } = route.params;
   const { BookCoverImage, BookDescription, BookName, ReviewStars } = bookData;
-  const { fetchBookDownLoadLink } = useViewModel({ bookData });
+  const { fetchBookDownLoadLink, isBookInLibrary } = useViewModel({ bookData });
   const { navigateToReadingBookScreen } = useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
 
@@ -40,7 +40,7 @@ export const BookDetailScreen: React.FC<any> = (
       }}
       headerRightParams={{
         icon: LOCAL_ICONS.bookmarkIcon,
-        iconColor: COLORS.black,
+        iconColor: isBookInLibrary() ? COLORS.primary.dark : COLORS.black,
         onPress: () => {},
       }}
     >

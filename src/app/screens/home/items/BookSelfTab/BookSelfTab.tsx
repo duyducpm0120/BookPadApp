@@ -10,6 +10,7 @@ import { useViewModel } from "./BookSelfTab.ViewModel";
 
 export const BookSelfTab = () => {
   const { selectors, handlers } = useViewModel();
+  const { removeBookFromUserLibrary } = handlers;
   const { USER_INFO, BOOK_LIBRARY_LIST, sectionData } = selectors;
   const { navigateToBookDetailScreen } = useGlobalNavigation();
   const renderUserAndSearchBar = () => {

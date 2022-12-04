@@ -17,7 +17,12 @@ export const BookDetailScreen: React.FC<any> = (
   const { navigation, route } = props;
   const { bookData } = route.params;
   const { BookCoverImage, BookDescription, BookName, ReviewStars } = bookData;
-  const { fetchBookDownLoadLink, isBookInLibrary } = useViewModel({ bookData });
+  const {
+    fetchBookDownLoadLink,
+    isBookInLibrary,
+    removeBookFromUserLibrary,
+    addBookToUserLibrary,
+  } = useViewModel({ bookData });
   const { navigateToReadingBookScreen } = useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
 
@@ -41,7 +46,17 @@ export const BookDetailScreen: React.FC<any> = (
       headerRightParams={{
         icon: LOCAL_ICONS.bookmarkIcon,
         iconColor: isBookInLibrary() ? COLORS.primary.dark : COLORS.black,
-        onPress: () => {},
+        onPress: async () => {
+          if (isBookInLibrary()) {
+            showGlobalLoading();
+            await removeBookFromUserLibrary(bookData.BookId);
+            hideGlobalLoading();
+          } else {
+            showGlobalLoading();
+            await addBookToUserLibrary(bookData.BookId);
+            hideGlobalLoading();
+          }
+        },
       }}
     >
       <ScrollView

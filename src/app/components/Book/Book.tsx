@@ -20,7 +20,6 @@ export const Book = (props: BookPropsType) => {
     },
     isHorizontal = false,
   } = props;
-  console.log("readingData", readingData);
   const renderReadingPercent = () => {
     if (readingData.isShowReadingStatus) {
       return (

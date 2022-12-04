@@ -87,4 +87,8 @@ export const enStrings = {
     "Hi, I am BookPad Chatbot. I can help you to find your favorite books. You can also ask me to recommend you some books. Let's get started!",
   bookpad_chatbot: "BookPad Chatbot",
   get_book_self_failed: "Get book self failed",
+  remove_book_from_library_success: "Remove book from library success",
+  remove_book_from_library_failed: "Remove book from library failed",
+  add_book_to_library_success: "Add book to library success",
+  add_book_to_library_failed: "Add book to library failed",
 };

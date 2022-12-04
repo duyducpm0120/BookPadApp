@@ -1,6 +1,17 @@
+import { safeGetString } from "@core/utils";
 import type { BookModel } from "@core";
-import { showErrorAlert, strings, useGlobalState } from "@core";
-import { useGetBookDownLoadLink } from "@core/services/BookServices";
+import {
+  safeGetNumber,
+  useGlobalSnackBar,
+  showErrorAlert,
+  strings,
+  useGlobalState,
+} from "@core";
+import {
+  addBookToLibrary,
+  removeBookFromLibrary,
+  useGetBookDownLoadLink,
+} from "@core/services/BookServices";
 import { useCallback } from "react";
 
 export const useViewModel = (params: { bookData: BookModel }) => {
@@ -10,6 +21,45 @@ export const useViewModel = (params: { bookData: BookModel }) => {
   const { mutateAsync, reset } = useGetBookDownLoadLink({
     bookId: bookData.BookId,
   });
+  const { showGlobalSnackBar } = useGlobalSnackBar();
+
+  const removeBookFromUserLibrary = async (bookId: string) => {
+    try {
+      const result = await removeBookFromLibrary({
+        token: TOKEN,
+        bookId,
+      });
+      const message = safeGetString(result, "result.message", "");
+      showGlobalSnackBar({
+        message,
+      });
+    } catch (err: any) {
+      const errStatus = safeGetNumber(err, "response.status", 500);
+      const message = safeGetString(err, "response.data.message", "");
+      showGlobalSnackBar({
+        message,
+      });
+    }
+  };
+
+  const addBookToUserLibrary = async (bookId: string) => {
+    try {
+      const result = await addBookToLibrary({
+        token: TOKEN,
+        bookId,
+      });
+      const message = safeGetString(result, "result.message", "");
+      showGlobalSnackBar({
+        message,
+      });
+    } catch (err: any) {
+      const errStatus = safeGetNumber(err, "response.status", 500);
+      const message = safeGetString(err, "response.data.message", "");
+      showGlobalSnackBar({
+        message,
+      });
+    }
+  };
 
   const isBookInLibrary = useCallback(() => {
     if (!BOOK_LIBRARY_LIST) {
@@ -43,5 +93,7 @@ export const useViewModel = (params: { bookData: BookModel }) => {
     bookData,
     fetchBookDownLoadLink,
     isBookInLibrary,
+    removeBookFromUserLibrary,
+    addBookToUserLibrary,
   };
 };

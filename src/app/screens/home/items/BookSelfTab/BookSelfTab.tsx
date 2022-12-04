@@ -1,7 +1,7 @@
 import { BlankSpacer, Book, BPText, Loading } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import type { BookModel } from "@core";
-import { strings, ICONS, useGlobalNavigation } from "@core";
+import { strings, ICONS, useGlobalNavigation, BookLibrarySection } from "@core";
 import { isNil } from "lodash";
 import React, { useCallback } from "react";
 import { FlatList, SectionList, View } from "react-native";
@@ -45,7 +45,7 @@ export const BookSelfTab = () => {
     );
   };
   const renderList = useCallback(
-    (data: BookModel[]) => {
+    (data: BookModel[], type: BookLibrarySection) => {
       return (
         <FlatList
           data={data}
@@ -56,10 +56,16 @@ export const BookSelfTab = () => {
               onPress={() => {
                 navigateToBookDetailScreen({ bookData: item });
               }}
+              isHorizontal={type === BookLibrarySection.WISH_LISTED_BOOKS}
+              readingData={{
+                isShowReadingStatus: type === BookLibrarySection.READING,
+                readingStatus: item.ReadPercentage,
+              }}
             />
           )}
-          horizontal
           showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          horizontal={type === BookLibrarySection.READING}
         />
       );
     },
@@ -83,7 +89,7 @@ export const BookSelfTab = () => {
                 {title}
               </BPText>
               <BlankSpacer height={SPACE.spacing12} />
-              {renderList(data)}
+              {renderList(data, title)}
               <BlankSpacer height={SPACE.spacing16} />
             </>
           )}

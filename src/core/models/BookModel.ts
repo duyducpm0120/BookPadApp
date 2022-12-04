@@ -43,6 +43,8 @@ export class BookModel {
 
   Categories: CategoryModel[];
 
+  ReadPercentage: number;
+
   constructor(
     BookId: string,
     BookName: string,
@@ -54,7 +56,8 @@ export class BookModel {
     Languages: any[],
     Authors: BookAuthor[],
     ReviewStars: number,
-    Categories: CategoryModel[]
+    Categories: CategoryModel[],
+    ReadPercentage: number
   ) {
     this.BookId = BookId;
     this.BookName = BookName;
@@ -67,6 +70,7 @@ export class BookModel {
     this.Authors = Authors;
     this.ReviewStars = ReviewStars;
     this.Categories = Categories;
+    this.ReadPercentage = ReadPercentage;
   }
 
   public static instantiate = (json: any) => {
@@ -85,6 +89,7 @@ export class BookModel {
     const categories = safeGetArray(json, "Categories", []).map((item: any) =>
       CategoryModel.instantiate(item)
     );
+    const ReadPercentage = safeGetNumber(json, "ReadPercentage", 0);
     // console.log('authors', authors);
     return new BookModel(
       bookId.toString(),
@@ -97,7 +102,8 @@ export class BookModel {
       languages,
       authors,
       reviewStars,
-      categories
+      categories,
+      ReadPercentage
     );
   };
 

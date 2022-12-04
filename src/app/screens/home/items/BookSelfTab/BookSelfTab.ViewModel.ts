@@ -1,4 +1,5 @@
 import {
+  BookLibrarySection,
   useGlobalState,
   useGlobalDispatch,
   globalActions,
@@ -12,12 +13,12 @@ import { useGetBookLibrary } from "@core/services";
 import { useMemo, useState } from "react";
 import { BackHandler } from "react-native";
 
-const bookLibrarySections = [
+const bookLibrarySections: { label: BookLibrarySection }[] = [
   {
-    label: "Reading",
+    label: BookLibrarySection.READING,
   },
   {
-    label: "Wishlisted Books",
+    label: BookLibrarySection.WISH_LISTED_BOOKS,
   },
 ];
 

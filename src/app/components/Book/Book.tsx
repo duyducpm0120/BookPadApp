@@ -2,7 +2,7 @@
 import { appStyle, COLORS, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { BookModel } from "@core";
 import { LOCAL_ICONS } from "@core/assets/images/local_icon";
-import { getBookAuthor } from "@core/utils/BookUtils";
+import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import FastImage from "react-native-fast-image";
@@ -18,7 +18,9 @@ export const Book = (props: BookPropsType) => {
       isShowReadingStatus: false,
       readingStatus: 0,
     },
+    isHorizontal = false,
   } = props;
+  console.log("readingData", readingData);
   const renderReadingPercent = () => {
     if (readingData.isShowReadingStatus) {
       return (
@@ -71,6 +73,68 @@ export const Book = (props: BookPropsType) => {
     PublishedAt,
     ReviewStars,
   } = data;
+
+  if (isHorizontal) {
+    return (
+      <TouchableOpacity
+        style={[
+          appStyle.rowFullWidthLeftContainer,
+          {
+            width: "100%",
+            height: 150,
+            marginBottom: SPACE.spacing16,
+            justifyContent: "flex-start",
+            overflow: "hidden",
+          },
+        ]}
+        onPress={onPress}
+      >
+        <FastImage
+          source={{ uri: BookCoverImage, priority: FastImage.priority.normal }}
+          style={{
+            height: "100%",
+            width: 100,
+          }}
+          resizeMode={FastImage.resizeMode.cover}
+        />
+        <BlankSpacer width={SPACE.spacing12} />
+        <View style={[appStyle.columnTopContainer]}>
+          <BPText
+            fontSize={FONT_SIZE.fontSize20}
+            fontWeight="600"
+            style={{
+              bottom: 0,
+            }}
+            numberOfLines={1}
+          >
+            {BookName.trim()}
+          </BPText>
+          <BlankSpacer height={SPACE.spacing4} />
+          <View style={appStyle.rowFullWidthSpaceBetweenContainer}>
+            <BPText
+              fontSize={FONT_SIZE.fontSize14}
+              color={TEXT_COLOR.light}
+              numberOfLines={1}
+            >
+              {getBookAuthor(data)}
+              {/* Nguyen Du */}
+            </BPText>
+          </View>
+          <BlankSpacer height={SPACE.spacing12} />
+          <View style={appStyle.rowFullWidthLeftContainer}>
+            {renderBookStars(data)}
+            <BlankSpacer width={SPACE.spacing4} />
+            <BPText fontSize={FONT_SIZE.fontSize14} color={TEXT_COLOR.light}>
+              {`${ReviewStars}/5`}
+            </BPText>
+          </View>
+          <View style={appStyle.rowFullWidthSpaceBetweenContainer}>
+            {renderReadingPercent()}
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
   return (
     <TouchableOpacity
       style={[

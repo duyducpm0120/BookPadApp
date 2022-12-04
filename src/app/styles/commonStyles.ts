@@ -91,6 +91,16 @@ export const appStyle = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
   },
+  columnTopContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  columnBottomContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
   centerContainer: {
     justifyContent: "center",
     alignItems: "center",

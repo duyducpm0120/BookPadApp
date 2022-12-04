@@ -7,4 +7,5 @@ export type BookPropsType = {
     isShowReadingStatus: boolean;
     readingStatus: number;
   };
+  isHorizontal?: boolean;
 };

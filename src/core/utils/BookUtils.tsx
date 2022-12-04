@@ -15,6 +15,8 @@ export const getBookAuthor = (book: BookModel) => {
   return `${Authors[0].AuthorName} and ${Authors.length - 1} more`;
 };
 
+const START_SIZE = 16;
+
 export const renderBookStars = (book: BookModel) => {
   const { ReviewStars } = book;
   const fullStars = Math.floor(ReviewStars);
@@ -26,8 +28,8 @@ export const renderBookStars = (book: BookModel) => {
     <FastImage
       source={LOCAL_ICONS.fullStar}
       style={{
-        height: 20,
-        width: 20,
+        height: START_SIZE,
+        width: START_SIZE,
         marginRight: 5,
       }}
       resizeMode="contain"
@@ -38,8 +40,8 @@ export const renderBookStars = (book: BookModel) => {
     <FastImage
       source={LOCAL_ICONS.halfStar}
       style={{
-        height: 20,
-        width: 20,
+        height: START_SIZE,
+        width: START_SIZE,
         marginRight: 5,
       }}
       resizeMode="contain"
@@ -50,8 +52,8 @@ export const renderBookStars = (book: BookModel) => {
     <FastImage
       source={LOCAL_ICONS.emptyStar}
       style={{
-        height: 20,
-        width: 20,
+        height: START_SIZE,
+        width: START_SIZE,
         marginRight: 5,
       }}
       resizeMode="contain"

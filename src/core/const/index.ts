@@ -19,3 +19,8 @@ export * from "./AppTab";
 export * from "./CacheKey";
 export * from "./ThemeList";
 export * from "./LanguageList";
+
+export enum BookLibrarySection {
+  READING = "Reading",
+  WISH_LISTED_BOOKS = "Wish listed books",
+}

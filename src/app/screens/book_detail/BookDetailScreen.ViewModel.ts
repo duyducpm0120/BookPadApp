@@ -1,6 +1,12 @@
-import { safeGetString } from "@core/utils";
+import {
+  getMessageFromErrorStatus,
+  safeGetString,
+  showAlert,
+} from "@core/utils";
 import type { BookModel } from "@core";
 import {
+  globalActions,
+  useGlobalDispatch,
   safeGetNumber,
   useGlobalSnackBar,
   showErrorAlert,
@@ -9,10 +15,12 @@ import {
 } from "@core";
 import {
   addBookToLibrary,
+  getBookLibrary,
   removeBookFromLibrary,
   useGetBookDownLoadLink,
 } from "@core/services/BookServices";
 import { useCallback } from "react";
+import { BackHandler } from "react-native";
 
 export const useViewModel = (params: { bookData: BookModel }) => {
   const { bookData } = params;
@@ -22,16 +30,42 @@ export const useViewModel = (params: { bookData: BookModel }) => {
     bookId: bookData.BookId,
   });
   const { showGlobalSnackBar } = useGlobalSnackBar();
-
+  const globalDispatch = useGlobalDispatch();
+  const getUserBookLibrary = async () => {
+    try {
+      const result = await getBookLibrary({
+        token: TOKEN,
+      });
+      globalDispatch(globalActions.setGlobalBookLibraryList(result));
+    } catch (err: any) {
+      const errStatus = safeGetNumber(err, "response.status", 500);
+      showAlert({
+        title: strings.get_book_self_failed,
+        message: getMessageFromErrorStatus(errStatus),
+        secondaryButtonParams: {
+          label: strings.exit,
+          onPress: () => {
+            BackHandler.exitApp();
+          },
+        },
+        primaryButtonParams: {
+          label: strings.retry,
+          onPress: async () => {
+            await getUserBookLibrary();
+          },
+        },
+      });
+    }
+  };
   const removeBookFromUserLibrary = async (bookId: string) => {
     try {
       const result = await removeBookFromLibrary({
         token: TOKEN,
         bookId,
       });
-      const message = safeGetString(result, "result.message", "");
+      await getUserBookLibrary();
       showGlobalSnackBar({
-        message,
+        message: strings.remove_book_from_library_success,
       });
     } catch (err: any) {
       const errStatus = safeGetNumber(err, "response.status", 500);
@@ -48,9 +82,10 @@ export const useViewModel = (params: { bookData: BookModel }) => {
         token: TOKEN,
         bookId,
       });
-      const message = safeGetString(result, "result.message", "");
+
+      await getUserBookLibrary();
       showGlobalSnackBar({
-        message,
+        message: strings.add_book_to_library_success,
       });
     } catch (err: any) {
       const errStatus = safeGetNumber(err, "response.status", 500);

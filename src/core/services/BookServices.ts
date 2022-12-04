@@ -69,7 +69,7 @@ export const removeBookFromLibrary = async ({
   const res = await axios.post(
     endPoint,
     {
-      bookId,
+      bookId: Number(bookId),
     },
     {
       headers: {
@@ -87,14 +87,11 @@ export const addBookToLibrary = async ({
   token: string;
   bookId: string;
 }) => {
-  console.log("endpoint", addBookLibraryEndPoint);
-  console.log("token", token);
-  console.log("bookId", bookId);
   const endPoint = addBookLibraryEndPoint;
   const res = await axios.post(
     endPoint,
     {
-      bookId,
+      bookId: Number(bookId),
     },
     {
       headers: {

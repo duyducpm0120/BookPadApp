@@ -10,7 +10,7 @@ import {
   strings,
   useGlobalSnackBar,
 } from "@core";
-import { getBookLibrary, removeBookFromLibrary } from "@core/services";
+import { getBookLibrary } from "@core/services";
 
 import { useMemo, useState } from "react";
 import { BackHandler } from "react-native";
@@ -57,22 +57,6 @@ export const useViewModel = () => {
       });
     }
   };
-  const removeBookFromUserLibrary = async (bookId: string) => {
-    try {
-      const result = await removeBookFromLibrary({
-        token: TOKEN,
-        bookId,
-      });
-      showGlobalSnackBar({
-        message: strings.remove_book_from_library_success,
-      });
-    } catch (err: any) {
-      const errStatus = safeGetNumber(err, "response.status", 500);
-      showGlobalSnackBar({
-        message: strings.remove_book_from_library_failed,
-      });
-    }
-  };
 
   useMount(async () => {
     if (!BOOK_LIBRARY_LIST) {
@@ -95,6 +79,6 @@ export const useViewModel = () => {
       BOOK_LIBRARY_LIST,
       sectionData,
     },
-    handlers: { removeBookFromUserLibrary },
+    handlers: {},
   };
 };

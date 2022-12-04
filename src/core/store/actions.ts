@@ -93,6 +93,13 @@ const setGlobalHomePageCategoryList = createAction(
   })
 )();
 
+const setGlobalBookLibraryList = createAction(
+  "global/setGlobalBookLibrary",
+  (bookLibrary: BookModel[]) => ({
+    bookLibrary,
+  })
+)();
+
 export const globalActions = {
   setGlobal,
   setGlobalLoading,
@@ -104,6 +111,7 @@ export const globalActions = {
   setGlobalCurrentTab,
   setGlobalIsLoggedIn,
   setGlobalHomePageCategoryList,
+  setGlobalBookLibraryList,
 };
 
 export type GlobalActionsType = ActionType<typeof globalActions>;

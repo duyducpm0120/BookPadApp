@@ -1,12 +1,15 @@
 import {
+  BookModel,
   END_POINT,
   GetBookDownLoadLinkModel,
+  safeGetArray,
   TimeToMillisecondsEnum,
 } from "@core";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
 const getDownLoadEndPoint = `${END_POINT}book/getBookDownloadLink/`;
+const getBookLibraryEndPoint = `${END_POINT}library/getBooks`;
 export const useGetBookDownLoadLink = (params: { bookId: string }) => {
   const getBookDownLoadEndPoint = async ({
     bookId,
@@ -15,8 +18,6 @@ export const useGetBookDownLoadLink = (params: { bookId: string }) => {
     bookId: string;
     token: string;
   }) => {
-    console.log("endpoint ", getDownLoadEndPoint + bookId);
-    console.log("token asdasd", token);
     const endPoint = getDownLoadEndPoint + bookId;
     const res = await axios.get(endPoint, {
       headers: {
@@ -29,6 +30,35 @@ export const useGetBookDownLoadLink = (params: { bookId: string }) => {
   const { reset, mutateAsync } = useMutation({
     mutationFn: getBookDownLoadEndPoint,
     mutationKey: [`getBookDownLoadEndPoint ${params.bookId}`],
+    cacheTime: TimeToMillisecondsEnum.DAY,
+    networkMode: "offlineFirst",
+  });
+
+  return {
+    reset,
+    mutateAsync,
+  };
+};
+
+export const useGetBookLibrary = () => {
+  const getBookLibrary = async ({ token }: { token: string }) => {
+    const endPoint = getBookLibraryEndPoint;
+    const res = await axios.post(
+      endPoint,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const books = safeGetArray(res.data, "books", []);
+    const returnData = BookModel.instantiateList(books);
+    return returnData;
+  };
+  const { reset, mutateAsync } = useMutation({
+    mutationFn: getBookLibrary,
+    mutationKey: [`getBookLibrary`],
     cacheTime: TimeToMillisecondsEnum.DAY,
     networkMode: "offlineFirst",
   });

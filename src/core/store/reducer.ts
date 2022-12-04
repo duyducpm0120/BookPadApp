@@ -28,6 +28,7 @@ export const initState: BookPadAppState = {
   CURRENT_TAB: AppTabEnum.HOME,
   IS_LOGGED_IN: false,
   HOME_PAGE_CATEGORY_LIST: [],
+  BOOK_LIBRARY_LIST: null,
 };
 export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
   initState
@@ -124,6 +125,15 @@ export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
       return {
         ...state,
         HOME_PAGE_CATEGORY_LIST: action.payload.homePageCategoryList,
+      };
+    }
+  )
+  .handleAction(
+    globalActions.setGlobalBookLibraryList,
+    (state, action): BookPadAppState => {
+      return {
+        ...state,
+        BOOK_LIBRARY_LIST: action.payload.bookLibrary,
       };
     }
   );

@@ -25,6 +25,7 @@ export interface BookPadAppState {
   CURRENT_TAB: AppTabEnum;
   IS_LOGGED_IN: boolean;
   HOME_PAGE_CATEGORY_LIST: CategoryModel[];
+  BOOK_LIBRARY_LIST: BookModel[] | null;
 }
 
 export enum AlertType {

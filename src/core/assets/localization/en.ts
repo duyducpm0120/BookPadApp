@@ -86,4 +86,5 @@ export const enStrings = {
   chatbot_hello:
     "Hi, I am BookPad Chatbot. I can help you to find your favorite books. You can also ask me to recommend you some books. Let's get started!",
   bookpad_chatbot: "BookPad Chatbot",
+  get_book_self_failed: "Get book self failed",
 };

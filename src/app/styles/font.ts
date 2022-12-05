@@ -2,6 +2,7 @@ export const FONT_FAMILY = {
   Montserrat: "Montserrat",
 };
 export const FONT_SIZE = {
+  fontSize10: 10,
   fontSize12: 12,
   fontSize14: 14,
   fontSize16: 16,

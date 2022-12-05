@@ -74,6 +74,9 @@ export const BaseScreen = (props: BaseScreenProps) => {
               size={SPACE.spacing24}
               iconColor={headerRightParams.iconColor}
               onPress={headerRightParams.onPress}
+              style={{
+                marginRight: SPACE.spacing8,
+              }}
             />
           ) : (
             <View style={{ width: 40 }} />

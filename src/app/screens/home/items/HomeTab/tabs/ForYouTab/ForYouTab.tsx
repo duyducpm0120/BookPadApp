@@ -1,9 +1,9 @@
 import { BlankSpacer, Book, BPText } from "@app/components";
-import { appStyle, FONT_SIZE, SPACE } from "@app/styles";
+import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import type { BookModel } from "@core";
 import { useGlobalNavigation } from "@core";
 import React from "react";
-import { FlatList, SectionList, View } from "react-native";
+import { FlatList, SectionList, useWindowDimensions, View } from "react-native";
 import { useViewModel } from "./ForYouTab.ViewModel";
 import { styles } from "./style";
 import type { ForYouTabProps } from "./types";
@@ -13,6 +13,7 @@ export const ForYouTab = (props: ForYouTabProps) => {
   const { books } = props;
   const { selectors } = useViewModel({ books });
   const { sectionData } = selectors;
+  const { width } = useWindowDimensions();
   const renderList = (data: BookModel[]) => {
     return (
       <FlatList
@@ -52,6 +53,13 @@ export const ForYouTab = (props: ForYouTabProps) => {
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={() => <BlankSpacer height={100} />}
+          ItemSeparatorComponent={() => (
+            <BlankSpacer
+              height={1}
+              color={COLORS.secondary.light}
+              width={width}
+            />
+          )}
         />
       </View>
       {/* <BlankSpacer height={100} /> */}

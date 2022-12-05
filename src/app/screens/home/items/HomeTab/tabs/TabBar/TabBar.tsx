@@ -94,7 +94,10 @@ export const MyTabBar = (props: MaterialTopTabBarProps) => {
                   paddingBottom: SPACE.spacing4,
                 }}
               >
-                <BPText fontSize={FONT_SIZE.fontSize14} fontWeight="600">
+                <BPText
+                  fontSize={FONT_SIZE.fontSize14}
+                  fontWeight={isFocused ? "600" : "300"}
+                >
                   {label}
                 </BPText>
               </Animated.View>

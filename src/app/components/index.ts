@@ -6,3 +6,4 @@ export * from "./Loading";
 export * from "./Book";
 export * from "./BaseScreen";
 export * from "./BPIconButton";
+export * from "./Author";

@@ -6,7 +6,7 @@ import React, { useCallback } from "react";
 import { View } from "react-native";
 import { Avatar, IconButton } from "react-native-paper";
 import { useViewModel } from "./HomeTab.ViewModel";
-import { ForYouTab, MyTabBar } from "./tabs";
+import { AuthorTab, ForYouTab, MyTabBar } from "./tabs";
 
 const Tab = createMaterialTopTabNavigator();
 export const HomeTab = (props: any) => {
@@ -49,6 +49,10 @@ export const HomeTab = (props: any) => {
     return <ForYouTab books={BOOKS} />;
   }, [BOOKS]);
 
+  const AuthorTabComp = useCallback(() => {
+    return <AuthorTab />;
+  }, []);
+
   return (
     <View style={appStyle.container}>
       {renderUserAndSearchBar()}
@@ -68,7 +72,7 @@ export const HomeTab = (props: any) => {
         <Tab.Screen name={strings.best_sellers} component={ForYouTabComp} />
         <Tab.Screen name={strings.new_releases} component={ForYouTabComp} />
         <Tab.Screen name={strings.categories} component={ForYouTabComp} />
-        <Tab.Screen name={strings.authors} component={ForYouTabComp} />
+        <Tab.Screen name={strings.authors} component={AuthorTabComp} />
         <Tab.Screen name={strings.publishers} component={ForYouTabComp} />
       </Tab.Navigator>
     </View>

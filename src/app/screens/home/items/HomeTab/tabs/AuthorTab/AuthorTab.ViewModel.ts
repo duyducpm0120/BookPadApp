@@ -17,7 +17,11 @@ export const useViewModel = () => {
   };
 
   useMount(() => {
-    getAuthorList();
+    try {
+      getAuthorList();
+    } catch (err) {
+      console.log("err", err);
+    }
   });
 
   return {

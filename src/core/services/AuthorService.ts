@@ -1,3 +1,8 @@
+import { safeGet } from "@core/utils";
+import { END_POINT } from "@core/const";
+import axios from "axios";
+import type { BookAuthor } from "../models/BookModel";
+
 const MOCK_AUTHORS = [
   {
     AuthorId: "2",
@@ -97,6 +102,14 @@ const MOCK_AUTHORS = [
   },
 ];
 
-export const getAuthors = async () => {
-  return MOCK_AUTHORS;
+const getAllAuthorsEndpoint = `${END_POINT}search/getAllAuthors`;
+export const getAuthors = async ({ token }: { token: string }) => {
+  const res = await axios.get(getAllAuthorsEndpoint, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log("res asdasd", res);
+  const authorList: BookAuthor[] = safeGet(res, "data.authors", []);
+  return authorList;
 };

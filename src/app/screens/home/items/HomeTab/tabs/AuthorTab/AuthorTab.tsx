@@ -1,5 +1,5 @@
 import { Author, BlankSpacer, Loading } from "@app/components";
-import { appStyle } from "@app/styles";
+import { appStyle, SPACE } from "@app/styles";
 import { useGlobalNavigation } from "@core";
 import { size } from "lodash";
 import React from "react";
@@ -13,12 +13,17 @@ export const AuthorTab = (props: any) => {
   const { selectors } = useViewModel();
   const { authorList } = selectors;
   const loadingComponent = () => {
-    return <Loading isLoading />;
+    return (
+      <>
+        <BlankSpacer height={SPACE.spacing12} />
+        <Loading isLoading />
+      </>
+    );
   };
 
   return (
     <View style={[styles.scrollViewContentContainer]}>
-      <View style={[appStyle.rowFullWidthLeftContainer, {}]}>
+      <View style={[appStyle.rowFullWidthLeftContainer]}>
         {size(authorList) > 0 ? (
           <>
             <FlatList

@@ -97,13 +97,10 @@ export const Book = (props: BookPropsType) => {
           resizeMode={FastImage.resizeMode.cover}
         />
         <BlankSpacer width={SPACE.spacing12} />
-        <View style={[appStyle.columnTopContainer]}>
+        <View style={[appStyle.columnTopLeftContainer]}>
           <BPText
             fontSize={FONT_SIZE.fontSize20}
             fontWeight="600"
-            style={{
-              bottom: 0,
-            }}
             numberOfLines={1}
           >
             {BookName.trim()}

@@ -105,4 +105,14 @@ export const appStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  columnTopLeftContainer: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+  },
+  columnTopRightContainer: {
+    flexDirection: "column",
+    alignItems: "flex-end",
+    justifyContent: "flex-start",
+  },
 });

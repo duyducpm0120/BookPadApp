@@ -38,7 +38,7 @@ export const Author = (props: { data: BookAuthor }) => {
       style={[
         appStyle.columnLeftContainer,
         // appStyle.shadowContainer,
-        { marginBottom: SPACE.spacing16 },
+        { marginBottom: SPACE.spacing32 },
       ]}
     >
       <View

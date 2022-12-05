@@ -6,7 +6,7 @@ import React, { useCallback } from "react";
 import { View } from "react-native";
 import { Avatar, IconButton } from "react-native-paper";
 import { useViewModel } from "./HomeTab.ViewModel";
-import { AuthorTab, ForYouTab, MyTabBar } from "./tabs";
+import { AuthorTab, CategoryTab, ForYouTab, MyTabBar } from "./tabs";
 
 const Tab = createMaterialTopTabNavigator();
 export const HomeTab = (props: any) => {
@@ -52,6 +52,9 @@ export const HomeTab = (props: any) => {
   const AuthorTabComp = useCallback(() => {
     return <AuthorTab />;
   }, []);
+  const CategoryTabComp = useCallback(() => {
+    return <CategoryTab />;
+  }, []);
 
   return (
     <View style={appStyle.container}>
@@ -71,7 +74,7 @@ export const HomeTab = (props: any) => {
         <Tab.Screen name={strings.for_you} component={ForYouTabComp} />
         <Tab.Screen name={strings.best_sellers} component={ForYouTabComp} />
         <Tab.Screen name={strings.new_releases} component={ForYouTabComp} />
-        <Tab.Screen name={strings.categories} component={ForYouTabComp} />
+        <Tab.Screen name={strings.categories} component={CategoryTabComp} />
         <Tab.Screen name={strings.authors} component={AuthorTabComp} />
         <Tab.Screen name={strings.publishers} component={ForYouTabComp} />
       </Tab.Navigator>

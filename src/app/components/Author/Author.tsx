@@ -3,7 +3,7 @@ import { appStyle, COLORS, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import type { BookAuthor } from "@core";
 import { Animated, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { LOCAL_ICONS } from "@core/assets/images/local_icon";
+import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import { BPText } from "../BPText";
 import { BPIconButton } from "../BPIconButton";
 

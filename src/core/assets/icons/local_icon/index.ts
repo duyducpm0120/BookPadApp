@@ -15,4 +15,5 @@ export const LOCAL_ICONS = {
   userProfile: require("./UserProfileIcon.png"),
   rightArrowIcon: require("./RightArrowIcon.png"),
   checkIcon: require("./CheckIcon.png"),
+  emptyICon: require("./emptyIcon.png"),
 };

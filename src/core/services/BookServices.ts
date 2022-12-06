@@ -12,6 +12,7 @@ const getDownLoadEndPoint = `${END_POINT}book/getBookDownloadLink/`;
 const getBookLibraryEndPoint = `${END_POINT}library/getBooks`;
 const removeBookLibraryEndPoint = `${END_POINT}library/removeBook`;
 const addBookLibraryEndPoint = `${END_POINT}library/addBook`;
+const searchBookEndPoint = `${END_POINT}search/bookNameSearch`;
 export const useGetBookDownLoadLink = (params: { bookId: string }) => {
   const getBookDownLoadEndPoint = async ({
     bookId,
@@ -100,4 +101,36 @@ export const addBookToLibrary = async ({
     }
   );
   return res;
+};
+
+export const searchBook = async ({
+  token,
+  lastBookId,
+  limit,
+  bookName,
+}: {
+  token: string;
+  lastBookId: number;
+  limit: number;
+  bookName: string;
+}) => {
+  console.log("search book", token, lastBookId, limit, bookName);
+
+  const endPoint = searchBookEndPoint;
+  const res = await axios.post(
+    endPoint,
+    {
+      limit,
+      last: Number(lastBookId),
+      searchString: bookName,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const bookData = safeGetArray(res, "data.books", []);
+  const returnData = BookModel.instantiateList(bookData);
+  return returnData;
 };

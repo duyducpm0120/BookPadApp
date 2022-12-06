@@ -1,16 +1,17 @@
-import { BlankSpacer, BPText } from "@app/components";
+import { BlankSpacer, BPIconButton, BPText } from "@app/components";
 import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
-import { strings, ICONS } from "@core";
+import { strings, ICONS, useGlobalNavigation } from "@core";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React, { useCallback } from "react";
 import { View } from "react-native";
-import { Avatar, IconButton } from "react-native-paper";
+import { Avatar } from "react-native-paper";
 import { useViewModel } from "./HomeTab.ViewModel";
 import { AuthorTab, CategoryTab, ForYouTab, MyTabBar } from "./tabs";
 
 const Tab = createMaterialTopTabNavigator();
 export const HomeTab = (props: any) => {
   const { selectors } = useViewModel({});
+  const { navigateToSearchScreen } = useGlobalNavigation();
   const { USER_INFO, BOOKS } = selectors;
   const renderUserAndSearchBar = () => {
     return (
@@ -32,13 +33,14 @@ export const HomeTab = (props: any) => {
             fontWeight="600"
           >{`${strings.hello}, ${USER_INFO.NickName}`}</BPText>
         </View>
-        <IconButton
+        <BPIconButton
           icon={{ uri: ICONS.search }}
           size={SPACE.spacing24}
           iconColor={COLORS.black}
           style={{ margin: 0 }}
           onPress={() => {
             console.log("search");
+            navigateToSearchScreen();
           }}
         />
       </View>
@@ -76,7 +78,6 @@ export const HomeTab = (props: any) => {
         <Tab.Screen name={strings.new_releases} component={ForYouTabComp} />
         <Tab.Screen name={strings.categories} component={CategoryTabComp} />
         <Tab.Screen name={strings.authors} component={AuthorTabComp} />
-        <Tab.Screen name={strings.publishers} component={ForYouTabComp} />
       </Tab.Navigator>
     </View>
   );

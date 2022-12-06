@@ -2,7 +2,7 @@
 import { BaseScreen, BlankSpacer, BPText, BPTextInput } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { showAlert, strings } from "@core";
-import { LOCAL_ICONS } from "@core/assets/images/local_icon";
+import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import React, { useState } from "react";
 import { View } from "react-native";
 

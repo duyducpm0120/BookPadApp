@@ -1,4 +1,5 @@
 import {
+  getMessageFromError,
   globalActions,
   strings,
   TimeToMillisecondsEnum,
@@ -8,12 +9,11 @@ import {
   useGlobalSnackBar,
 } from "@core";
 import { useLogInService } from "@core/services";
-import { getMessageFromErrorStatus } from "@core/utils/ErrorUtils";
+
 import LocalStorageHelper from "@core/utils/LocalStorageHelper";
 import { showAlert } from "@core/utils/PopupUtils";
 import { useState } from "react";
 import { CacheKeyEnum } from "../../../core/const/CacheKey";
-import { safeGetNumber } from "../../../core/utils/CommonUtils";
 
 const defaultDependencies = {
   useLogInService,
@@ -64,10 +64,9 @@ export const useViewModel = (dependencies = defaultDependencies) => {
       navigateToHomeScreen();
     } catch (err: any) {
       hideGlobalLoading();
-      const errStatus = safeGetNumber(err, "response.status", 500);
       showAlert({
         title: strings.loginFailed,
-        message: getMessageFromErrorStatus(errStatus),
+        message: getMessageFromError(err),
         primaryButtonParams: {
           label: "OK",
           onPress: () => {},

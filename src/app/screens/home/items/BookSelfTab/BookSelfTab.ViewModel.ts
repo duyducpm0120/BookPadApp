@@ -4,8 +4,7 @@ import {
   useGlobalDispatch,
   globalActions,
   useMount,
-  getMessageFromErrorStatus,
-  safeGetNumber,
+  getMessageFromError,
   showAlert,
   strings,
   useGlobalSnackBar,
@@ -38,10 +37,9 @@ export const useViewModel = () => {
       console.log("result asdasd", result);
       globalDispatch(globalActions.setGlobalBookLibraryList(result));
     } catch (err: any) {
-      const errStatus = safeGetNumber(err, "response.status", 500);
       showAlert({
         title: strings.get_book_self_failed,
-        message: getMessageFromErrorStatus(errStatus),
+        message: getMessageFromError(err),
         secondaryButtonParams: {
           label: strings.exit,
           onPress: () => {

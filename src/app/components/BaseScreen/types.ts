@@ -26,4 +26,5 @@ export type BaseScreenProps = {
   headerType?: "normal" | "transparent";
   headerFloating?: boolean;
   useHeaderPadding?: boolean;
+  headerComponent?: JSX.Element;
 };

@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { appStyle, COLORS, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { BookModel } from "@core";
-import { LOCAL_ICONS } from "@core/assets/images/local_icon";
+import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
 import { TouchableOpacity, View } from "react-native";

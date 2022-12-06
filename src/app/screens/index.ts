@@ -6,3 +6,4 @@ export * from "./reading_book";
 export * from "./profile";
 export * from "./setting";
 export * from "./change_password";
+export * from "./search";

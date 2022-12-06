@@ -91,4 +91,5 @@ export const enStrings = {
   remove_book_from_library_failed: "Remove book from library failed",
   add_book_to_library_success: "Add book to library success",
   add_book_to_library_failed: "Add book to library failed",
+  empty_data: "Empty data",
 };

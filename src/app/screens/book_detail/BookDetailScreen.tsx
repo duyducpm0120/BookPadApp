@@ -2,7 +2,7 @@
 import { BaseScreen, BlankSpacer, BPText } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
-import { LOCAL_ICONS } from "@core/assets/images/local_icon";
+import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import { getBookAuthor, renderBookStars } from "@core/utils/BookUtils";
 import React from "react";
 import { ScrollView, View } from "react-native";

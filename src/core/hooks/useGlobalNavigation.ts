@@ -39,6 +39,9 @@ export const useGlobalNavigation = () => {
   const navigateToChatbotScreen = () => {
     navigation.navigate(ScreenNameEnum.Chatbot);
   };
+  const navigateToSearchScreen = () => {
+    navigation.navigate(ScreenNameEnum.Search);
+  };
 
   return {
     navigation,
@@ -51,5 +54,6 @@ export const useGlobalNavigation = () => {
     navigateToSettingScreen,
     navigateToChangePasswordScreen,
     navigateToChatbotScreen,
+    navigateToSearchScreen,
   };
 };

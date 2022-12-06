@@ -1,7 +1,6 @@
 import type { AlertButton } from "react-native";
 import { Alert } from "react-native";
-import { safeGetNumber } from "./CommonUtils";
-import { getMessageFromErrorStatus } from "./ErrorUtils";
+import { getMessageFromError } from "./ErrorUtils";
 
 export type BPAlertParams = {
   //
@@ -64,8 +63,7 @@ export const showErrorAlert = (params: BPErrorAlertParams) => {
     secondaryButtonParams = null,
     error,
   } = params;
-  const errStatus = safeGetNumber(error, "response.status", 500);
-  const message = getMessageFromErrorStatus(errStatus);
+  const message = getMessageFromError(error);
   const alertButtons: AlertButton[] = [];
   if (primaryButtonParams) {
     alertButtons.push({

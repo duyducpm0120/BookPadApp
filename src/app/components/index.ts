@@ -8,3 +8,4 @@ export * from "./BaseScreen";
 export * from "./BPIconButton";
 export * from "./Author";
 export * from "./Category";
+export * from "./EmptyScreen";

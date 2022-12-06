@@ -22,6 +22,7 @@ export const BPTextInput = forwardRef(
       onChangeText = () => {},
       passwordMode,
       useShadow = false,
+      activeOutlineColor = COLORS.primary.main,
       ...rest
     } = props;
 
@@ -44,7 +45,7 @@ export const BPTextInput = forwardRef(
         mode={type}
         label={label}
         //   outlineColor={COLORS.primary.main}
-        activeOutlineColor={COLORS.primary.main}
+        activeOutlineColor={activeOutlineColor}
         clearButtonMode="while-editing"
         value={value}
         onChangeText={onChangeText}

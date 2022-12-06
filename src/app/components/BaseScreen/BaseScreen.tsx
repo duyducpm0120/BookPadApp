@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { useGlobalNavigation } from "@core";
-import { LOCAL_ICONS } from "@core/assets/images/local_icon";
+import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import React, { useMemo } from "react";
 import { SafeAreaView, useWindowDimensions, View } from "react-native";
 import { BPButton } from "../BPButton";
@@ -26,6 +26,7 @@ export const BaseScreen = (props: BaseScreenProps) => {
     headerType = "normal",
     headerFloating = false,
     useHeaderPadding = false,
+    headerComponent = null,
   } = props;
 
   const buttonWidth = useMemo(() => {
@@ -64,10 +65,13 @@ export const BaseScreen = (props: BaseScreenProps) => {
             onPress={() => {
               goBack();
             }}
+            style={{ marginLeft: SPACE.spacing16 }}
           />
-          <BPText fontSize={FONT_SIZE.fontSize16} fontWeight="600">
-            {tittle}
-          </BPText>
+          {headerComponent || (
+            <BPText fontSize={FONT_SIZE.fontSize16} fontWeight="600">
+              {tittle}
+            </BPText>
+          )}
           {headerRightParams ? (
             <BPIconButton
               icon={headerRightParams.icon}
@@ -75,11 +79,11 @@ export const BaseScreen = (props: BaseScreenProps) => {
               iconColor={headerRightParams.iconColor}
               onPress={headerRightParams.onPress}
               style={{
-                marginRight: SPACE.spacing8,
+                marginRight: SPACE.spacing16,
               }}
             />
           ) : (
-            <View style={{ width: 40 }} />
+            <View style={{ width: 24 }} />
           )}
         </View>
         {useHeaderPadding ? <View style={{ height: 40 }} /> : null}

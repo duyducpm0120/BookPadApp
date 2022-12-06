@@ -1,7 +1,5 @@
 import type { AppTabEnum } from "@core";
 import {
-  getMessageFromErrorStatus,
-  safeGetNumber,
   showAlert,
   strings,
   useGlobalNavigation,
@@ -13,6 +11,7 @@ import {
 } from "@core";
 import { getBookLibrary, useLogInWithTokenService } from "@core/services";
 import { BackHandler } from "react-native";
+import { getMessageFromError } from "../../../core/utils/ErrorUtils";
 
 const defaultDependencies = {
   useLogInWithTokenService,
@@ -64,10 +63,9 @@ export const useViewModel = (
       );
       navigateToHomeScreen();
     } catch (err: any) {
-      const errStatus = safeGetNumber(err, "response.status", 500);
       showAlert({
         title: strings.loginFailed,
-        message: getMessageFromErrorStatus(errStatus),
+        message: getMessageFromError(err),
         secondaryButtonParams: {
           label: strings.exit,
           onPress: () => {
@@ -91,10 +89,9 @@ export const useViewModel = (
       console.log("result asdasd", result);
       globalDispatch(globalActions.setGlobalBookLibraryList(result));
     } catch (err: any) {
-      const errStatus = safeGetNumber(err, "response.status", 500);
       showAlert({
         title: strings.get_book_self_failed,
-        message: getMessageFromErrorStatus(errStatus),
+        message: getMessageFromError(err),
         secondaryButtonParams: {
           label: strings.exit,
           onPress: () => {

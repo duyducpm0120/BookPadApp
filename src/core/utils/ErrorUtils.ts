@@ -1,5 +1,7 @@
 import { ErrorCodeMessage } from "@core/const";
+import { safeGetNumber } from "./CommonUtils";
 
-export const getMessageFromErrorStatus = (error: number): string => {
-  return ErrorCodeMessage[error] || "Unknown error";
+export const getMessageFromError = (error: any): string => {
+  const errStatus = safeGetNumber(error, "response.status", 500);
+  return ErrorCodeMessage[errStatus] || "Unknown error";
 };

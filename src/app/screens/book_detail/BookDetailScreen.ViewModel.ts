@@ -1,8 +1,4 @@
-import {
-  getMessageFromErrorStatus,
-  safeGetString,
-  showAlert,
-} from "@core/utils";
+import { getMessageFromError, safeGetString, showAlert } from "@core/utils";
 import type { BookModel } from "@core";
 import {
   globalActions,
@@ -38,10 +34,9 @@ export const useViewModel = (params: { bookData: BookModel }) => {
       });
       globalDispatch(globalActions.setGlobalBookLibraryList(result));
     } catch (err: any) {
-      const errStatus = safeGetNumber(err, "response.status", 500);
       showAlert({
         title: strings.get_book_self_failed,
-        message: getMessageFromErrorStatus(errStatus),
+        message: getMessageFromError(err),
         secondaryButtonParams: {
           label: strings.exit,
           onPress: () => {

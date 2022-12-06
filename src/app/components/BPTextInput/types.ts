@@ -11,4 +11,5 @@ export type BPTextInputProps = TextInputPropsWithoutTheme & {
   value?: string;
   onChangeText?: (text: string) => void;
   useShadow?: boolean;
+  activeOutlineColor?: string;
 };

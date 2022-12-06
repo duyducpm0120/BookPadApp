@@ -2,7 +2,7 @@
 import { BlankSpacer, BPText } from "@app/components";
 import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
 import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
-import { LOCAL_ICONS } from "@core/assets/images/local_icon";
+import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 
 import React from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";

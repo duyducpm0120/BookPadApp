@@ -35,14 +35,33 @@ export const useViewModel = (params: any) => {
       showGlobalLoading();
       const res = await searchBook({
         token: TOKEN,
-        lastBookId,
+        lastBookId: 0,
         limit: 10,
         bookName: searchText,
       });
       setSearchResult(res);
+      setLastBookId(Number(res[res.length - 1].BookId));
       hideGlobalLoading();
     } catch (err) {
       hideGlobalLoading();
+      showAlert({
+        title: "Error",
+        message: getMessageFromError(err),
+      });
+    }
+  };
+
+  const loadMore = async () => {
+    try {
+      const res = await searchBook({
+        token: TOKEN,
+        lastBookId,
+        limit: 10,
+        bookName: searchText,
+      });
+      setSearchResult([...searchResult, ...res]);
+      setLastBookId(Number(res[res.length - 1].BookId));
+    } catch (err) {
       showAlert({
         title: "Error",
         message: getMessageFromError(err),
@@ -56,5 +75,6 @@ export const useViewModel = (params: any) => {
     setSearchText,
     searchBookByName,
     searchResult,
+    loadMore,
   };
 };

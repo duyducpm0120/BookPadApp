@@ -13,8 +13,13 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
   const { navigation, route } = props;
   // const { bookData } = route.params;
   // const { BookCoverImage, BookDescription, BookName, ReviewStars } = bookData;
-  const { searchText, setSearchText, searchBookByName, searchResult } =
-    useViewModel({});
+  const {
+    searchText,
+    setSearchText,
+    searchBookByName,
+    searchResult,
+    loadMore,
+  } = useViewModel({});
   const { navigateToReadingBookScreen } = useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
 
@@ -36,10 +41,14 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={() => <EmptyScreen />}
+          onEndReached={() => {
+            loadMore();
+          }}
+          scrollEventThrottle={16}
         />
       </View>
     );
-  }, [searchResult]);
+  }, [loadMore, searchResult]);
 
   return (
     <BaseScreen

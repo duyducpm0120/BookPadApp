@@ -28,6 +28,8 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
     searchResult,
     loadMoreBookByName,
     loadMoreBookByCategory,
+    searchBookByAuth,
+    loadMoreBookByAuthor,
   } = useViewModel({ type, id });
   const { navigateToReadingBookScreen } = useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
@@ -68,7 +70,10 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
     if (type === SearchScreenType.CATEGORY) {
       loadMoreBookByCategory();
     }
-  }, [loadMoreBookByName, loadMoreBookByCategory, type]);
+    if (type === SearchScreenType.AUTHOR) {
+      loadMoreBookByAuthor();
+    }
+  }, [type, loadMoreBookByName, loadMoreBookByCategory, loadMoreBookByAuthor]);
 
   const renderContent = useCallback(() => {
     return (

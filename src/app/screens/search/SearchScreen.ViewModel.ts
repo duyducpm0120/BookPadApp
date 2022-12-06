@@ -6,7 +6,11 @@ import {
   showAlert,
   useGlobalState,
 } from "@core";
-import { searchBook, searchBookByCategory } from "@core/services";
+import {
+  searchBook,
+  searchBookByAuthor,
+  searchBookByCategory,
+} from "@core/services";
 import { useState } from "react";
 import { SearchScreenType } from "./types";
 
@@ -98,13 +102,51 @@ export const useViewModel = (params: {
       });
     }
   };
+  const loadMoreBookByAuthor = async () => {
+    try {
+      const res = await searchBookByAuthor({
+        token: TOKEN,
+        lastBookId,
+        limit: 10,
+        authorId: id,
+      });
+      setSearchResult([...searchResult, ...res]);
+      setLastBookId(Number(res[res.length - 1].BookId));
+    } catch (err) {
+      showAlert({
+        title: "Error",
+        message: getMessageFromError(err),
+      });
+    }
+  };
+
+  const searchBookByAuth = async () => {
+    try {
+      showGlobalLoading();
+      const res = await searchBookByAuthor({
+        token: TOKEN,
+        lastBookId: 0,
+        limit: 10,
+        authorId: id,
+      });
+      setSearchResult(res);
+      setLastBookId(Number(res[res.length - 1].BookId));
+      hideGlobalLoading();
+    } catch (err) {
+      hideGlobalLoading();
+      showAlert({
+        title: "Error",
+        message: getMessageFromError(err),
+      });
+    }
+  };
 
   useMount(async () => {
     if (type === SearchScreenType.CATEGORY) {
       await searchBookByCat();
     }
     if (type === SearchScreenType.AUTHOR) {
-      await searchBookByCat();
+      await searchBookByAuth();
     }
   });
 
@@ -116,5 +158,7 @@ export const useViewModel = (params: {
     searchResult,
     loadMoreBookByName,
     loadMoreBookByCategory,
+    searchBookByAuth,
+    loadMoreBookByAuthor,
   };
 };

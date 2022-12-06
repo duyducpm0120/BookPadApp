@@ -1,5 +1,7 @@
 import { Author, BlankSpacer, Loading } from "@app/components";
+import { SearchScreenType } from "@app/screens/search";
 import { appStyle, SPACE } from "@app/styles";
+import type { BookAuthor } from "@core";
 import { useGlobalNavigation } from "@core";
 import { size } from "lodash";
 import React from "react";
@@ -8,7 +10,7 @@ import { useViewModel } from "./AuthorTab.ViewModel";
 import { styles } from "./style";
 
 export const AuthorTab = (props: any) => {
-  const { navigateToBookDetailScreen } = useGlobalNavigation();
+  const { navigateToSearchScreen } = useGlobalNavigation();
 
   const { selectors } = useViewModel();
   const { authorList } = selectors;
@@ -20,7 +22,13 @@ export const AuthorTab = (props: any) => {
       </>
     );
   };
-
+  const navigateToSearch = (item: BookAuthor) => {
+    navigateToSearchScreen({
+      type: SearchScreenType.CATEGORY,
+      keyword: item.AuthorName,
+      id: Number(item.AuthorId),
+    });
+  };
   return (
     <View style={[styles.scrollViewContentContainer]}>
       <View style={[appStyle.rowFullWidthLeftContainer]}>
@@ -29,7 +37,14 @@ export const AuthorTab = (props: any) => {
             <FlatList
               data={authorList}
               keyExtractor={(item, index) => `${item.AuthorId} + ${index}`}
-              renderItem={({ item }) => <Author data={item} />}
+              renderItem={({ item }) => (
+                <Author
+                  data={item}
+                  onPress={() => {
+                    navigateToSearch(item);
+                  }}
+                />
+              )}
               showsVerticalScrollIndicator={false}
               ListFooterComponent={() => <BlankSpacer height={100} />}
             />

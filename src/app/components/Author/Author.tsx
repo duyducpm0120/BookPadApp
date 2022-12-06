@@ -7,8 +7,8 @@ import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import { BPText } from "../BPText";
 import { BPIconButton } from "../BPIconButton";
 
-export const Author = (props: { data: BookAuthor }) => {
-  const { data } = props;
+export const Author = (props: { data: BookAuthor; onPress: () => void }) => {
+  const { data, onPress } = props;
   const [isShowDetail, setIsShowDetail] = React.useState(false);
   const showDetailAnimated = React.useRef(new Animated.Value(0)).current;
   const iconDegree = showDetailAnimated.interpolate({
@@ -40,6 +40,7 @@ export const Author = (props: { data: BookAuthor }) => {
         // appStyle.shadowContainer,
         { marginBottom: SPACE.spacing32 },
       ]}
+      onPress={onPress}
     >
       <View
         style={[

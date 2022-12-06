@@ -3,6 +3,7 @@ import type { BookDetailScreenParams } from "@app/screens/book_detail";
 import type { ReadingBookScreenParams } from "@app/screens/reading_book/types";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { SearchScreenParams } from "../../app/screens/search/types";
 
 export const useGlobalNavigation = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -39,8 +40,8 @@ export const useGlobalNavigation = () => {
   const navigateToChatbotScreen = () => {
     navigation.navigate(ScreenNameEnum.Chatbot);
   };
-  const navigateToSearchScreen = () => {
-    navigation.navigate(ScreenNameEnum.Search);
+  const navigateToSearchScreen = (params: SearchScreenParams) => {
+    navigation.navigate(ScreenNameEnum.Search, { ...params });
   };
 
   return {

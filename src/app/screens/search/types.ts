@@ -1,4 +1,3 @@
-import type { BookModel } from "@core";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export type SearchScreenProps = {
@@ -13,5 +12,13 @@ export type SearchScreenProps = {
 };
 
 export type SearchScreenParams = {
-  bookData: BookModel;
+  type: SearchScreenType;
+  keyword?: string;
+  id?: number;
 };
+
+export enum SearchScreenType {
+  BOOK_NAME = "BOOK_NAME",
+  CATEGORY = "CATEGORY",
+  AUTHOR = "AUTHOR",
+}

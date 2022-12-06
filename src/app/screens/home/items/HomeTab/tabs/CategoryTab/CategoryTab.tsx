@@ -1,7 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BlankSpacer, Category, Loading } from "@app/components";
+import { SearchScreenType } from "@app/screens/search";
 import { appStyle, SPACE } from "@app/styles";
 import { useGlobalNavigation } from "@core";
+import type { CategoryModel } from "@core/models/CategoryModel";
 import { size } from "lodash";
 import React from "react";
 import { FlatList, useWindowDimensions, View } from "react-native";
@@ -9,7 +11,7 @@ import { useViewModel } from "./CategoryTab.ViewModel";
 import { styles } from "./style";
 
 export const CategoryTab = (props: any) => {
-  const { navigateToBookDetailScreen } = useGlobalNavigation();
+  const { navigateToSearchScreen } = useGlobalNavigation();
   const { width } = useWindowDimensions();
 
   const { selectors } = useViewModel();
@@ -22,6 +24,13 @@ export const CategoryTab = (props: any) => {
       </>
     );
   };
+  const navigateToSearch = (item: CategoryModel) => {
+    navigateToSearchScreen({
+      type: SearchScreenType.CATEGORY,
+      keyword: item.CategoryName,
+      id: item.CategoryId,
+    });
+  };
 
   return (
     <View style={[styles.scrollViewContentContainer]}>
@@ -31,7 +40,14 @@ export const CategoryTab = (props: any) => {
             <FlatList
               data={categoryList}
               keyExtractor={(item, index) => `${item.CategoryId} + ${index}`}
-              renderItem={({ item }) => <Category data={item} />}
+              renderItem={({ item }) => (
+                <Category
+                  data={item}
+                  onPress={() => {
+                    navigateToSearch(item);
+                  }}
+                />
+              )}
               showsVerticalScrollIndicator={false}
               ListFooterComponent={() => <BlankSpacer height={100} />}
               numColumns={2}

@@ -83,7 +83,15 @@ export const BaseScreen = (props: BaseScreenProps) => {
               }}
             />
           ) : (
-            <View style={{ width: 24 }} />
+            <BPIconButton
+              icon={LOCAL_ICONS.emptyStar}
+              size={SPACE.spacing24}
+              iconColor={COLORS.transparent}
+              onPress={() => {}}
+              style={{
+                marginRight: SPACE.spacing16,
+              }}
+            />
           )}
         </View>
         {useHeaderPadding ? <View style={{ height: 40 }} /> : null}

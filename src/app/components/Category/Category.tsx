@@ -7,8 +7,11 @@ import type { CategoryModel } from "@core/models/CategoryModel";
 import { BlankSpacer } from "../BlankSpacer";
 import { BPText } from "../BPText";
 
-export const Category = (props: { data: CategoryModel }) => {
-  const { data } = props;
+export const Category = (props: {
+  data: CategoryModel;
+  onPress: () => void;
+}) => {
+  const { data, onPress } = props;
   const { width } = useWindowDimensions();
   return (
     <TouchableOpacity
@@ -22,6 +25,7 @@ export const Category = (props: { data: CategoryModel }) => {
         },
         appStyle.shadowContainer,
       ]}
+      onPress={onPress}
     >
       <View
         style={[

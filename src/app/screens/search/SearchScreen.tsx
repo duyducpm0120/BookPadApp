@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import { BaseScreen, Book, BPTextInput, EmptyScreen } from "@app/components";
-import { appStyle, COLORS } from "@app/styles";
+import {
+  BaseScreen,
+  BlankSpacer,
+  Book,
+  BPText,
+  BPTextInput,
+  EmptyScreen,
+} from "@app/components";
+import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import React, { useCallback } from "react";
@@ -8,20 +15,60 @@ import { FlatList, View } from "react-native";
 import { useViewModel } from "./SearchScreen.ViewModel";
 
 import type { SearchScreenProps } from "./types";
+import { SearchScreenType } from "./types";
 
 export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
   const { navigation, route } = props;
-  // const { bookData } = route.params;
+  const { type, keyword = "", id = 0 } = route.params;
   // const { BookCoverImage, BookDescription, BookName, ReviewStars } = bookData;
   const {
     searchText,
     setSearchText,
     searchBookByName,
     searchResult,
-    loadMore,
-  } = useViewModel({});
+    loadMoreBookByName,
+    loadMoreBookByCategory,
+  } = useViewModel({ type, id });
   const { navigateToReadingBookScreen } = useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
+
+  const renderHeaderComp = useCallback(() => {
+    if (type === SearchScreenType.BOOK_NAME)
+      return (
+        <BPTextInput
+          label=""
+          placeholder="Search book name"
+          style={{
+            width: "70%",
+            backgroundColor: COLORS.transparent,
+            borderBottomColor: COLORS.transparent,
+          }}
+          activeOutlineColor={COLORS.transparent}
+          autoFocus
+          type="flat"
+          activeUnderlineColor={COLORS.transparent}
+          value={searchText}
+          onChangeText={(text) => {
+            setSearchText(text);
+          }}
+        />
+      );
+
+    return (
+      <BPText fontSize={FONT_SIZE.fontSize16} fontWeight="600">
+        {keyword}
+      </BPText>
+    );
+  }, [keyword, searchText, setSearchText, type]);
+
+  const loadMoreFunc = useCallback(() => {
+    if (type === SearchScreenType.BOOK_NAME) {
+      loadMoreBookByName();
+    }
+    if (type === SearchScreenType.CATEGORY) {
+      loadMoreBookByCategory();
+    }
+  }, [loadMoreBookByName, loadMoreBookByCategory, type]);
 
   const renderContent = useCallback(() => {
     return (
@@ -42,53 +89,34 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={() => <EmptyScreen />}
           onEndReached={() => {
-            loadMore();
+            loadMoreFunc();
           }}
           scrollEventThrottle={16}
         />
       </View>
     );
-  }, [loadMore, searchResult]);
+  }, [loadMoreFunc, searchResult]);
+
+  const headerRight = () => {
+    if (type === SearchScreenType.BOOK_NAME) {
+      return {
+        icon: LOCAL_ICONS.searchIcon,
+        iconColor: COLORS.black,
+        onPress: async () => {
+          searchBookByName();
+        },
+      };
+    }
+    return undefined;
+  };
 
   return (
     <BaseScreen
       tittle={strings.book_detail}
-      headerRightParams={{
-        icon: LOCAL_ICONS.searchIcon,
-        iconColor: COLORS.black,
-        onPress: async () => {
-          // if (isBookInLibrary()) {
-          //   showGlobalLoading();
-          //   await removeBookFromUserLibrary(bookData.BookId);
-          //   hideGlobalLoading();
-          // } else {
-          //   showGlobalLoading();
-          //   await addBookToUserLibrary(bookData.BookId);
-          //   hideGlobalLoading();
-          // }
-          searchBookByName();
-        },
-      }}
-      headerComponent={
-        <BPTextInput
-          label=""
-          placeholder="Search book name"
-          style={{
-            width: "70%",
-            backgroundColor: COLORS.transparent,
-            borderBottomColor: COLORS.transparent,
-          }}
-          activeOutlineColor={COLORS.transparent}
-          autoFocus
-          type="flat"
-          activeUnderlineColor={COLORS.transparent}
-          value={searchText}
-          onChangeText={(text) => {
-            setSearchText(text);
-          }}
-        />
-      }
+      headerRightParams={headerRight()}
+      headerComponent={renderHeaderComp()}
     >
+      <BlankSpacer height={SPACE.spacing12} />
       {renderContent()}
     </BaseScreen>
   );

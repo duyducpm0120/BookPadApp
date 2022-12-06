@@ -1,4 +1,5 @@
 import { BlankSpacer, BPIconButton, BPText } from "@app/components";
+import { SearchScreenType } from "@app/screens/search";
 import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
 import { strings, ICONS, useGlobalNavigation } from "@core";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -40,7 +41,9 @@ export const HomeTab = (props: any) => {
           style={{ margin: 0 }}
           onPress={() => {
             console.log("search");
-            navigateToSearchScreen();
+            navigateToSearchScreen({
+              type: SearchScreenType.BOOK_NAME,
+            });
           }}
         />
       </View>

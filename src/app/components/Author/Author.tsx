@@ -6,6 +6,7 @@ import React from "react";
 import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import { BPText } from "../BPText";
 import { BPIconButton } from "../BPIconButton";
+import { BlankSpacer } from "../BlankSpacer";
 
 export const Author = (props: { data: BookAuthor; onPress: () => void }) => {
   const { data, onPress } = props;
@@ -38,7 +39,7 @@ export const Author = (props: { data: BookAuthor; onPress: () => void }) => {
       style={[
         appStyle.columnLeftContainer,
         // appStyle.shadowContainer,
-        { marginBottom: SPACE.spacing32 },
+        { marginBottom: SPACE.spacing24 },
       ]}
       onPress={onPress}
     >
@@ -62,6 +63,7 @@ export const Author = (props: { data: BookAuthor; onPress: () => void }) => {
           }}
         />
       </View>
+      <BlankSpacer height={SPACE.spacing12} />
       <Animated.View
         style={[
           appStyle.rowFullWidthLeftContainer,

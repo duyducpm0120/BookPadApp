@@ -8,7 +8,7 @@ import {
   EmptyScreen,
 } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
-import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
+import { strings, useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import React, { useCallback } from "react";
 import { FlatList, View } from "react-native";
@@ -31,8 +31,7 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
     loadMoreBookByAuthor,
     isSearched,
   } = useViewModel({ type, id });
-  const { navigateToReadingBookScreen } = useGlobalNavigation();
-  const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
+  const { navigateToBookDetailScreen } = useGlobalNavigation();
 
   const renderHeaderComp = useCallback(() => {
     if (type === SearchScreenType.BOOK_NAME)
@@ -85,7 +84,7 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
             <Book
               data={item}
               onPress={() => {
-                // navigateToBookDetailScreen({ bookData: item });
+                navigateToBookDetailScreen({ bookData: item });
               }}
               isHorizontal
             />
@@ -100,7 +99,7 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
         />
       </View>
     );
-  }, [isSearched, loadMoreFunc, searchResult]);
+  }, [isSearched, loadMoreFunc, navigateToBookDetailScreen, searchResult]);
 
   const headerRight = () => {
     if (type === SearchScreenType.BOOK_NAME) {

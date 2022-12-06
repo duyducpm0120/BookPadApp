@@ -24,6 +24,7 @@ export const useViewModel = (params: {
   const [lastBookId, setLastBookId] = useState<number>(0);
   const [searchResult, setSearchResult] = useState<BookModel[]>([]);
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
+  const [isSearched, setIsSearched] = useState(false);
 
   const searchBookByName = async () => {
     try {
@@ -34,9 +35,15 @@ export const useViewModel = (params: {
         limit: 10,
         bookName: searchText,
       });
+      if (res.length === 0) {
+        hideGlobalLoading();
+        setIsSearched(true);
+        return;
+      }
       setSearchResult(res);
       setLastBookId(Number(res[res.length - 1].BookId));
       hideGlobalLoading();
+      setIsSearched(true);
     } catch (err) {
       hideGlobalLoading();
       showAlert({
@@ -54,6 +61,9 @@ export const useViewModel = (params: {
         limit: 10,
         bookName: searchText,
       });
+      if (res.length === 0) {
+        return;
+      }
       setSearchResult([...searchResult, ...res]);
       setLastBookId(Number(res[res.length - 1].BookId));
     } catch (err) {
@@ -72,6 +82,9 @@ export const useViewModel = (params: {
         limit: 10,
         categoryId: id,
       });
+      if (res.length === 0) {
+        return;
+      }
       setSearchResult([...searchResult, ...res]);
       setLastBookId(Number(res[res.length - 1].BookId));
     } catch (err) {
@@ -91,9 +104,15 @@ export const useViewModel = (params: {
         limit: 10,
         categoryId: id,
       });
+      if (res.length === 0) {
+        hideGlobalLoading();
+        setIsSearched(true);
+        return;
+      }
       setSearchResult(res);
       setLastBookId(Number(res[res.length - 1].BookId));
       hideGlobalLoading();
+      setIsSearched(true);
     } catch (err) {
       hideGlobalLoading();
       showAlert({
@@ -110,6 +129,9 @@ export const useViewModel = (params: {
         limit: 10,
         authorId: id,
       });
+      if (res.length === 0) {
+        return;
+      }
       setSearchResult([...searchResult, ...res]);
       setLastBookId(Number(res[res.length - 1].BookId));
     } catch (err) {
@@ -129,9 +151,15 @@ export const useViewModel = (params: {
         limit: 10,
         authorId: id,
       });
+      if (res.length === 0) {
+        hideGlobalLoading();
+        setIsSearched(true);
+        return;
+      }
       setSearchResult(res);
       setLastBookId(Number(res[res.length - 1].BookId));
       hideGlobalLoading();
+      setIsSearched(true);
     } catch (err) {
       hideGlobalLoading();
       showAlert({
@@ -160,5 +188,6 @@ export const useViewModel = (params: {
     loadMoreBookByCategory,
     searchBookByAuth,
     loadMoreBookByAuthor,
+    isSearched,
   };
 };

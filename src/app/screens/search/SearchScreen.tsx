@@ -28,8 +28,8 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
     searchResult,
     loadMoreBookByName,
     loadMoreBookByCategory,
-    searchBookByAuth,
     loadMoreBookByAuthor,
+    isSearched,
   } = useViewModel({ type, id });
   const { navigateToReadingBookScreen } = useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
@@ -92,7 +92,7 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
           )}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          ListEmptyComponent={() => <EmptyScreen />}
+          ListEmptyComponent={() => (isSearched ? <EmptyScreen /> : null)}
           onEndReached={() => {
             loadMoreFunc();
           }}
@@ -100,7 +100,7 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
         />
       </View>
     );
-  }, [loadMoreFunc, searchResult]);
+  }, [isSearched, loadMoreFunc, searchResult]);
 
   const headerRight = () => {
     if (type === SearchScreenType.BOOK_NAME) {

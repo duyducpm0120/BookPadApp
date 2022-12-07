@@ -9,7 +9,6 @@ export const useViewModel = () => {
 
   const getCategoryList = async () => {
     const categories = await getCategories({ token: TOKEN });
-    console.log("categories asdasd", categories);
     setCategoryList(categories);
   };
 

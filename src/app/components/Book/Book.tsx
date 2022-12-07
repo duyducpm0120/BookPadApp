@@ -93,10 +93,11 @@ export const Book = (props: BookPropsType) => {
           style={{
             height: "100%",
             width: 100,
+            ...appStyle.shadowContainer,
           }}
           resizeMode={FastImage.resizeMode.cover}
         />
-        <BlankSpacer width={SPACE.spacing12} />
+        <BlankSpacer width={SPACE.spacing24} />
         <View style={[appStyle.columnTopLeftContainer]}>
           <BPText
             fontSize={FONT_SIZE.fontSize20}
@@ -118,7 +119,7 @@ export const Book = (props: BookPropsType) => {
           </View>
           <BlankSpacer height={SPACE.spacing12} />
           <View style={appStyle.rowFullWidthLeftContainer}>
-            {renderBookStars(data)}
+            {renderBookStars(data.ReviewStars)}
             <BlankSpacer width={SPACE.spacing4} />
             <BPText fontSize={FONT_SIZE.fontSize14} color={TEXT_COLOR.light}>
               {`${ReviewStars}/5`}

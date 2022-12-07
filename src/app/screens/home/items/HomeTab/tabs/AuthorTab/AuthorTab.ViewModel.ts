@@ -9,7 +9,6 @@ export const useViewModel = () => {
 
   const getAuthorList = async () => {
     const authors = await getAuthors({ token: TOKEN });
-    console.log("authors asdasd", authors);
     const authorsAlphabetically = authors.sort((a, b) =>
       a.AuthorName.localeCompare(b.AuthorName)
     );

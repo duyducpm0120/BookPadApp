@@ -86,7 +86,6 @@ export const useViewModel = (
       const result = await dependencies.getBookLibrary({
         token: TOKEN,
       });
-      console.log("result asdasd", result);
       globalDispatch(globalActions.setGlobalBookLibraryList(result));
     } catch (err: any) {
       showAlert({

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { BlankSpacer, Category, Loading } from "@app/components";
+import { BlankSpacer, Loading, Category } from "@app/components";
 import { SearchScreenType } from "@app/screens/search";
 import { appStyle, SPACE } from "@app/styles";
 import { useGlobalNavigation } from "@core";

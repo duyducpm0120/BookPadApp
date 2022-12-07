@@ -10,10 +10,14 @@ import { BPText } from "../BPText";
 
 export const EmptyScreen = (props: {
   backgroundColor?: string;
-
   showLogo?: boolean;
+  content?: string;
 }) => {
-  const { backgroundColor = COLORS.white, showLogo = false } = props;
+  const {
+    backgroundColor = COLORS.white,
+    showLogo = false,
+    content = strings.empty_data,
+  } = props;
 
   return (
     <View
@@ -30,7 +34,7 @@ export const EmptyScreen = (props: {
         tintColor={COLORS.secondary.light}
       />
       {showLogo && <BlankSpacer height={SPACE.spacing16} />}
-      <BPText color={COLORS.secondary.light}>{strings.empty_data}</BPText>
+      <BPText color={COLORS.secondary.light}>{content}</BPText>
     </View>
   );
 };

@@ -12,7 +12,6 @@ export const getCategories = async ({ token }: { token: string }) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log("res asdasd", res);
   const catList = safeGet(res, "data.categories", []);
   const result = CategoryModel.instantiateList(catList);
   return result;

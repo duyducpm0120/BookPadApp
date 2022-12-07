@@ -58,7 +58,6 @@ export const useViewModel = (params: { bookData: BookModel }) => {
         token: TOKEN,
         bookId,
       });
-      console.log("result asdasd", result);
       const message = safeGetString(result, "data.message", "");
       await getUserBookLibrary();
       showGlobalSnackBar({
@@ -79,7 +78,6 @@ export const useViewModel = (params: { bookData: BookModel }) => {
         token: TOKEN,
         bookId,
       });
-      console.log("result asdasd", result);
       const message = safeGetString(result, "data.message", "");
       await getUserBookLibrary();
       showGlobalSnackBar({

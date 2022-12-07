@@ -109,7 +109,7 @@ export const BookDetailScreen: React.FC<any> = (
           </BPText>
           <BlankSpacer height={SPACE.spacing4} />
           <View style={appStyle.rowFullWidthCenterContainer}>
-            {renderBookStars(bookData)}
+            {renderBookStars(bookData.ReviewStars)}
             <BlankSpacer width={SPACE.spacing4} />
             <BPText fontSize={FONT_SIZE.fontSize14} color={TEXT_COLOR.light}>
               {`${ReviewStars}/5`}

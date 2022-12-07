@@ -7,12 +7,15 @@ import {
 } from "@core";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { ReviewModel } from "../models/ReviewModel";
 
 const getDownLoadEndPoint = `${END_POINT}book/getBookDownloadLink/`;
 const getBookLibraryEndPoint = `${END_POINT}library/getBooks`;
 const removeBookLibraryEndPoint = `${END_POINT}library/removeBook`;
 const addBookLibraryEndPoint = `${END_POINT}library/addBook`;
 const searchBookEndPoint = `${END_POINT}search/bookNameSearch`;
+const getBookReviewEndPoint = `${END_POINT}bookReview/getReviewsByBook`;
+
 export const useGetBookDownLoadLink = (params: { bookId: string }) => {
   const getBookDownLoadEndPoint = async ({
     bookId,
@@ -114,8 +117,6 @@ export const searchBook = async ({
   limit: number;
   bookName: string;
 }) => {
-  console.log("search book", token, lastBookId, limit, bookName);
-
   const endPoint = searchBookEndPoint;
   const res = await axios.post(
     endPoint,
@@ -132,5 +133,35 @@ export const searchBook = async ({
   );
   const bookData = safeGetArray(res, "data.books", []);
   const returnData = BookModel.instantiateList(bookData);
+  return returnData;
+};
+
+export const getBookReview = async ({
+  token,
+  lastBookId,
+  limit,
+  bookId,
+}: {
+  token: string;
+  lastBookId: number;
+  limit: number;
+  bookId: string;
+}) => {
+  const endPoint = getBookReviewEndPoint;
+  const res = await axios.post(
+    endPoint,
+    {
+      limit,
+      last: Number(lastBookId),
+      bookId: Number(bookId),
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const bookData = safeGetArray(res, "data.reviews", []);
+  const returnData = ReviewModel.instantiateList(bookData);
   return returnData;
 };

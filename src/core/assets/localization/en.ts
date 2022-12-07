@@ -93,4 +93,6 @@ export const enStrings = {
   add_book_to_library_failed: "Add book to library failed",
   empty_data: "Empty data",
   reviews: "Reviews",
+  no_reviews: "No reviews",
+  create_review: "Write your review",
 };

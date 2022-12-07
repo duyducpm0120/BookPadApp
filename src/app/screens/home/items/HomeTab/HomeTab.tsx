@@ -40,7 +40,6 @@ export const HomeTab = (props: any) => {
           iconColor={COLORS.black}
           style={{ margin: 0 }}
           onPress={() => {
-            console.log("search");
             navigateToSearchScreen({
               type: SearchScreenType.BOOK_NAME,
             });

@@ -17,8 +17,8 @@ export const getBookAuthor = (book: BookModel) => {
 
 const START_SIZE = 16;
 
-export const renderBookStars = (book: BookModel) => {
-  const { ReviewStars } = book;
+export const renderBookStars = (bookStars: number) => {
+  const ReviewStars = bookStars;
   const fullStars = Math.floor(ReviewStars);
   const halfStars = ReviewStars - fullStars > 0 ? 1 : 0;
   const emptyStars = 5 - fullStars - halfStars;

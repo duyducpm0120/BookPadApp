@@ -10,4 +10,5 @@ export enum ScreenNameEnum {
   Chatbot = "Chatbot",
   Search = "Search",
   Review = "Review",
+  WriteReview = "WriteReview",
 }

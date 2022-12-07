@@ -15,6 +15,7 @@ const removeBookLibraryEndPoint = `${END_POINT}library/removeBook`;
 const addBookLibraryEndPoint = `${END_POINT}library/addBook`;
 const searchBookEndPoint = `${END_POINT}search/bookNameSearch`;
 const getBookReviewEndPoint = `${END_POINT}bookReview/getReviewsByBook`;
+const createBookReviewEndPoint = `${END_POINT}bookReview/create`;
 
 export const useGetBookDownLoadLink = (params: { bookId: string }) => {
   const getBookDownLoadEndPoint = async ({
@@ -164,4 +165,33 @@ export const getBookReview = async ({
   const bookData = safeGetArray(res, "data.reviews", []);
   const returnData = ReviewModel.instantiateList(bookData);
   return returnData;
+};
+
+export const createBookReview = async ({
+  token,
+  score,
+  comment,
+  bookId,
+}: {
+  token: string;
+  score: number;
+  comment: string;
+  bookId: string;
+}) => {
+  const endPoint = createBookReviewEndPoint;
+  console.log(token, score, comment, bookId);
+  const res = await axios.post(
+    endPoint,
+    {
+      bookReviewScore: score,
+      bookReviewComment: comment,
+      bookId: Number(bookId),
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
 };

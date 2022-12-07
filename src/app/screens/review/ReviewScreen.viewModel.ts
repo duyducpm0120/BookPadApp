@@ -7,11 +7,12 @@ import {
   useGlobalLoading,
   useMount,
 } from "@core";
+import type { ReviewModel } from "@core/models/ReviewModel";
 import { getBookReview } from "@core/services";
 import { useState } from "react";
 
 export const useViewModel = (props: { bookData: BookModel }) => {
-  const [reviews, setReviews] = useState<any[]>([]);
+  const [reviews, setReviews] = useState<ReviewModel[]>([]);
   const { bookData } = props;
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
   const { TOKEN } = useGlobalState();

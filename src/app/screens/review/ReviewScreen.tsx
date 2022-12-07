@@ -6,7 +6,7 @@ import {
   Review,
 } from "@app/components";
 import { appStyle, SPACE } from "@app/styles";
-import { strings } from "@core";
+import { strings, useGlobalNavigation } from "@core";
 import React from "react";
 import { FlatList } from "react-native";
 import { useViewModel } from "./ReviewScreen.viewModel";
@@ -16,6 +16,7 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
   const { navigation, route } = props;
   const { bookData } = route.params;
   const { reviews, setReviews, loadMoreReview } = useViewModel({ bookData });
+  const { navigateToWriteReviewScreen } = useGlobalNavigation();
 
   const listHeader = () => {
     return (
@@ -33,21 +34,19 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
   };
 
   const renderReviewList = () => {
-    if (reviews.length === 0) {
-      return <EmptyScreen content={strings.no_reviews} />;
-    }
     return (
       <FlatList
         data={reviews}
         renderItem={({ item }) => {
           return <Review data={item} />;
         }}
-        keyExtractor={(item) => item.ReviewId}
+        keyExtractor={(item) => item.BookReviewId + item.Owner.NickName}
         onEndReached={() => {
           loadMoreReview();
         }}
         ListHeaderComponent={listHeader()}
         contentContainerStyle={appStyle.containerPadding16}
+        ListEmptyComponent={<EmptyScreen content={strings.no_reviews} />}
       />
     );
   };
@@ -58,6 +57,9 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
         title: strings.create_review,
         onPress: async () => {
           //   getBookLinkAndNavigate();
+          navigateToWriteReviewScreen({
+            bookData,
+          });
         },
       }}
     >

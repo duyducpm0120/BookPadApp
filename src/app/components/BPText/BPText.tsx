@@ -23,6 +23,7 @@ export const BPText: React.FC<BPTextProps> = (
         textAlign,
         color,
         fontWeight,
+        flexWrap: "wrap",
       }}
       {...rest}
     />

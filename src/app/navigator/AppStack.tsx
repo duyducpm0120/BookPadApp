@@ -8,6 +8,7 @@ import {
   ChangePasswordScreen,
   SearchScreen,
   ReviewScreen,
+  WriteReviewScreen,
 } from "@app/screens";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BookDetailScreen } from "@app/screens/book_detail";
@@ -87,6 +88,11 @@ export const AppStack = React.memo(() => {
         <Stack.Screen
           name={ScreenNameEnum.Review}
           component={ReviewScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ScreenNameEnum.WriteReview}
+          component={WriteReviewScreen}
           options={{ headerShown: false }}
         />
       </>

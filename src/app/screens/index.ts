@@ -8,3 +8,4 @@ export * from "./setting";
 export * from "./change_password";
 export * from "./search";
 export * from "./review";
+export * from "./write_review";

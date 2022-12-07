@@ -98,11 +98,21 @@ export const Book = (props: BookPropsType) => {
           resizeMode={FastImage.resizeMode.cover}
         />
         <BlankSpacer width={SPACE.spacing24} />
-        <View style={[appStyle.columnTopLeftContainer]}>
+        <View
+          style={[
+            appStyle.columnTopLeftContainer,
+            {
+              flex: 1,
+            },
+          ]}
+        >
           <BPText
             fontSize={FONT_SIZE.fontSize20}
             fontWeight="600"
-            numberOfLines={1}
+            numberOfLines={2}
+            style={{
+              flexWrap: "wrap",
+            }}
           >
             {BookName.trim()}
           </BPText>

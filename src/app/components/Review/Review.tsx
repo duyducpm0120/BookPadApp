@@ -10,7 +10,6 @@ import { BPText } from "../BPText";
 
 export const Review = (props: { data: ReviewModel }) => {
   const { data } = props;
-  console.log("data", data);
   const { width } = useWindowDimensions();
   return (
     <View

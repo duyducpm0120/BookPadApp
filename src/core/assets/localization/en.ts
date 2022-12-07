@@ -95,4 +95,9 @@ export const enStrings = {
   reviews: "Reviews",
   no_reviews: "No reviews",
   create_review: "Write your review",
+  write_review: "Write review",
+  how_would_you_rate: "How would you rate this book?",
+  send_review: "Send review",
+  write_your_review: "Write your review",
+  createReviewSuccess: "Your review has been sent successfully",
 };

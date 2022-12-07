@@ -92,4 +92,5 @@ export const enStrings = {
   add_book_to_library_success: "Add book to library success",
   add_book_to_library_failed: "Add book to library failed",
   empty_data: "Empty data",
+  reviews: "Reviews",
 };

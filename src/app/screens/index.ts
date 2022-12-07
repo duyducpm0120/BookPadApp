@@ -7,3 +7,4 @@ export * from "./profile";
 export * from "./setting";
 export * from "./change_password";
 export * from "./search";
+export * from "./review";

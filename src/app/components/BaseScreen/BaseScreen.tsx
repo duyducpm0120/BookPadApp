@@ -99,11 +99,12 @@ export const BaseScreen = (props: BaseScreenProps) => {
         <View
           style={[
             appStyle.rowFullWidthSpaceAroundContainer,
-            appStyle.shadowContainer,
+            // appStyle.shadowContainer,
             {
               backgroundColor: COLORS.transparent,
               position: "absolute",
               bottom: 0,
+              paddingHorizontal: SPACE.spacing16,
             },
           ]}
         >

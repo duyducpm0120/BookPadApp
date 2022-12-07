@@ -23,7 +23,8 @@ export const BookDetailScreen: React.FC<any> = (
     removeBookFromUserLibrary,
     addBookToUserLibrary,
   } = useViewModel({ bookData });
-  const { navigateToReadingBookScreen } = useGlobalNavigation();
+  const { navigateToReadingBookScreen, navigateToReviewScreen } =
+    useGlobalNavigation();
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
 
   const getBookLinkAndNavigate = async () => {
@@ -41,6 +42,14 @@ export const BookDetailScreen: React.FC<any> = (
         title: strings.read,
         onPress: async () => {
           getBookLinkAndNavigate();
+        },
+      }}
+      secondaryButtonParams={{
+        title: strings.reviews,
+        onPress: async () => {
+          navigateToReviewScreen({
+            bookData,
+          });
         },
       }}
       headerRightParams={{

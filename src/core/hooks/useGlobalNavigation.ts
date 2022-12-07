@@ -1,6 +1,7 @@
 import { ScreenNameEnum } from "@app/navigator";
 import type { BookDetailScreenParams } from "@app/screens/book_detail";
 import type { ReadingBookScreenParams } from "@app/screens/reading_book/types";
+import type { ReviewScreenParams } from "@app/screens/review";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { SearchScreenParams } from "../../app/screens/search/types";
@@ -43,7 +44,9 @@ export const useGlobalNavigation = () => {
   const navigateToSearchScreen = (params: SearchScreenParams) => {
     navigation.navigate(ScreenNameEnum.Search, { ...params });
   };
-
+  const navigateToReviewScreen = (params: ReviewScreenParams) => {
+    navigation.navigate(ScreenNameEnum.Review, { ...params });
+  };
   return {
     navigation,
     navigateToLoginScreen,
@@ -56,5 +59,6 @@ export const useGlobalNavigation = () => {
     navigateToChangePasswordScreen,
     navigateToChatbotScreen,
     navigateToSearchScreen,
+    navigateToReviewScreen,
   };
 };

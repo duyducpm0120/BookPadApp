@@ -15,7 +15,10 @@ import type { ReviewScreenProps } from "./type";
 export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
   const { navigation, route } = props;
   const { bookData } = route.params;
-  const { reviews, setReviews, loadMoreReview } = useViewModel({ bookData });
+  const { reviews, setReviews, loadMoreReview, USER_INFO, onPressDelete } =
+    useViewModel({
+      bookData,
+    });
   const { navigateToWriteReviewScreen } = useGlobalNavigation();
 
   const listHeader = () => {
@@ -38,7 +41,15 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
       <FlatList
         data={reviews}
         renderItem={({ item }) => {
-          return <Review data={item} />;
+          return (
+            <Review
+              data={item}
+              showDelete={item.Owner.NickName === USER_INFO.NickName}
+              onPressDelete={() => {
+                onPressDelete(item.BookReviewId);
+              }}
+            />
+          );
         }}
         keyExtractor={(item) => item.BookReviewId + item.Owner.NickName}
         onEndReached={() => {

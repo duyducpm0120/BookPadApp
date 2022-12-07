@@ -100,4 +100,7 @@ export const enStrings = {
   send_review: "Send review",
   write_your_review: "Write your review",
   createReviewSuccess: "Your review has been sent successfully",
+  delete_review: "Delete review",
+  delete_review_confirm: "Do you want to delete this review?",
+  cancel: "Cancel",
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { BlankSpacer, BPButton, BPText } from "@app/components";
 import { appStyle, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { IMAGES, strings, useGlobalNavigation } from "@core";

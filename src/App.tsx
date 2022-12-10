@@ -12,6 +12,8 @@ import { Loading } from "@app/components";
 import { QueryClient } from "@tanstack/react-query";
 import { Snackbar } from "react-native-paper";
 import LocalStorageHelper from "@core/utils/LocalStorageHelper";
+import { Dialogflow_V2 } from "react-native-dialogflow";
+import { DIALOG_FLOW_CONFIG } from "../env";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,12 @@ const App = (): JSX.Element => {
   };
   useMount(async () => {
     await getGlobalToken();
+    Dialogflow_V2.setConfiguration(
+      DIALOG_FLOW_CONFIG.client_email,
+      DIALOG_FLOW_CONFIG.private_key,
+      Dialogflow_V2.LANG_ENGLISH_US,
+      DIALOG_FLOW_CONFIG.project_id
+    );
   });
 
   return (

@@ -5,41 +5,11 @@ import { strings } from "@core";
 import React from "react";
 import { View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
+import { useViewModel } from "./ChatbotScreen.ViewModel";
 
 export const ChatbotScreen: React.FC<any> = (props: any) => {
   const { navigation, route } = props;
-  const messages = [
-    {
-      _id: 1,
-      text: "Hello developer",
-      createdAt: new Date(),
-      user: {
-        _id: 2,
-        name: "React Native",
-        avatar: "https://placeimg.com/140/140/any",
-      },
-    },
-    {
-      _id: 2,
-      text: "Hello developer",
-      createdAt: new Date(),
-      user: {
-        _id: 1,
-        name: "React Native 2",
-        avatar: "https://placeimg.com/140/140/any",
-      },
-    },
-    {
-      _id: 3,
-      text: "Hello developer",
-      createdAt: new Date(),
-      user: {
-        _id: 1,
-        name: "React Native 2",
-        avatar: "https://placeimg.com/140/140/any",
-      },
-    },
-  ];
+  const { USER, onSend, messages } = useViewModel({});
 
   return (
     <BaseScreen
@@ -48,14 +18,7 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
     >
       <View style={appStyle.containerPadding16}>
         {/* <BPText>asdasd</BPText> */}
-        <GiftedChat
-          messages={messages}
-          user={{
-            _id: 2,
-            name: "React Native",
-            avatar: "https://placeimg.com/140/140/any",
-          }}
-        />
+        <GiftedChat messages={messages} user={USER} onSend={onSend} />
       </View>
     </BaseScreen>
   );

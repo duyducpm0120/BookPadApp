@@ -28,6 +28,7 @@
     "react": "17.0.2",
     "react-localization": "^1.0.19",
     "react-native": "0.68.2",
+    "react-native-dialogflow": "^3.2.2",
     "react-native-dropdown-picker": "^5.4.3",
     "react-native-fast-image": "^8.6.3",
     "react-native-fs": "^2.20.0",
@@ -39,6 +40,7 @@
     "react-native-screens": "^3.18.2",
     "react-native-storage": "^1.0.1",
     "react-native-tab-view": "^3.3.0",
+    "react-native-voice": "^0.3.0",
     "react-native-webview": "^11.23.1",
     "typesafe-actions": "5.1.0"
   },
@@ -51,6 +53,7 @@
     "@types/node": "^18.11.9",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.68.2",
+    "@types/react-native-dialogflow": "^3.2.1",
     "@types/react-test-renderer": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",

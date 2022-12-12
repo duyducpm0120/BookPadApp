@@ -1,5 +1,6 @@
 import { BotResponseType } from "@core/assets";
 import { BotResponseModel } from "@core/models";
+import type { User } from "react-native-gifted-chat";
 import { safeGet } from "./CommonUtils";
 
 export const convertToBotResponseModel = (response: any): BotResponseModel => {
@@ -17,4 +18,22 @@ export const convertToBotResponseModel = (response: any): BotResponseModel => {
       message,
     };
   }
+};
+
+export const convertToGiftedChatMessage = (params: {
+  message: string;
+  index: number;
+  user: User;
+  data?: any[];
+  type: BotResponseType;
+}) => {
+  const { message, index, user, data = [], type } = params;
+  return {
+    _id: index,
+    text: message,
+    createdAt: new Date(),
+    user,
+    type,
+    data,
+  };
 };

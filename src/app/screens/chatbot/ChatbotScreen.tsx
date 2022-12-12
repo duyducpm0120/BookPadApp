@@ -1,15 +1,81 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react-native/no-inline-styles */
-import { BaseScreen } from "@app/components";
-import { appStyle } from "@app/styles";
-import { strings } from "@core";
+import { BaseScreen, BlankSpacer, Book } from "@app/components";
+import { appStyle, SPACE } from "@app/styles";
+import type { BookModel } from "@core";
+import {
+  useGlobalNavigation,
+  BotResponseType,
+  safeGet,
+  safeGetArray,
+  strings,
+} from "@core";
 import React from "react";
-import { View } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
+import { ScrollView, View } from "react-native";
+import type { BubbleProps } from "react-native-gifted-chat";
+import { Bubble, GiftedChat } from "react-native-gifted-chat";
 import { useViewModel } from "./ChatbotScreen.ViewModel";
+import { BOT } from "./const";
+import type { IChatbotMessage } from "./types";
 
 export const ChatbotScreen: React.FC<any> = (props: any) => {
   const { navigation, route } = props;
   const { USER, onSend, messages } = useViewModel({});
+
+  const { navigateToBookDetailScreen } = useGlobalNavigation();
+
+  const renderBubble = (bubbleProps: BubbleProps<IChatbotMessage>) => {
+    const currentMessage: IChatbotMessage = safeGet(
+      bubbleProps,
+      "currentMessage",
+      {
+        _id: 0,
+        text: "",
+        createdAt: new Date(),
+        user: {},
+        type: BotResponseType.NONE,
+        data: [],
+      }
+    );
+    console.log("current message asdasd", currentMessage);
+    if (currentMessage.user._id === BOT._id) {
+      if (currentMessage.type === BotResponseType.TEXT)
+        return <Bubble {...bubbleProps} />;
+      if (currentMessage.type === BotResponseType.RECOMMEND_BOOK) {
+        const books: BookModel[] = safeGetArray(currentMessage, "data", []);
+        return (
+          <ScrollView
+            contentContainerStyle={[
+              appStyle.columnLeftContainer,
+              {
+                marginTop: SPACE.spacing12,
+              },
+            ]}
+          >
+            {books.map((item, index) => {
+              return (
+                <>
+                  <Book
+                    key={-index}
+                    data={item}
+                    onPress={() => {
+                      navigateToBookDetailScreen({
+                        bookData: item,
+                      });
+                    }}
+                  />
+                  {index < books.length - 1 ? (
+                    <BlankSpacer height={SPACE.spacing16} />
+                  ) : null}
+                </>
+              );
+            })}
+          </ScrollView>
+        );
+      }
+    }
+    return <Bubble {...bubbleProps} />;
+  };
 
   return (
     <BaseScreen
@@ -18,7 +84,12 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
     >
       <View style={appStyle.containerPadding16}>
         {/* <BPText>asdasd</BPText> */}
-        <GiftedChat messages={messages} user={USER} onSend={onSend} />
+        <GiftedChat
+          messages={messages}
+          user={USER}
+          onSend={onSend}
+          renderBubble={renderBubble}
+        />
       </View>
     </BaseScreen>
   );

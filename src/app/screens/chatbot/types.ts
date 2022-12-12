@@ -1,5 +1,6 @@
-import type { BookModel } from "@core";
+import type { BookModel, BotResponseType } from "@core";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { IMessage } from "react-native-gifted-chat";
 
 export type BookDetailScreenProps = {
   //
@@ -14,4 +15,9 @@ export type BookDetailScreenProps = {
 
 export type BookDetailScreenParams = {
   bookData: BookModel;
+};
+
+export type IChatbotMessage = IMessage & {
+  type: BotResponseType;
+  data: any[];
 };

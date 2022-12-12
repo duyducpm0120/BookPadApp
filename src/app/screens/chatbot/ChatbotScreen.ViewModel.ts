@@ -1,17 +1,25 @@
-import { convertToBotResponseModel } from "@core/utils";
+import {
+  convertToBotResponseModel,
+  convertToGiftedChatMessage,
+} from "@core/utils";
+import type { BookModel } from "@core";
 import { BotResponseType, useGlobalState } from "@core";
 import { useMemo, useState } from "react";
-import type { IMessage } from "react-native-gifted-chat";
+import type { User } from "react-native-gifted-chat";
 import { GiftedChat } from "react-native-gifted-chat";
 import { Dialogflow_V2 } from "react-native-dialogflow";
+import { getRecommendBooks } from "@core/services";
+import type { BotResponseModel } from "../../../core/models/BotResponseModel";
 import { BOT } from "./const";
+import type { IChatbotMessage } from "./types";
 
 export const useViewModel = (params: any) => {
-  const { USER_INFO } = useGlobalState();
-  const [messages, setMessages] = useState<IMessage[]>([]);
+  const { USER_INFO, TOKEN } = useGlobalState();
+  const [messages, setMessages] = useState<IChatbotMessage[]>([]);
   const { NickName, UserId, ProfilePicUrl } = USER_INFO;
+  const [recommendBooks, setRecommendBooks] = useState<BookModel[]>([]);
 
-  const USER = useMemo(() => {
+  const USER: User = useMemo(() => {
     return {
       _id: UserId,
       name: NickName,
@@ -19,28 +27,49 @@ export const useViewModel = (params: any) => {
     };
   }, [NickName, ProfilePicUrl, UserId]);
 
-  const handleBotTextMessage = (text: string) => {
-    const newMessage = {
-      _id: messages.length + 1,
-      text,
-      createdAt: new Date(),
+  const getUserRecommendBooks = async () => {
+    const books = await getRecommendBooks({ token: TOKEN, numberOfBooks: 3 });
+    return books;
+  };
+
+  const handleBotTextMessage = (message: string) => {
+    const newMessage = convertToGiftedChatMessage({
+      message,
+      index: messages.length + 1,
       user: BOT,
-    };
+      type: BotResponseType.TEXT,
+    });
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, [newMessage])
     );
   };
 
-  const handleBotResponse = (result: any) => {
+  const handleBotMessage = async (message: BotResponseModel) => {
+    const books = await getUserRecommendBooks();
+    const newMessage = convertToGiftedChatMessage({
+      message: message.message,
+      index: messages.length + 2,
+      user: BOT,
+      type: message.type,
+      data: books,
+    });
+
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, [newMessage])
+    );
+  };
+
+  const handleBotResponse = async (result: any) => {
     try {
       // const text = result.queryResult.fulfillmentMessages[0].text.text[0];
       const botMessage = convertToBotResponseModel(result);
-      console.log("botMessage asdasd", botMessage);
+      // console.log("botMessage asdasd", botMessage);
       if (botMessage.type === BotResponseType.TEXT) {
-        handleBotTextMessage(botMessage.message);
+        handleBotMessage(botMessage);
       } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK) {
         console.log("book recommend", botMessage);
         handleBotTextMessage(botMessage.message);
+        await handleBotMessage(botMessage);
         // handle recommendation
       }
     } catch (err) {
@@ -48,7 +77,7 @@ export const useViewModel = (params: any) => {
     }
   };
 
-  const onSend = (_messages: IMessage[]) => {
+  const onSend = (_messages: IChatbotMessage[]) => {
     console.log("onSend", _messages);
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, _messages)
@@ -63,7 +92,7 @@ export const useViewModel = (params: any) => {
 
   const onQuickReply = (replies: any) => {
     console.log("onQuickReply", replies);
-    handleBotTextMessage(replies[0].value);
+    handleBotMessage(replies[0].value);
   };
 
   return {

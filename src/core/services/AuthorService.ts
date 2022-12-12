@@ -111,7 +111,6 @@ export const getAuthors = async ({ token }: { token: string }) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log("res asdasd", res);
   const authorList: BookAuthor[] = safeGet(res, "data.authors", []);
   return authorList;
 };

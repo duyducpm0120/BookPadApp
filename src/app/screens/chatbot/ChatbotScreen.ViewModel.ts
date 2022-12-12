@@ -1,4 +1,5 @@
-import { useGlobalState } from "@core";
+import { convertToBotResponseModel } from "@core/utils";
+import { BotResponseType, useGlobalState } from "@core";
 import { useMemo, useState } from "react";
 import type { IMessage } from "react-native-gifted-chat";
 import { GiftedChat } from "react-native-gifted-chat";
@@ -18,7 +19,7 @@ export const useViewModel = (params: any) => {
     };
   }, [NickName, ProfilePicUrl, UserId]);
 
-  const onReceive = (text: string) => {
+  const handleBotTextMessage = (text: string) => {
     const newMessage = {
       _id: messages.length + 1,
       text,
@@ -31,8 +32,20 @@ export const useViewModel = (params: any) => {
   };
 
   const handleBotResponse = (result: any) => {
-    const text = result.queryResult.fulfillmentMessages[0].text.text[0];
-    onReceive(text);
+    try {
+      // const text = result.queryResult.fulfillmentMessages[0].text.text[0];
+      const botMessage = convertToBotResponseModel(result);
+      console.log("botMessage asdasd", botMessage);
+      if (botMessage.type === BotResponseType.TEXT) {
+        handleBotTextMessage(botMessage.message);
+      } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK) {
+        console.log("book recommend", botMessage);
+        handleBotTextMessage(botMessage.message);
+        // handle recommendation
+      }
+    } catch (err) {
+      console.log("bot response err", err);
+    }
   };
 
   const onSend = (_messages: IMessage[]) => {
@@ -50,7 +63,7 @@ export const useViewModel = (params: any) => {
 
   const onQuickReply = (replies: any) => {
     console.log("onQuickReply", replies);
-    onReceive(replies[0].value);
+    handleBotTextMessage(replies[0].value);
   };
 
   return {

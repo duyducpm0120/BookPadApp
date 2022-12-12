@@ -11,7 +11,7 @@ import {
   strings,
 } from "@core";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import type { BubbleProps } from "react-native-gifted-chat";
 import { Bubble, GiftedChat } from "react-native-gifted-chat";
 import { useViewModel } from "./ChatbotScreen.ViewModel";
@@ -37,22 +37,16 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
         data: [],
       }
     );
-    console.log("current message asdasd", currentMessage);
     if (currentMessage.user._id === BOT._id) {
       if (currentMessage.type === BotResponseType.TEXT)
         return <Bubble {...bubbleProps} />;
       if (currentMessage.type === BotResponseType.RECOMMEND_BOOK) {
         const books: BookModel[] = safeGetArray(currentMessage, "data", []);
         return (
-          <ScrollView
-            contentContainerStyle={[
-              appStyle.columnLeftContainer,
-              {
-                marginTop: SPACE.spacing12,
-              },
-            ]}
-          >
-            {books.map((item, index) => {
+          <FlatList
+            data={books}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => {
               return (
                 <>
                   <Book
@@ -69,8 +63,14 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
                   ) : null}
                 </>
               );
-            })}
-          </ScrollView>
+            }}
+            contentContainerStyle={[
+              appStyle.columnLeftContainer,
+              {
+                marginTop: SPACE.spacing12,
+              },
+            ]}
+          />
         );
       }
     }

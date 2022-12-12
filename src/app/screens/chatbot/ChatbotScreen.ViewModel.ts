@@ -28,8 +28,12 @@ export const useViewModel = (params: any) => {
   }, [NickName, ProfilePicUrl, UserId]);
 
   const getUserRecommendBooks = async () => {
-    const books = await getRecommendBooks({ token: TOKEN, numberOfBooks: 3 });
-    return books;
+    try {
+      const books = await getRecommendBooks({ token: TOKEN, numberOfBooks: 3 });
+      return books;
+    } catch (err) {
+      return [];
+    }
   };
 
   const handleBotTextMessage = (message: string) => {
@@ -67,7 +71,6 @@ export const useViewModel = (params: any) => {
       if (botMessage.type === BotResponseType.TEXT) {
         handleBotMessage(botMessage);
       } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK) {
-        console.log("book recommend", botMessage);
         handleBotTextMessage(botMessage.message);
         await handleBotMessage(botMessage);
         // handle recommendation

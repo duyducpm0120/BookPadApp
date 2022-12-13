@@ -41,10 +41,14 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
       if (currentMessage.type === BotResponseType.TEXT)
         return <Bubble {...bubbleProps} />;
       if (currentMessage.type === BotResponseType.RECOMMEND_BOOK) {
-        const books: BookModel[] = safeGetArray(currentMessage, "data", []);
+        const bookList: BookModel[] = safeGetArray(
+          currentMessage,
+          "bookList",
+          []
+        );
         return (
           <FlatList
-            data={books}
+            data={bookList}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => {
               return (
@@ -58,7 +62,7 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
                       });
                     }}
                   />
-                  {index < books.length - 1 ? (
+                  {index < bookList.length - 1 ? (
                     <BlankSpacer height={SPACE.spacing16} />
                   ) : null}
                 </>

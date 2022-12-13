@@ -13,11 +13,14 @@ import type { BotResponseModel } from "../../../core/models/BotResponseModel";
 import { BOT } from "./const";
 import type { IChatbotMessage } from "./types";
 
+const NUMBER_OF_RECOMMEND_BOOKS = 20;
+const NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE = 3;
 export const useViewModel = (params: any) => {
   const { USER_INFO, TOKEN } = useGlobalState();
   const [messages, setMessages] = useState<IChatbotMessage[]>([]);
   const { NickName, UserId, ProfilePicUrl } = USER_INFO;
   const [recommendBooks, setRecommendBooks] = useState<BookModel[]>([]);
+  const [recommendBooksPage, setRecommendBooksPage] = useState(0);
 
   const USER: User = useMemo(() => {
     return {
@@ -29,8 +32,12 @@ export const useViewModel = (params: any) => {
 
   const getUserRecommendBooks = async () => {
     try {
-      const books = await getRecommendBooks({ token: TOKEN, numberOfBooks: 3 });
-      return books;
+      const books = await getRecommendBooks({
+        token: TOKEN,
+        numberOfBooks: NUMBER_OF_RECOMMEND_BOOKS,
+      });
+      setRecommendBooksPage(recommendBooksPage + 1);
+      return books.slice(0, NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE);
     } catch (err) {
       return [];
     }
@@ -55,7 +62,7 @@ export const useViewModel = (params: any) => {
       index: messages.length + 2,
       user: BOT,
       type: message.type,
-      data: books,
+      bookList: books,
     });
 
     setMessages((previousMessages) =>
@@ -69,10 +76,14 @@ export const useViewModel = (params: any) => {
       const botMessage = convertToBotResponseModel(result);
       // console.log("botMessage asdasd", botMessage);
       if (botMessage.type === BotResponseType.TEXT) {
-        handleBotMessage(botMessage);
+        handleBotTextMessage(botMessage.message);
       } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK) {
         handleBotTextMessage(botMessage.message);
         await handleBotMessage(botMessage);
+        // handle recommendation
+      } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK_MORE) {
+        // handleBotTextMessage(botMessage.message);
+        // await handleBotMessage(botMessage);
         // handle recommendation
       }
     } catch (err) {

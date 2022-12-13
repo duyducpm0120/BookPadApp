@@ -7,4 +7,5 @@ export enum BotResponseType {
   RECOMMEND_BOOK = "recommend_book",
   NONE = "none",
   TEXT = "text",
+  RECOMMEND_BOOK_MORE = "recommend_book_more",
 }

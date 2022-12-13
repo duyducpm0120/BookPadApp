@@ -19,5 +19,5 @@ export type BookDetailScreenParams = {
 
 export type IChatbotMessage = IMessage & {
   type: BotResponseType;
-  data: any[];
+  bookList: BookModel[];
 };

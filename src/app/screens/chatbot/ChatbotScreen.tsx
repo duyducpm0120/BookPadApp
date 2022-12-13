@@ -13,7 +13,7 @@ import {
 import React from "react";
 import { FlatList, View } from "react-native";
 import type { BubbleProps } from "react-native-gifted-chat";
-import { Bubble, GiftedChat } from "react-native-gifted-chat";
+import { Send, Bubble, GiftedChat } from "react-native-gifted-chat";
 import { useViewModel } from "./ChatbotScreen.ViewModel";
 import { BOT } from "./const";
 import type { IChatbotMessage } from "./types";
@@ -131,6 +131,18 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
           user={USER}
           onSend={onSend}
           renderBubble={renderBubble}
+          quickReplyTextStyle={{
+            color: COLORS.primary.main,
+          }}
+          renderSend={(sendProps) => {
+            return (
+              <Send
+                {...sendProps}
+                textStyle={{ color: COLORS.primary.main }}
+                label="Send"
+              />
+            );
+          }}
         />
       </View>
     </BaseScreen>

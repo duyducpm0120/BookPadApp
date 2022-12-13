@@ -40,12 +40,26 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
     if (currentMessage.user._id === BOT._id) {
       if (currentMessage.type === BotResponseType.TEXT)
         return <Bubble {...bubbleProps} />;
-      if (currentMessage.type === BotResponseType.RECOMMEND_BOOK) {
+      if (
+        currentMessage.type === BotResponseType.RECOMMEND_BOOK ||
+        currentMessage.type === BotResponseType.RECOMMEND_BOOK_MORE
+      ) {
         const bookList: BookModel[] = safeGetArray(
           currentMessage,
           "bookList",
           []
         );
+
+        if (bookList.length === 0)
+          return (
+            <Bubble
+              {...bubbleProps}
+              currentMessage={{
+                ...currentMessage,
+                text: strings.i_cant_find_suitable_books_for_you,
+              }}
+            />
+          );
         return (
           <FlatList
             data={bookList}

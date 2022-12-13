@@ -37,6 +37,7 @@ export const useViewModel = (params: any) => {
         numberOfBooks: NUMBER_OF_RECOMMEND_BOOKS,
       });
       setRecommendBooksPage(recommendBooksPage + 1);
+      setRecommendBooks(books);
       return books.slice(0, NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE);
     } catch (err) {
       return [];
@@ -72,20 +73,38 @@ export const useViewModel = (params: any) => {
     );
   };
 
-  const handleBotResponse = async (result: any) => {
+  const handleBotRecommendMoreBookMessage = async (
+    message: BotResponseModel
+  ) => {
+    handleBotTextMessage(message);
+    const newMessage = convertToGiftedChatMessage({
+      message: message.message,
+      index: messages.length + 2,
+      user: BOT,
+      type: message.type,
+      bookList: recommendBooks.slice(
+        recommendBooksPage * NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE,
+        (recommendBooksPage + 1) * NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE
+      ),
+    });
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, [newMessage])
+    );
+    setRecommendBooksPage(recommendBooksPage + 1);
+  };
+
+  const handleBotResponse = async (botResponse: any) => {
     try {
       // const text = result.queryResult.fulfillmentMessages[0].text.text[0];
-      const botMessage = convertToBotResponseModel(result);
+      console.log("botResponse", botResponse);
+      const botMessage = convertToBotResponseModel(botResponse);
       // console.log("botMessage asdasd", botMessage);
       if (botMessage.type === BotResponseType.TEXT) {
         handleBotTextMessage(botMessage);
       } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK) {
         await handleBotRecommendBookMessage(botMessage);
-        // handle recommendation
       } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK_MORE) {
-        // handleBotTextMessage(botMessage.message);
-        // await handleBotMessage(botMessage);
-        // handle recommendation
+        handleBotRecommendMoreBookMessage(botMessage);
       }
     } catch (err) {
       console.log("bot response err", err);

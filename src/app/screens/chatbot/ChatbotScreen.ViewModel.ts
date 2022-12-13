@@ -43,9 +43,10 @@ export const useViewModel = (params: any) => {
     }
   };
 
-  const handleBotTextMessage = (message: string) => {
+  const handleBotTextMessage = (message: BotResponseModel) => {
+    const botMessage = message.message;
     const newMessage = convertToGiftedChatMessage({
-      message,
+      message: botMessage,
       index: messages.length + 1,
       user: BOT,
       type: BotResponseType.TEXT,
@@ -55,7 +56,8 @@ export const useViewModel = (params: any) => {
     );
   };
 
-  const handleBotMessage = async (message: BotResponseModel) => {
+  const handleBotRecommendBookMessage = async (message: BotResponseModel) => {
+    handleBotTextMessage(message);
     const books = await getUserRecommendBooks();
     const newMessage = convertToGiftedChatMessage({
       message: message.message,
@@ -76,10 +78,9 @@ export const useViewModel = (params: any) => {
       const botMessage = convertToBotResponseModel(result);
       // console.log("botMessage asdasd", botMessage);
       if (botMessage.type === BotResponseType.TEXT) {
-        handleBotTextMessage(botMessage.message);
+        handleBotTextMessage(botMessage);
       } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK) {
-        handleBotTextMessage(botMessage.message);
-        await handleBotMessage(botMessage);
+        await handleBotRecommendBookMessage(botMessage);
         // handle recommendation
       } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK_MORE) {
         // handleBotTextMessage(botMessage.message);
@@ -106,7 +107,7 @@ export const useViewModel = (params: any) => {
 
   const onQuickReply = (replies: any) => {
     console.log("onQuickReply", replies);
-    handleBotMessage(replies[0].value);
+    handleBotRecommendBookMessage(replies[0].value);
   };
 
   return {

@@ -139,7 +139,7 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
               <Send
                 {...sendProps}
                 textStyle={{ color: COLORS.primary.main }}
-                label="Send"
+                label={strings.send}
               />
             );
           }}

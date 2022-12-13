@@ -103,5 +103,6 @@ export const enStrings = {
   delete_review: "Delete review",
   delete_review_confirm: "Do you want to delete this review?",
   cancel: "Cancel",
-  i_cant_find_suitable_books_for_you: "I can't find suitable books for you",
+  i_cant_find_suitable_books_for_you:
+    "Sorry. I can't find suitable books for you",
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   convertToBotResponseModel,
   convertToGiftedChatMessage,
@@ -95,10 +96,8 @@ export const useViewModel = (params: any) => {
 
   const handleBotResponse = async (botResponse: any) => {
     try {
-      // const text = result.queryResult.fulfillmentMessages[0].text.text[0];
       console.log("botResponse", botResponse);
       const botMessage = convertToBotResponseModel(botResponse);
-      // console.log("botMessage asdasd", botMessage);
       if (botMessage.type === BotResponseType.TEXT) {
         handleBotTextMessage(botMessage);
       } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK) {

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react-native/no-inline-styles */
 import { BaseScreen, BlankSpacer, Book } from "@app/components";
-import { appStyle, SPACE } from "@app/styles";
+import { appStyle, COLORS, SPACE } from "@app/styles";
 import type { BookModel } from "@core";
 import {
   useGlobalNavigation,
@@ -24,6 +24,66 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
 
   const { navigateToBookDetailScreen } = useGlobalNavigation();
 
+  const renderRecommendBooks = (params: {
+    bubbleProps: BubbleProps<IChatbotMessage>;
+    currentMessage: IChatbotMessage;
+  }) => {
+    const { bubbleProps, currentMessage } = params;
+    const bookList: BookModel[] = safeGetArray(currentMessage, "bookList", []);
+    if (bookList.length === 0) {
+      if (currentMessage.type === BotResponseType.RECOMMEND_BOOK_MORE) {
+        return (
+          <Bubble
+            {...bubbleProps}
+            currentMessage={{
+              ...currentMessage,
+              text: strings.that_is_all,
+            }}
+          />
+        );
+      }
+      return (
+        <Bubble
+          {...bubbleProps}
+          currentMessage={{
+            ...currentMessage,
+            text: strings.i_cant_find_suitable_books_for_you,
+          }}
+        />
+      );
+    }
+    return (
+      <FlatList
+        data={bookList}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => {
+          return (
+            <>
+              <Book
+                key={-index}
+                data={item}
+                onPress={() => {
+                  navigateToBookDetailScreen({
+                    bookData: item,
+                  });
+                }}
+              />
+              {index < bookList.length - 1 ? (
+                <BlankSpacer height={SPACE.spacing16} />
+              ) : null}
+            </>
+          );
+        }}
+        contentContainerStyle={[
+          appStyle.columnLeftContainer,
+          {
+            marginTop: SPACE.spacing12,
+          },
+        ]}
+      />
+    );
+  };
+
   const renderBubble = (bubbleProps: BubbleProps<IChatbotMessage>) => {
     const currentMessage: IChatbotMessage = safeGet(
       bubbleProps,
@@ -44,55 +104,19 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
         currentMessage.type === BotResponseType.RECOMMEND_BOOK ||
         currentMessage.type === BotResponseType.RECOMMEND_BOOK_MORE
       ) {
-        const bookList: BookModel[] = safeGetArray(
-          currentMessage,
-          "bookList",
-          []
-        );
-
-        if (bookList.length === 0)
-          return (
-            <Bubble
-              {...bubbleProps}
-              currentMessage={{
-                ...currentMessage,
-                text: strings.i_cant_find_suitable_books_for_you,
-              }}
-            />
-          );
-        return (
-          <FlatList
-            data={bookList}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              return (
-                <>
-                  <Book
-                    key={-index}
-                    data={item}
-                    onPress={() => {
-                      navigateToBookDetailScreen({
-                        bookData: item,
-                      });
-                    }}
-                  />
-                  {index < bookList.length - 1 ? (
-                    <BlankSpacer height={SPACE.spacing16} />
-                  ) : null}
-                </>
-              );
-            }}
-            contentContainerStyle={[
-              appStyle.columnLeftContainer,
-              {
-                marginTop: SPACE.spacing12,
-              },
-            ]}
-          />
-        );
+        return renderRecommendBooks({ bubbleProps, currentMessage });
       }
     }
-    return <Bubble {...bubbleProps} />;
+    return (
+      <Bubble
+        {...bubbleProps}
+        wrapperStyle={{
+          right: {
+            backgroundColor: COLORS.primary.main,
+          },
+        }}
+      />
+    );
   };
 
   return (

@@ -105,4 +105,5 @@ export const enStrings = {
   cancel: "Cancel",
   i_cant_find_suitable_books_for_you:
     "Sorry. I can't find suitable books for you",
+  that_is_all: "That is all",
 };

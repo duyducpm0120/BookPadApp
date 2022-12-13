@@ -3,14 +3,13 @@ import {
   convertToBotResponseModel,
   convertToGiftedChatMessage,
 } from "@core/utils";
-import type { BookModel } from "@core";
+import type { BookModel, BotResponseModel } from "@core";
 import { BotResponseType, useGlobalState } from "@core";
 import { useMemo, useState } from "react";
 import type { User } from "react-native-gifted-chat";
 import { GiftedChat } from "react-native-gifted-chat";
 import { Dialogflow_V2 } from "react-native-dialogflow";
 import { getRecommendBooks } from "@core/services";
-import type { BotResponseModel } from "../../../core/models/BotResponseModel";
 import { BOT } from "./const";
 import type { IChatbotMessage } from "./types";
 

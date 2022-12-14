@@ -107,4 +107,8 @@ export const enStrings = {
     "Sorry. I can't find suitable books for you",
   that_is_all: "That is all",
   send: "Send",
+  upload: "Upload",
+  upload_image: "Upload image",
+  upload_image_fail: "Upload image fail",
+  upload_image_succes: "Upload image successfully",
 };

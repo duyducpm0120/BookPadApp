@@ -58,7 +58,7 @@ const App = (): JSX.Element => {
             SNACK_BAR_ACTION.onPress();
           },
         }}
-        duration={3000}
+        duration={1000}
       >
         {SNACK_BAR_MESSAGE}
       </Snackbar>

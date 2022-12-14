@@ -51,6 +51,13 @@ export const useGlobalNavigation = () => {
   const navigateToWriteReviewScreen = (params: WriteReviewScreenParams) => {
     navigation.navigate(ScreenNameEnum.WriteReview, { ...params });
   };
+
+  const resetToHomeScreen = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: ScreenNameEnum.Home }],
+    });
+  };
   return {
     navigation,
     navigateToLoginScreen,
@@ -65,5 +72,6 @@ export const useGlobalNavigation = () => {
     navigateToSearchScreen,
     navigateToReviewScreen,
     navigateToWriteReviewScreen,
+    resetToHomeScreen,
   };
 };

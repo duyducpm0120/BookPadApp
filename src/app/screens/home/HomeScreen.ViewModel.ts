@@ -1,5 +1,6 @@
 import type { AppTabEnum } from "@core";
 import {
+  useLogin,
   showAlert,
   strings,
   useGlobalNavigation,
@@ -40,27 +41,11 @@ export const useViewModel = (
   const { mutateAsync: logInWithTokenMutateAsync, reset } =
     dependencies.useLogInWithTokenService();
 
-  const loginWithToken = async () => {
-    try {
-      const result = await logInWithTokenMutateAsync(
-        {
-          token: TOKEN,
-        },
-        {
-          onSuccess: () => {},
-          onError: (err) => {},
-        }
-      );
+  const { loginWithToken } = useLogin();
 
-      // showGlobalSnackBar({
-      //   message: strings.loginSuccessMessage,
-      // });
-      globalDispatch(globalActions.setGlobalIsLoggedIn(true));
-      globalDispatch(globalActions.setGlobalBooks(result.books));
-      globalDispatch(globalActions.setGlobalUserInfo(result.userInfo));
-      globalDispatch(
-        globalActions.setGlobalHomePageCategoryList(result.categoryList)
-      );
+  const login = async () => {
+    try {
+      await loginWithToken();
       navigateToHomeScreen();
     } catch (err: any) {
       showAlert({
@@ -109,7 +94,7 @@ export const useViewModel = (
 
   useMount(async () => {
     if (!IS_LOGGED_IN) {
-      await loginWithToken();
+      await login();
     }
     if (!BOOK_LIBRARY_LIST) {
       await getUserBookLibrary();

@@ -4,20 +4,50 @@ import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { Gender, strings } from "@core";
 import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
 import React, { useState } from "react";
-import { Image, ScrollView, useWindowDimensions, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { Avatar } from "react-native-paper";
 import CheckBox from "@react-native-community/checkbox";
+import { launchImageLibrary } from "react-native-image-picker";
 import { useViewModel } from "./ProfileScreen.ViewModel";
 
 const IMAGE_HEIGHT = 180;
 export const ProfileScreen: React.FC<any> = () => {
-  const { selectors } = useViewModel();
+  const { selectors, handlers } = useViewModel();
+  const { updateUserProfile } = handlers;
   const { width } = useWindowDimensions();
   const { USER_INFO } = selectors;
   const [nickname, setNickname] = useState(USER_INFO.NickName);
   const [gender, setGender] = useState(USER_INFO.Gender);
   const [email, setEmail] = useState(USER_INFO.Email);
   const [phone, setPhone] = useState(USER_INFO.Phone);
+
+  const openImageLibrary = async () => {
+    launchImageLibrary(
+      {
+        mediaType: "photo",
+        // maxWidth: RESPONSIVE.pixelSizeHorizontal(100),
+        // maxHeight: RESPONSIVE.pixelSizeHorizontal(100),
+        includeBase64: false,
+      },
+      (response) => {
+        if (response.didCancel) {
+          console.log("User canceled image picker");
+        } else if (response.errorMessage) {
+          console.log("Image picker error", response.errorMessage);
+        } else if (response.errorCode) {
+          console.log("Error code ", response.errorCode);
+        } else {
+          updateUserProfile(response);
+        }
+      }
+    );
+  };
 
   const renderImageAndName = () => {
     return (
@@ -62,13 +92,20 @@ export const ProfileScreen: React.FC<any> = () => {
               backgroundColor: COLORS.transparent,
             }}
           />
-          <BPText
-            fontSize={FONT_SIZE.fontSize16}
-            color={COLORS.white}
-            // fontWeight="bold"
-          >
-            {USER_INFO.NickName}
-          </BPText>
+          <BlankSpacer height={SPACE.spacing4} />
+          <TouchableOpacity>
+            <BPText
+              fontSize={FONT_SIZE.fontSize16}
+              color={COLORS.white}
+              fontWeight="bold"
+              style={{
+                textDecorationLine: "underline",
+              }}
+              onPress={openImageLibrary}
+            >
+              {`${strings.upload_image}`}
+            </BPText>
+          </TouchableOpacity>
         </View>
       </>
     );

@@ -1,6 +1,5 @@
 import type { AppTabEnum } from "@core";
 import {
-  useLogin,
   showAlert,
   strings,
   useGlobalNavigation,
@@ -10,6 +9,7 @@ import {
   useGlobalDispatch,
   useGlobalState,
 } from "@core";
+import { useLogin } from "@core/hooks/useLogin";
 import { getBookLibrary, useLogInWithTokenService } from "@core/services";
 import { BackHandler } from "react-native";
 import { getMessageFromError } from "../../../core/utils/ErrorUtils";

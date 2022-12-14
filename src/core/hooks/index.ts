@@ -6,4 +6,3 @@ export * from "./useGlobalState";
 export * from "./useGlobalLoading";
 export * from "./useGlobalNavigation";
 export * from "./useGlobalSnackBar";
-export * from "./useLogin";

@@ -24,7 +24,7 @@ export const ProfileTab = () => {
   const { showGlobalLoading, hideGlobalLoading } = useGlobalLoading();
   const renderData: ProfileTabRenderDataType[] = [
     {
-      title: strings.update_profile,
+      title: strings.profile,
       icon: LOCAL_ICONS.userProfile,
       onPress: () => {
         navigateToProfileScreen();

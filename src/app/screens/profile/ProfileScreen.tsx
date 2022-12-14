@@ -127,6 +127,7 @@ export const ProfileScreen: React.FC<any> = () => {
           onChangeText={(text) => {
             setNickname(text);
           }}
+          disabled
         />
         <BlankSpacer height={SPACE.spacing16} />
         <BPText fontSize={FONT_SIZE.fontSize14} fontWeight="bold">
@@ -139,6 +140,7 @@ export const ProfileScreen: React.FC<any> = () => {
           value={email}
           onChangeText={(text) => {}}
           editable={false}
+          disabled
         />
         <BlankSpacer height={SPACE.spacing16} />
         <BPText fontSize={FONT_SIZE.fontSize14} fontWeight="bold">
@@ -147,7 +149,7 @@ export const ProfileScreen: React.FC<any> = () => {
         <BlankSpacer height={SPACE.spacing8} />
         <View style={appStyle.rowLeftContainer}>
           <CheckBox
-            disabled={false}
+            disabled
             value={gender === Gender.MALE}
             onValueChange={(newValue) => {
               setGender(Gender.MALE);
@@ -162,7 +164,7 @@ export const ProfileScreen: React.FC<any> = () => {
           <BPText fontSize={FONT_SIZE.fontSize14}>{strings.male}</BPText>
           <BlankSpacer width={SPACE.spacing24} />
           <CheckBox
-            disabled={false}
+            disabled
             value={gender === Gender.FEMALE}
             onValueChange={(newValue) => {
               setGender(Gender.FEMALE);
@@ -190,6 +192,7 @@ export const ProfileScreen: React.FC<any> = () => {
             setPhone(text);
           }}
           keyboardType="numeric"
+          disabled
         />
       </View>
     );

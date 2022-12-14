@@ -28,12 +28,12 @@ export const useViewModel = () => {
     try {
       showGlobalLoading();
       await updateProfilePic(response.assets[0], TOKEN);
+      await loginWithToken();
+      resetToHomeScreen();
       hideGlobalLoading();
       showGlobalSnackBar({
         message: strings.upload_image_succes,
       });
-      await loginWithToken();
-      resetToHomeScreen();
     } catch (err) {
       //
       hideGlobalLoading();

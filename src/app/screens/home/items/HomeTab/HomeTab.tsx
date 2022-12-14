@@ -3,7 +3,7 @@ import { SearchScreenType } from "@app/screens/search";
 import { appStyle, SPACE, COLORS, FONT_SIZE } from "@app/styles";
 import { strings, ICONS, useGlobalNavigation } from "@core";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { View } from "react-native";
 import { Avatar } from "react-native-paper";
 import { useViewModel } from "./HomeTab.ViewModel";
@@ -14,7 +14,7 @@ export const HomeTab = (props: any) => {
   const { selectors } = useViewModel({});
   const { navigateToSearchScreen } = useGlobalNavigation();
   const { USER_INFO, BOOKS } = selectors;
-  const renderUserAndSearchBar = () => {
+  const renderUserAndSearchBar = useMemo(() => {
     return (
       <View
         style={[
@@ -47,7 +47,7 @@ export const HomeTab = (props: any) => {
         />
       </View>
     );
-  };
+  }, [USER_INFO.NickName, USER_INFO.ProfilePicUrl, navigateToSearchScreen]);
 
   const ForYouTabComp = useCallback(() => {
     return <ForYouTab books={BOOKS} />;
@@ -62,7 +62,7 @@ export const HomeTab = (props: any) => {
 
   return (
     <View style={appStyle.container}>
-      {renderUserAndSearchBar()}
+      {renderUserAndSearchBar}
       {/* <BlankSpacer height={SPACE.spacing8} /> */}
       <Tab.Navigator
         screenOptions={{

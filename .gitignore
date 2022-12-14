@@ -104,3 +104,4 @@ dist
 .tern-port
 yarn.lock
 env.js
+.VSCodeCounter

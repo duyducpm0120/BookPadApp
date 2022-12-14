@@ -1,11 +1,17 @@
-import { BlankSpacer, Book, BPText, Loading } from "@app/components";
+import {
+  BlankSpacer,
+  Book,
+  BPIconButton,
+  BPText,
+  Loading,
+} from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import type { BookModel } from "@core";
 import { strings, ICONS, useGlobalNavigation, BookLibrarySection } from "@core";
 import { isNil } from "lodash";
 import React, { useCallback } from "react";
 import { FlatList, ScrollView, SectionList, View } from "react-native";
-import { Avatar, IconButton } from "react-native-paper";
+import { Avatar } from "react-native-paper";
 import { useViewModel } from "./BookSelfTab.ViewModel";
 
 export const BookSelfTab = () => {
@@ -33,7 +39,7 @@ export const BookSelfTab = () => {
             fontWeight="600"
           >{`${strings.hello}, ${USER_INFO.NickName}`}</BPText>
         </View>
-        <IconButton
+        <BPIconButton
           icon={{ uri: ICONS.search }}
           size={SPACE.spacing24}
           iconColor={COLORS.black}

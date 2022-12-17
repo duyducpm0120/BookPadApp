@@ -5,9 +5,9 @@ import {
   safeGetArray,
   TimeToMillisecondsEnum,
 } from "@core";
+import { ReviewModel } from "@core/models/ReviewModel";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { ReviewModel } from "../models/ReviewModel";
 
 const getDownLoadEndPoint = `${END_POINT}book/getBookDownloadLink/`;
 const getBookLibraryEndPoint = `${END_POINT}library/getBooks`;

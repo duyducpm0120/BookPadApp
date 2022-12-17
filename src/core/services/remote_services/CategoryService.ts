@@ -1,8 +1,8 @@
 import { END_POINT } from "@core/const";
 import { BookModel } from "@core/models";
+import { CategoryModel } from "@core/models/CategoryModel";
 import { safeGet, safeGetArray } from "@core/utils";
 import axios from "axios";
-import { CategoryModel } from "../models/CategoryModel";
 
 const getAllCategoriesEndpoint = `${END_POINT}search/getAllCategories`;
 const searchBookEndPoint = `${END_POINT}search/categoryBookSearch`;

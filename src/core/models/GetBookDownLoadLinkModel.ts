@@ -8,7 +8,6 @@ export class GetBookDownLoadLinkModel {
   }
 
   public static instantiate = (json: any) => {
-    console.log("json download link asdasd", json);
     const data = safeGet(json, "data", {});
     const downloadLink = safeGetString(data, "downloadLink", "");
     return new GetBookDownLoadLinkModel(downloadLink);

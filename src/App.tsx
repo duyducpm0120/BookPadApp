@@ -1,5 +1,4 @@
 import {
-  CacheKeyEnum,
   globalActions,
   useGlobalDispatch,
   useGlobalLoading,
@@ -11,8 +10,8 @@ import { AppStack } from "@app/navigator";
 import { Loading } from "@app/components";
 import { QueryClient } from "@tanstack/react-query";
 import { Snackbar } from "react-native-paper";
-import LocalStorageHelper from "@core/utils/LocalStorageHelper";
 import { Dialogflow_V2 } from "react-native-dialogflow";
+import { getToken } from "@core/services";
 import { DIALOG_FLOW_CONFIG } from "../env";
 
 const queryClient = new QueryClient();
@@ -29,7 +28,7 @@ const App = (): JSX.Element => {
   const globalDispatch = useGlobalDispatch();
 
   const getGlobalToken = async () => {
-    const token = await LocalStorageHelper.getItem(CacheKeyEnum.TOKEN);
+    const token = await getToken();
     if (token !== null) {
       globalDispatch(globalActions.setGlobalToken(token.toString()));
     }

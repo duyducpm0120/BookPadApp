@@ -1,4 +1,2 @@
-export * from "./Authentication";
-export * from "./BookServices";
-export * from "./AuthorService";
-export * from "./CategoryService";
+export * from "./remote_services";
+export * from "./local_storage_services";

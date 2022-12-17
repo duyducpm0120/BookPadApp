@@ -7,10 +7,10 @@ import {
   useGlobalSnackBar,
   useGlobalState,
 } from "@core";
-import { updateProfilePic } from "@core/services/UserProfileService";
 import { isNil } from "lodash";
 import { BackHandler } from "react-native";
 import type { ImagePickerResponse } from "react-native-image-picker";
+import { updateProfilePic } from "@core/services";
 import { useLogin } from "../../../core/hooks/useLogin";
 
 export const useViewModel = () => {

@@ -3,7 +3,9 @@ import { Reader, ReaderProvider } from "@epubjs-react-native/core";
 import { useFileSystem } from "@epubjs-react-native/file-system";
 import React from "react";
 import { useWindowDimensions, View } from "react-native";
+import { safeGetString } from "@core";
 import type { ReadingBookScreenProps } from "./types";
+import { useViewModel } from "./ReadingBookScreen.ViewModel";
 
 export const ReadingBookScreen: React.FC<any> = (
   props: ReadingBookScreenProps
@@ -11,10 +13,12 @@ export const ReadingBookScreen: React.FC<any> = (
   const { navigation, route } = props;
   const { width, height } = useWindowDimensions();
   const { bookData, bookDownLoadLink } = route.params;
-  // const { bookData: data, bookDownloadLink } = useViewModel({ bookData });
+  const { saveReadStatus, currentLocation, currentProcess } = useViewModel({
+    bookData,
+  });
   // const { changeFontFamily } = useReader();
 
-  const renderReader = () => {
+  const RenderReader = () => {
     try {
       return (
         <Reader
@@ -24,6 +28,22 @@ export const ReadingBookScreen: React.FC<any> = (
           fileSystem={useFileSystem}
           enableSwipe
           enableSelection
+          onSwipeRight={() => {}}
+          onFinish={() => {}}
+          onLocationChange={(_totalLocations, _currentLocation, progress) => {
+            // console.log("_currentLocation asdasd", _currentLocation);
+            console.log("progress asdasd", progress);
+            const location = safeGetString(
+              _currentLocation,
+              "start.cfi",
+              ""
+            ).toString();
+            saveReadStatus({
+              currentLocation: location,
+              progress,
+            });
+          }}
+          initialLocation={currentLocation}
         />
       );
     } catch (err) {
@@ -33,7 +53,7 @@ export const ReadingBookScreen: React.FC<any> = (
 
   return (
     <BaseScreen tittle={bookData.BookName}>
-      <ReaderProvider>{renderReader()}</ReaderProvider>
+      <ReaderProvider>{RenderReader()}</ReaderProvider>
     </BaseScreen>
   );
 };

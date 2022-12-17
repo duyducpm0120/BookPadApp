@@ -9,6 +9,7 @@ import FastImage from "react-native-fast-image";
 import { BlankSpacer } from "../BlankSpacer";
 import { BPText } from "../BPText";
 import type { BookPropsType } from "./type";
+import { useViewModel } from "./Book.ViewModel";
 
 export const Book = (props: BookPropsType) => {
   const {
@@ -20,6 +21,7 @@ export const Book = (props: BookPropsType) => {
     },
     isHorizontal = false,
   } = props;
+  const { progress } = useViewModel({ data });
   const renderReadingPercent = () => {
     if (readingData.isShowReadingStatus) {
       return (
@@ -33,7 +35,7 @@ export const Book = (props: BookPropsType) => {
               backgroundColor: COLORS.secondary.light,
               justifyContent: "center",
               alignItems: "flex-start",
-              width: "70%",
+              width: "80%",
               borderRadius: 20,
             }}
           >
@@ -46,13 +48,13 @@ export const Book = (props: BookPropsType) => {
                 backgroundColor: COLORS.primary.dark,
                 justifyContent: "center",
                 alignItems: "center",
-                width: `${readingData.readingStatus}%`,
+                width: `${progress}%`,
                 borderRadius: 20,
               }}
             />
           </View>
           <BPText fontSize={FONT_SIZE.fontSize12} color={TEXT_COLOR.light}>
-            {readingData.readingStatus}%
+            {progress}%
           </BPText>
         </>
       );

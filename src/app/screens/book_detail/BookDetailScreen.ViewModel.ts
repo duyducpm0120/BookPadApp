@@ -9,14 +9,15 @@ import {
   strings,
   useGlobalState,
 } from "@core";
-import {
-  addBookToLibrary,
-  getBookLibrary,
-  removeBookFromLibrary,
-  useGetBookDownLoadLink,
-} from "@core/services/BookServices";
+
 import { useCallback } from "react";
 import { BackHandler } from "react-native";
+import {
+  useGetBookDownLoadLink,
+  getBookLibrary,
+  removeBookFromLibrary,
+  addBookToLibrary,
+} from "@core/services";
 
 export const useViewModel = (params: { bookData: BookModel }) => {
   const { bookData } = params;

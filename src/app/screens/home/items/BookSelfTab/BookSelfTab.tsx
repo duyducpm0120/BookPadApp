@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
   BlankSpacer,
   Book,
@@ -57,19 +58,21 @@ export const BookSelfTab = () => {
         <FlatList
           data={data}
           keyExtractor={(item, index) => `${item.BookId} + ${index}`}
-          renderItem={({ item }) => (
-            <Book
-              data={item}
-              onPress={() => {
-                navigateToBookDetailScreen({ bookData: item });
-              }}
-              isHorizontal={type === BookLibrarySection.WISH_LISTED_BOOKS}
-              readingData={{
-                isShowReadingStatus: type === BookLibrarySection.READING,
-                readingStatus: item.ReadPercentage,
-              }}
-            />
-          )}
+          renderItem={({ item }) => {
+            return (
+              <Book
+                data={item}
+                onPress={() => {
+                  navigateToBookDetailScreen({ bookData: item });
+                }}
+                isHorizontal={type === BookLibrarySection.WISH_LISTED_BOOKS}
+                readingData={{
+                  isShowReadingStatus: type === BookLibrarySection.READING,
+                  readingStatus: item.ReadPercentage,
+                }}
+              />
+            );
+          }}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           horizontal={type === BookLibrarySection.READING}
@@ -86,7 +89,7 @@ export const BookSelfTab = () => {
       {isNil(BOOK_LIBRARY_LIST) ? (
         <Loading isLoading />
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
           <SectionList
             sections={sectionData}
             keyExtractor={(item, index) => `${item.BookId} + ${index}`}

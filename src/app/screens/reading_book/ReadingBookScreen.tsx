@@ -31,7 +31,7 @@ export const ReadingBookScreen: React.FC<any> = (
           onSwipeRight={() => {}}
           onFinish={() => {}}
           onLocationChange={(_totalLocations, _currentLocation, progress) => {
-            // console.log("_currentLocation asdasd", _currentLocation);
+            console.log("_currentLocation asdasd", _currentLocation);
             console.log("progress asdasd", progress);
             const location = safeGetString(
               _currentLocation,

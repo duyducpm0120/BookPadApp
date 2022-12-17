@@ -1,4 +1,5 @@
 import type { BookModel } from "@core";
+import type { BookReadStatus } from "@core/services";
 
 export type BookPropsType = {
   data: BookModel;
@@ -9,3 +10,7 @@ export type BookPropsType = {
   };
   isHorizontal?: boolean;
 };
+
+export interface BookHandles {
+  getReadStatus: () => BookReadStatus;
+}

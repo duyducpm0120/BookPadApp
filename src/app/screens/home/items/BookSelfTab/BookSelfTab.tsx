@@ -84,8 +84,8 @@ export const BookSelfTab = () => {
 
   return (
     <View style={appStyle.container}>
-      {renderUserAndSearchBar()}
-      <BlankSpacer height={SPACE.spacing16} />
+      {/* {renderUserAndSearchBar()} */}
+      {/* <BlankSpacer height={SPACE.spacing16} /> */}
       {isNil(BOOK_LIBRARY_LIST) ? (
         <Loading isLoading />
       ) : (
@@ -94,13 +94,13 @@ export const BookSelfTab = () => {
             sections={sectionData}
             keyExtractor={(item, index) => `${item.BookId} + ${index}`}
             renderItem={({ item }) => null}
-            renderSectionHeader={({ section: { title, data } }) => (
+            renderSectionHeader={({ section: { title, data, type } }) => (
               <>
                 <BPText fontSize={FONT_SIZE.fontSize24} fontWeight="bold">
                   {title}
                 </BPText>
                 <BlankSpacer height={SPACE.spacing12} />
-                {renderList(data, title)}
+                {renderList(data, type)}
                 <BlankSpacer height={SPACE.spacing16} />
               </>
             )}

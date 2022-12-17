@@ -14,15 +14,6 @@ import { getBookLibrary } from "@core/services";
 import { useMemo, useState } from "react";
 import { BackHandler } from "react-native";
 
-const bookLibrarySections: { label: BookLibrarySection }[] = [
-  {
-    label: BookLibrarySection.READING,
-  },
-  {
-    label: BookLibrarySection.WISH_LISTED_BOOKS,
-  },
-];
-
 export const useViewModel = () => {
   const { USER_INFO, BOOKS, TOKEN, BOOK_LIBRARY_LIST } = useGlobalState();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -62,10 +53,21 @@ export const useViewModel = () => {
   });
 
   const sectionData = useMemo(() => {
+    const bookLibrarySections: { type: BookLibrarySection; label: string }[] = [
+      {
+        type: BookLibrarySection.READING,
+        label: strings.reading,
+      },
+      {
+        type: BookLibrarySection.WISH_LISTED_BOOKS,
+        label: strings.wish_listed_books,
+      },
+    ];
     return bookLibrarySections.map((category) => {
       return {
         title: category.label,
         data: BOOK_LIBRARY_LIST || [],
+        type: category.type,
       };
     });
   }, [BOOK_LIBRARY_LIST]);

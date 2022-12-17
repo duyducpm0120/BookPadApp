@@ -114,4 +114,6 @@ export const viStrings: typeof enStrings = {
   upload_image_succes: "Tải ảnh lên thành công",
   profile: "Cá nhân",
   upload_image_fail: "Tải ảnh lên thất bại",
+  reading: "Đang đọc",
+  wish_listed_books: "Đã lưu",
 };

@@ -112,4 +112,6 @@ export const enStrings = {
   upload_image_fail: "Upload image fail",
   upload_image_succes: "Upload image successfully",
   profile: "Profile",
+  reading: "Reading",
+  wish_listed_books: "Wishlisted books",
 };

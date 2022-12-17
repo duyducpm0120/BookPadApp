@@ -4,7 +4,7 @@ import {
   convertToGiftedChatMessage,
 } from "@core/utils";
 import type { BookModel, BotResponseModel } from "@core";
-import { BotResponseType, useGlobalState } from "@core";
+import { useMount, BotResponseType, useGlobalState } from "@core";
 import { useMemo, useState } from "react";
 import type { User } from "react-native-gifted-chat";
 import { GiftedChat } from "react-native-gifted-chat";
@@ -126,6 +126,21 @@ export const useViewModel = (params: any) => {
     console.log("onQuickReply", replies);
     handleBotRecommendBookMessage(replies[0].value);
   };
+
+  const sendWelcomeMessage = () => {
+    try {
+      Dialogflow_V2.requestQuery(
+        "Hello",
+        (result) => handleBotResponse(result),
+        (error) => console.log(error)
+      );
+    } catch (err) {
+      console.log("send first message to chatbot err");
+    }
+  };
+  useMount(() => {
+    sendWelcomeMessage();
+  });
 
   return {
     USER,

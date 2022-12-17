@@ -1,9 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import { BaseScreen, BlankSpacer, BPText } from "@app/components";
 import { appStyle, COLORS, FONT_FAMILY, FONT_SIZE, SPACE } from "@app/styles";
-import { strings, ThemeList } from "@core";
+import {
+  globalActions,
+  strings,
+  ThemeList,
+  useGlobalDispatch,
+  useGlobalState,
+} from "@core";
 import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWindowDimensions, View } from "react-native";
 
 import { LanguageList } from "@core/const/LanguageList";
@@ -11,15 +17,21 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useViewModel } from "./SettingScreen.ViewModel";
 
 const IMAGE_HEIGHT = 180;
-export const SettingScreen: React.FC<any> = () => {
+export const SettingScreen: React.FC<any> = React.memo(() => {
   const { selectors } = useViewModel();
+  const globalDispatch = useGlobalDispatch();
+  const { GLOBAL_LANGUAGE } = useGlobalState();
   const { width } = useWindowDimensions();
 
-  const [language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState(GLOBAL_LANGUAGE);
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [theme, setTheme] = useState<string>("Light");
   const [showThemeDropdown, setShowThemeDropdown] = useState(false);
+
+  useEffect(() => {
+    globalDispatch(globalActions.setGlobalLanguage(language));
+  }, [globalDispatch, language]);
 
   const renderContent = () => {
     return (
@@ -124,4 +136,4 @@ export const SettingScreen: React.FC<any> = () => {
       <View style={[appStyle.container, {}]}>{renderContent()}</View>
     </BaseScreen>
   );
-};
+});

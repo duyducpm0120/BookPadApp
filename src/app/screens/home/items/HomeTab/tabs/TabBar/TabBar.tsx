@@ -13,11 +13,7 @@ export const MyTabBar = (props: MaterialTopTabBarProps) => {
   const scrollViewRef = React.useRef<ScrollView>(null);
   useEffect(() => {
     const { index } = state;
-    const offset =
-      index * HEADER_TAB_WIDTH +
-      (index - 1) * MARGIN_RIGHT -
-      HEADER_TAB_WIDTH -
-      HEADER_TAB_WIDTH;
+    const offset = index * HEADER_TAB_WIDTH + (index - 1) * MARGIN_RIGHT;
     scrollViewRef.current?.scrollTo({ x: offset, animated: true });
   }, [state, state.index, state.key, state.routes]);
   return (

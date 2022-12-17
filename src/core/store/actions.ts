@@ -100,6 +100,13 @@ const setGlobalBookLibraryList = createAction(
   })
 )();
 
+const setGlobalLanguage = createAction(
+  "global/setGlobalLanguage",
+  (language: string) => ({
+    language,
+  })
+)();
+
 export const globalActions = {
   setGlobal,
   setGlobalLoading,
@@ -112,6 +119,7 @@ export const globalActions = {
   setGlobalIsLoggedIn,
   setGlobalHomePageCategoryList,
   setGlobalBookLibraryList,
+  setGlobalLanguage,
 };
 
 export type GlobalActionsType = ActionType<typeof globalActions>;

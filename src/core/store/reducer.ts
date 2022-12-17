@@ -1,4 +1,5 @@
 import { createReducer } from "typesafe-actions";
+import { strings } from "@core/assets";
 import { AppTabEnum } from "../const/AppTab";
 import { UserInfoModel } from "../models/UserInfoModel";
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
@@ -29,6 +30,7 @@ export const initState: BookPadAppState = {
   IS_LOGGED_IN: false,
   HOME_PAGE_CATEGORY_LIST: [],
   BOOK_LIBRARY_LIST: null,
+  GLOBAL_LANGUAGE: "English",
 };
 export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
   initState
@@ -134,6 +136,16 @@ export const reducer = createReducer<BookPadAppState, GlobalActionsType>(
       return {
         ...state,
         BOOK_LIBRARY_LIST: action.payload.bookLibrary,
+      };
+    }
+  )
+  .handleAction(
+    globalActions.setGlobalLanguage,
+    (state, action): BookPadAppState => {
+      strings.setLanguage(action.payload.language);
+      return {
+        ...state,
+        GLOBAL_LANGUAGE: action.payload.language,
       };
     }
   );

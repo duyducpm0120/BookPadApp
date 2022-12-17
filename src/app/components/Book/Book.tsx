@@ -53,7 +53,7 @@ export const Book = React.forwardRef(
                 backgroundColor: COLORS.secondary.light,
                 justifyContent: "center",
                 alignItems: "flex-start",
-                width: "80%",
+                width: "75%",
                 borderRadius: 20,
               }}
             >

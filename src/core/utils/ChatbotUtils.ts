@@ -17,16 +17,6 @@ export const convertToBotResponseModel = (response: any): BotResponseModel => {
     "queryResult.fulfillmentMessages[0].payload",
     null
   );
-  // try {
-  //   const botResponse = JSON.parse(message);
-  //   return BotResponseModel.instantiate(botResponse);
-  // } catch (err) {
-  //   return {
-  //     type: BotResponseType.TEXT,
-  //     message,
-  //   };
-  // }
-
   if (payload) {
     // nếu có payload thì trả về payload
     return BotResponseModel.instantiate(payload);

@@ -25,6 +25,7 @@ export const convertToBotResponseModel = (response: any): BotResponseModel => {
     // nếu không có payload thì trả về message - sys action default của bot
     type: BotResponseType.TEXT,
     message,
+    value: "",
   };
 };
 

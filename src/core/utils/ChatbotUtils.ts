@@ -10,15 +10,32 @@ export const convertToBotResponseModel = (response: any): BotResponseModel => {
     "queryResult.fulfillmentMessages[0].text.text[0]",
     {}
   );
-  try {
-    const botResponse = JSON.parse(message);
-    return BotResponseModel.instantiate(botResponse);
-  } catch (err) {
-    return {
-      type: BotResponseType.TEXT,
-      message,
-    };
+
+  // với các action cần xử lý, ta sẽ trả về payload
+  const payload = safeGet(
+    response,
+    "queryResult.fulfillmentMessages[0].payload",
+    null
+  );
+  // try {
+  //   const botResponse = JSON.parse(message);
+  //   return BotResponseModel.instantiate(botResponse);
+  // } catch (err) {
+  //   return {
+  //     type: BotResponseType.TEXT,
+  //     message,
+  //   };
+  // }
+
+  if (payload) {
+    // nếu có payload thì trả về payload
+    return BotResponseModel.instantiate(payload);
   }
+  return {
+    // nếu không có payload thì trả về message - sys action default của bot
+    type: BotResponseType.TEXT,
+    message,
+  };
 };
 
 export const convertToGiftedChatMessage = (params: {

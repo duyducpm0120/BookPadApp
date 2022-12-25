@@ -9,7 +9,7 @@ import { useMemo, useState } from "react";
 import type { User } from "react-native-gifted-chat";
 import { GiftedChat } from "react-native-gifted-chat";
 import { Dialogflow_V2 } from "react-native-dialogflow";
-import { getRecommendBooks } from "@core/services";
+import { getRecommendBooks, searchBookByCategory } from "@core/services";
 import { BOT } from "./const";
 import type { IChatbotMessage } from "./types";
 
@@ -20,7 +20,7 @@ export const useViewModel = (params: any) => {
   const [messages, setMessages] = useState<IChatbotMessage[]>([]);
   const { NickName, UserId, ProfilePicUrl } = USER_INFO;
   const [recommendBooks, setRecommendBooks] = useState<BookModel[]>([]);
-  const [recommendBooksPage, setRecommendBooksPage] = useState(0);
+  const [recommendBooksPage, setRecommendBooksPage] = useState(0); // page index of recommend books - use for show more option
 
   const USER: User = useMemo(() => {
     return {
@@ -36,7 +36,23 @@ export const useViewModel = (params: any) => {
         token: TOKEN,
         numberOfBooks: NUMBER_OF_RECOMMEND_BOOKS,
       });
-      setRecommendBooksPage(recommendBooksPage + 1);
+      setRecommendBooksPage(1);
+      setRecommendBooks(books);
+      return books.slice(0, NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE);
+    } catch (err) {
+      return [];
+    }
+  };
+
+  const getBookByCategory = async (category: number) => {
+    try {
+      const books = await searchBookByCategory({
+        token: TOKEN,
+        categoryId: category,
+        lastBookId: 0,
+        limit: NUMBER_OF_RECOMMEND_BOOKS,
+      });
+      setRecommendBooksPage(1);
       setRecommendBooks(books);
       return books.slice(0, NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE);
     } catch (err) {
@@ -76,7 +92,41 @@ export const useViewModel = (params: any) => {
   const handleBotRecommendMoreBookMessage = async (
     message: BotResponseModel
   ) => {
+    // handleBotTextMessage(message);
+    const newMessage = convertToGiftedChatMessage({
+      message: message.message,
+      index: messages.length + 2,
+      user: BOT,
+      type: message.type,
+      bookList: recommendBooks.slice(
+        recommendBooksPage * NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE,
+        (recommendBooksPage + 1) * NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE
+      ),
+    });
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, [newMessage])
+    );
+    setRecommendBooksPage(recommendBooksPage + 1);
+  };
+
+  const handleSearchBookByCategory = async (message: BotResponseModel) => {
     handleBotTextMessage(message);
+    const books = await getBookByCategory(Number(message.value));
+    const newMessage = convertToGiftedChatMessage({
+      message: message.message,
+      index: messages.length + 2,
+      user: BOT,
+      type: message.type,
+      bookList: books,
+    });
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, [newMessage])
+    );
+    setRecommendBooksPage(recommendBooksPage + 1);
+  };
+
+  const handleSearchBookByCategoryMore = async (message: BotResponseModel) => {
+    // handleBotTextMessage(message);
     const newMessage = convertToGiftedChatMessage({
       message: message.message,
       index: messages.length + 2,
@@ -97,12 +147,25 @@ export const useViewModel = (params: any) => {
     try {
       console.log("botResponse", botResponse);
       const botMessage = convertToBotResponseModel(botResponse);
-      if (botMessage.type === BotResponseType.TEXT) {
-        handleBotTextMessage(botMessage);
-      } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK) {
-        await handleBotRecommendBookMessage(botMessage);
-      } else if (botMessage.type === BotResponseType.RECOMMEND_BOOK_MORE) {
-        handleBotRecommendMoreBookMessage(botMessage);
+      console.log("bot converted Message", botMessage);
+      switch (botMessage.type) {
+        case BotResponseType.TEXT:
+          handleBotTextMessage(botMessage);
+          break;
+        case BotResponseType.RECOMMEND_BOOK:
+          await handleBotRecommendBookMessage(botMessage);
+          break;
+        case BotResponseType.RECOMMEND_BOOK_MORE:
+          handleBotRecommendMoreBookMessage(botMessage);
+          break;
+        case BotResponseType.SEARCH_BOOK_CATEGORY:
+          handleSearchBookByCategory(botMessage);
+          break;
+        case BotResponseType.SEARCH_BOOK_CATEGORY_MORE:
+          handleSearchBookByCategoryMore(botMessage);
+          break;
+        default:
+          break;
       }
     } catch (err) {
       console.log("bot response err", err);

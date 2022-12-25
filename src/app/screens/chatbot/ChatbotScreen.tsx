@@ -31,7 +31,12 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
     const { bubbleProps, currentMessage } = params;
     const bookList: BookModel[] = safeGetArray(currentMessage, "bookList", []);
     if (bookList.length === 0) {
-      if (currentMessage.type === BotResponseType.RECOMMEND_BOOK_MORE) {
+      console.log("currentMessage.type", currentMessage.type);
+      // nếu không có sách đề xuất
+      if (
+        currentMessage.type === BotResponseType.RECOMMEND_BOOK_MORE ||
+        currentMessage.type === BotResponseType.SEARCH_BOOK_CATEGORY_MORE
+      ) {
         return (
           <Bubble
             {...bubbleProps}
@@ -98,13 +103,25 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
       }
     );
     if (currentMessage.user._id === BOT._id) {
-      if (currentMessage.type === BotResponseType.TEXT)
-        return <Bubble {...bubbleProps} />;
-      if (
-        currentMessage.type === BotResponseType.RECOMMEND_BOOK ||
-        currentMessage.type === BotResponseType.RECOMMEND_BOOK_MORE
-      ) {
-        return renderRecommendBooks({ bubbleProps, currentMessage });
+      // if (currentMessage.type === BotResponseType.TEXT)
+      //   return <Bubble {...bubbleProps} />;
+      // if (
+      //   currentMessage.type === BotResponseType.RECOMMEND_BOOK ||
+      //   currentMessage.type === BotResponseType.RECOMMEND_BOOK_MORE
+      // ) {
+      //   return renderRecommendBooks({ bubbleProps, currentMessage });
+      // }
+
+      switch (currentMessage.type) {
+        case BotResponseType.TEXT:
+          return <Bubble {...bubbleProps} />;
+        case BotResponseType.RECOMMEND_BOOK:
+        case BotResponseType.RECOMMEND_BOOK_MORE:
+        case BotResponseType.SEARCH_BOOK_CATEGORY:
+        case BotResponseType.SEARCH_BOOK_CATEGORY_MORE:
+          return renderRecommendBooks({ bubbleProps, currentMessage });
+        default:
+          return <Bubble {...bubbleProps} />;
       }
     }
     return (

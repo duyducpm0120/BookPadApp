@@ -105,7 +105,7 @@ export const enStrings = {
   cancel: "Cancel",
   i_cant_find_suitable_books_for_you:
     "Sorry. I can't find suitable books for you",
-  that_is_all: "That is all",
+  that_is_all: "That is all we have for you",
   send: "Send",
   upload: "Upload",
   upload_image: "Upload image",

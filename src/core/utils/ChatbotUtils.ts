@@ -24,15 +24,28 @@ export const convertToBotResponseModel = (response: any): BotResponseModel => {
     null
   );
 
-  let parameters = "";
-  if (payload && payload.type === BotResponseType.SEARCH_BOOK_CATEGORY)
-    parameters = safeGetString(
-      response,
-      "queryResult.parameters.book_category",
-      ""
-    );
-
   if (payload) {
+    let parameters = "";
+    switch (
+      payload.type // với các action đặc biệt cần lấy thêm value từ response parameters
+    ) {
+      case BotResponseType.SEARCH_BOOK_BY_CATEGORY:
+        parameters = safeGetString(
+          response,
+          "queryResult.parameters.book_category",
+          ""
+        );
+        break;
+      case BotResponseType.SEARCH_BOOK_BY_AUTHOR:
+        parameters = safeGetString(
+          response,
+          "queryResult.parameters.author.name",
+          ""
+        );
+        break;
+      default:
+        break;
+    }
     // nếu có payload thì trả về payload với value là parameters
     return BotResponseModel.instantiate({ ...payload, value: parameters });
   }
@@ -40,7 +53,7 @@ export const convertToBotResponseModel = (response: any): BotResponseModel => {
     // nếu không có payload thì trả về message - sys action default của bot
     type: BotResponseType.TEXT,
     message,
-    value: parameters,
+    value: "",
   };
 };
 

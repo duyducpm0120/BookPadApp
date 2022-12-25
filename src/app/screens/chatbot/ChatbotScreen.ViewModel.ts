@@ -146,6 +146,43 @@ export const useViewModel = (params: any) => {
     setRecommendBooksPage(recommendBooksPage + 1);
   };
 
+  const handleSearchBookByAuthor = async (message: BotResponseModel) => {
+    handleBotTextMessage({
+      ...message,
+      message: message.message.replace("<author>", message.value),
+    }); // bot will send message first, then handle more actions
+    const books = await searchBookByValue(message.value);
+    const newMessage = convertToGiftedChatMessage({
+      message: message.message,
+      index: messages.length + 2,
+      user: BOT,
+      type: message.type,
+      bookList: books,
+    });
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, [newMessage])
+    );
+    setRecommendBooksPage(recommendBooksPage + 1);
+  };
+
+  const handleSearchBookByAuthorMore = async (message: BotResponseModel) => {
+    // handleBotTextMessage(message);
+    const newMessage = convertToGiftedChatMessage({
+      message: message.message,
+      index: messages.length + 2,
+      user: BOT,
+      type: message.type,
+      bookList: recommendBooks.slice(
+        recommendBooksPage * NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE,
+        (recommendBooksPage + 1) * NUMBER_OF_RECOMMEND_BOOKS_PER_PAGE
+      ),
+    });
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, [newMessage])
+    );
+    setRecommendBooksPage(recommendBooksPage + 1);
+  };
+
   const handleBotResponse = async (botResponse: any) => {
     try {
       console.log("botResponse", botResponse);
@@ -161,11 +198,17 @@ export const useViewModel = (params: any) => {
         case BotResponseType.RECOMMEND_BOOK_MORE:
           handleBotRecommendMoreBookMessage(botMessage);
           break;
-        case BotResponseType.SEARCH_BOOK_CATEGORY:
+        case BotResponseType.SEARCH_BOOK_BY_CATEGORY:
           handleSearchBookByCategory(botMessage);
           break;
-        case BotResponseType.SEARCH_BOOK_CATEGORY_MORE:
+        case BotResponseType.SEARCH_BOOK_BY_AUTHOR:
+          handleSearchBookByAuthor(botMessage);
+          break;
+        case BotResponseType.SEARCH_BOOK_BY_CATEGORY_MORE:
           handleSearchBookByCategoryMore(botMessage);
+          break;
+        case BotResponseType.SEARCH_BOOK_BY_AUTHOR_MORE:
+          handleSearchBookByAuthorMore(botMessage);
           break;
         default:
           break;

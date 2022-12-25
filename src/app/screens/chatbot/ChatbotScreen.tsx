@@ -30,12 +30,13 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
   }) => {
     const { bubbleProps, currentMessage } = params;
     const bookList: BookModel[] = safeGetArray(currentMessage, "bookList", []);
+
+    // nếu không có sách đề xuất
     if (bookList.length === 0) {
-      console.log("currentMessage.type", currentMessage.type);
-      // nếu không có sách đề xuất
       if (
         currentMessage.type === BotResponseType.RECOMMEND_BOOK_MORE ||
-        currentMessage.type === BotResponseType.SEARCH_BOOK_CATEGORY_MORE
+        currentMessage.type === BotResponseType.SEARCH_BOOK_BY_CATEGORY_MORE ||
+        currentMessage.type === BotResponseType.SEARCH_BOOK_BY_AUTHOR_MORE
       ) {
         return (
           <Bubble
@@ -57,6 +58,7 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
         />
       );
     }
+
     return (
       <FlatList
         data={bookList}
@@ -117,8 +119,10 @@ export const ChatbotScreen: React.FC<any> = (props: any) => {
           return <Bubble {...bubbleProps} />;
         case BotResponseType.RECOMMEND_BOOK:
         case BotResponseType.RECOMMEND_BOOK_MORE:
-        case BotResponseType.SEARCH_BOOK_CATEGORY:
-        case BotResponseType.SEARCH_BOOK_CATEGORY_MORE:
+        case BotResponseType.SEARCH_BOOK_BY_CATEGORY:
+        case BotResponseType.SEARCH_BOOK_BY_AUTHOR:
+        case BotResponseType.SEARCH_BOOK_BY_CATEGORY_MORE:
+        case BotResponseType.SEARCH_BOOK_BY_AUTHOR_MORE:
           return renderRecommendBooks({ bubbleProps, currentMessage });
         default:
           return <Bubble {...bubbleProps} />;

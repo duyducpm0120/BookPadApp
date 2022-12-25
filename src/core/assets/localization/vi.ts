@@ -116,4 +116,5 @@ export const viStrings: typeof enStrings = {
   upload_image_fail: "Tải ảnh lên thất bại",
   reading: "Đang đọc",
   wish_listed_books: "Đã lưu",
+  sorry_im_busy: "Sorry. I'm busy now. Please try again later",
 };

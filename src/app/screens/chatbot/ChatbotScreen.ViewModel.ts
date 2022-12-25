@@ -9,7 +9,7 @@ import { useMemo, useState } from "react";
 import type { User } from "react-native-gifted-chat";
 import { GiftedChat } from "react-native-gifted-chat";
 import { Dialogflow_V2 } from "react-native-dialogflow";
-import { getRecommendBooks, searchBookByCategory } from "@core/services";
+import { getRecommendBooks, searchBook } from "@core/services";
 import { BOT } from "./const";
 import type { IChatbotMessage } from "./types";
 
@@ -44,11 +44,11 @@ export const useViewModel = (params: any) => {
     }
   };
 
-  const getBookByCategory = async (category: number) => {
+  const searchBookByValue = async (value: string) => {
     try {
-      const books = await searchBookByCategory({
+      const books = await searchBook({
         token: TOKEN,
-        categoryId: category,
+        searchValue: value,
         lastBookId: 0,
         limit: NUMBER_OF_RECOMMEND_BOOKS,
       });
@@ -74,7 +74,7 @@ export const useViewModel = (params: any) => {
   };
 
   const handleBotRecommendBookMessage = async (message: BotResponseModel) => {
-    handleBotTextMessage(message);
+    handleBotTextMessage(message); // bot will send message first, then handle more actions
     const books = await getUserRecommendBooks();
     const newMessage = convertToGiftedChatMessage({
       message: message.message,
@@ -110,8 +110,11 @@ export const useViewModel = (params: any) => {
   };
 
   const handleSearchBookByCategory = async (message: BotResponseModel) => {
-    handleBotTextMessage(message);
-    const books = await getBookByCategory(Number(message.value));
+    handleBotTextMessage({
+      ...message,
+      message: message.message.replace("<category>", message.value),
+    }); // bot will send message first, then handle more actions
+    const books = await searchBookByValue(message.value);
     const newMessage = convertToGiftedChatMessage({
       message: message.message,
       index: messages.length + 2,

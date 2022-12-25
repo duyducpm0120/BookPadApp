@@ -113,12 +113,12 @@ export const searchBook = async ({
   token,
   lastBookId,
   limit,
-  bookName,
+  searchValue,
 }: {
   token: string;
   lastBookId: number;
   limit: number;
-  bookName: string;
+  searchValue: string;
 }) => {
   const endPoint = searchBookEndPoint;
   const res = await axios.post(
@@ -126,7 +126,7 @@ export const searchBook = async ({
     {
       limit,
       last: Number(lastBookId),
-      searchString: bookName,
+      searchString: searchValue,
     },
     {
       headers: {

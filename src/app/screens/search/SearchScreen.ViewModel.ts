@@ -33,7 +33,7 @@ export const useViewModel = (params: {
         token: TOKEN,
         lastBookId: 0,
         limit: 10,
-        bookName: searchText,
+        searchValue: searchText,
       });
       if (res.length === 0) {
         hideGlobalLoading();
@@ -59,7 +59,7 @@ export const useViewModel = (params: {
         token: TOKEN,
         lastBookId,
         limit: 10,
-        bookName: searchText,
+        searchValue: searchText,
       });
       if (res.length === 0) {
         return;

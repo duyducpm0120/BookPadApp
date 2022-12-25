@@ -114,4 +114,5 @@ export const enStrings = {
   profile: "Profile",
   reading: "Reading",
   wish_listed_books: "Wishlisted books",
+  sorry_im_busy: "Sorry. I'm busy now. Please try again later",
 };

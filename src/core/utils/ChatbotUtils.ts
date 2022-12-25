@@ -14,7 +14,7 @@ export const convertToBotResponseModel = (response: any): BotResponseModel => {
   const message = safeGet(
     response,
     "queryResult.fulfillmentMessages[0].text.text[0]",
-    strings.i_cant_find_suitable_books_for_you // default message if bot can't response
+    strings.sorry_im_busy // default message if bot can't response
   );
 
   // với các action cần xử lý, ta sẽ trả về payload

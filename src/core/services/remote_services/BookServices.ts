@@ -18,6 +18,7 @@ const getBookReviewEndPoint = `${END_POINT}bookReview/getReviewsByBook`;
 const createBookReviewEndPoint = `${END_POINT}bookReview/create`;
 const deleteBookReviewEndPoint = `${END_POINT}bookReview/delete`;
 const getRecommendBookEndPoint = `${END_POINT}book/getRecommendation`;
+const getBestSellerBook = `${END_POINT}book/getTrendingBooks`;
 
 export const useGetBookDownLoadLink = (params: { bookId: string }) => {
   const getBookDownLoadEndPoint = async ({
@@ -228,6 +229,30 @@ export const getRecommendBooks = async ({
   numberOfBooks: number;
 }) => {
   const endPoint = getRecommendBookEndPoint;
+  const res = await axios.post(
+    endPoint,
+    {
+      num: numberOfBooks,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const bookData = safeGetArray(res, "data.books", []);
+  const returnData = BookModel.instantiateList(bookData);
+  return returnData;
+};
+
+export const getBestSellerBooks = async ({
+  token,
+  numberOfBooks,
+}: {
+  token: string;
+  numberOfBooks: number;
+}) => {
+  const endPoint = getBestSellerBook;
   const res = await axios.post(
     endPoint,
     {

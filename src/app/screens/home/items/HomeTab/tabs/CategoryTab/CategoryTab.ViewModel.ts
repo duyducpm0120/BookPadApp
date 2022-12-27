@@ -8,8 +8,12 @@ export const useViewModel = () => {
   const { TOKEN } = useGlobalState();
 
   const getCategoryList = async () => {
-    const categories = await getCategories({ token: TOKEN });
-    setCategoryList(categories);
+    try {
+      const categories = await getCategories({ token: TOKEN });
+      setCategoryList(categories);
+    } catch (err) {
+      //
+    }
   };
 
   useMount(() => {

@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import { View } from "react-native";
 import React from "react";
-import { categoryColors, getTextColor } from "@core";
-import { FONT_SIZE } from "@app/styles";
+import { categoryColors } from "@core";
+import { COLORS, FONT_SIZE, SPACE } from "@app/styles";
 import { BPText } from "../BPText";
 
 type CategoryTagProps = {
@@ -16,19 +16,27 @@ export const CategoryTag = ({ category }: CategoryTagProps) => {
   const color = isCategoryValid
     ? categoryColors[category]
     : defaultBackgroundColor;
-  const textColor = getTextColor(color);
+  // const textColor = getTextColor(color);
+  const textColor = color;
 
   return (
     <View
       style={{
-        backgroundColor: color,
+        backgroundColor: COLORS.white,
         paddingVertical: 4,
         paddingHorizontal: 8,
         borderRadius: 50,
         marginHorizontal: 4,
+        borderColor: color,
+        borderWidth: 2,
+        marginBottom: SPACE.spacing8,
       }}
     >
-      <BPText fontSize={FONT_SIZE.fontSize12} style={{ color: textColor }}>
+      <BPText
+        fontSize={FONT_SIZE.fontSize12}
+        style={{ color: textColor }}
+        fontWeight="500"
+      >
         {category}
       </BPText>
     </View>

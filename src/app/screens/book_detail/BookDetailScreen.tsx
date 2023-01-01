@@ -116,7 +116,15 @@ export const BookDetailScreen: React.FC<any> = (
             </BPText>
           </View>
           <BlankSpacer height={SPACE.spacing8} />
-          <View style={appStyle.rowFullWidthCenterContainer}>
+          <View
+            style={[
+              appStyle.rowFullWidthCenterContainer,
+              {
+                maxWidth: "80%",
+                flexWrap: "wrap",
+              },
+            ]}
+          >
             {bookData.Categories.map((item, index) => {
               return (
                 <View key={-index}>

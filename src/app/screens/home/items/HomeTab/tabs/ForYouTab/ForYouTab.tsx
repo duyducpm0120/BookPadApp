@@ -43,7 +43,7 @@ export const ForYouTab = (props: ForYouTabProps) => {
           renderSectionHeader={({ section: { title, data } }) => (
             <>
               <BPText fontSize={FONT_SIZE.fontSize24} fontWeight="bold">
-                {title}
+                {data.length > 0 ? title : ""}
               </BPText>
               <BlankSpacer height={SPACE.spacing12} />
               {renderList(data)}

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { BaseScreen, BlankSpacer, BPText } from "@app/components";
+import { BaseScreen, BlankSpacer, BPText, CategoryTag } from "@app/components";
 import { appStyle, COLORS, FONT_SIZE, SPACE, TEXT_COLOR } from "@app/styles";
 import { strings, useGlobalLoading, useGlobalNavigation } from "@core";
 import { LOCAL_ICONS } from "@core/assets/icons/local_icon";
@@ -115,7 +115,17 @@ export const BookDetailScreen: React.FC<any> = (
               {`${ReviewStars}/5`}
             </BPText>
           </View>
-          <BlankSpacer height={SPACE.spacing16} />
+          <BlankSpacer height={SPACE.spacing8} />
+          <View style={appStyle.rowFullWidthCenterContainer}>
+            {bookData.Categories.map((item, index) => {
+              return (
+                <View key={-index}>
+                  <CategoryTag category={item.CategoryName} />
+                </View>
+              );
+            })}
+          </View>
+          <BlankSpacer height={SPACE.spacing8} />
           <BPText
             fontSize={FONT_SIZE.fontSize14}
             color={TEXT_COLOR.light}

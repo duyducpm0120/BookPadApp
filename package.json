@@ -44,12 +44,14 @@
     "react-native-tab-view": "^3.3.0",
     "react-native-voice": "^0.3.0",
     "react-native-webview": "^11.23.1",
+    "tinycolor2": "^1.5.1",
     "typesafe-actions": "5.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@babel/runtime": "^7.20.1",
     "@react-native-community/eslint-config": "^3.2.0",
+    "@types/chroma-js": "^2.1.4",
     "@types/jest": "^27.1.3",
     "@types/lodash": "^4.14.161",
     "@types/node": "^18.11.9",

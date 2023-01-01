@@ -10,3 +10,4 @@ export * from "./Author";
 export * from "./Category";
 export * from "./EmptyScreen";
 export * from "./Review";
+export * from "./Tag";

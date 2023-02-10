@@ -13,6 +13,7 @@ import {
   CategoryTab,
   ForYouTab,
   MyTabBar,
+  NewBookTab,
 } from "./tabs";
 
 const Tab = createMaterialTopTabNavigator();
@@ -87,7 +88,7 @@ export const HomeTab = (props: any) => {
       >
         <Tab.Screen name={strings.for_you} component={ForYouTabComp} />
         <Tab.Screen name={strings.best_sellers} component={BestSellerTabComp} />
-        <Tab.Screen name={strings.new_releases} component={ForYouTabComp} />
+        <Tab.Screen name={strings.new_releases} component={NewBookTab} />
         <Tab.Screen name={strings.categories} component={CategoryTabComp} />
         <Tab.Screen name={strings.authors} component={AuthorTabComp} />
       </Tab.Navigator>

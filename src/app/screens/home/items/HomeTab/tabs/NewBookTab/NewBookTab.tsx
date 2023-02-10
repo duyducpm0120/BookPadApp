@@ -4,11 +4,11 @@ import type { BookModel } from "@core";
 import { useGlobalNavigation } from "@core";
 import React from "react";
 import { FlatList, SectionList, useWindowDimensions, View } from "react-native";
-import { useViewModel } from "./BestSellerTab.ViewModel";
+import { useViewModel } from "./NewBookTab.ViewModel";
 import { styles } from "./style";
-import type { NewBookTabProps } from "./types";
+import type { BestSellerTabProps } from "./types";
 
-export const BestSellerTab = (props: NewBookTabProps) => {
+export const NewBookTab = (props: BestSellerTabProps) => {
   const { navigateToBookDetailScreen } = useGlobalNavigation();
   // const { books } = props;
   const { selectors } = useViewModel();

@@ -1,9 +1,9 @@
-export type BestSellerTabProps = {
+export type NewBookTabProps = {
   //
   // books: BookModel[];
 };
 
-export type BestSellerTabViewModelProps = {
+export type NewBookTabViewModelProps = {
   //
   // books: BookModel[];
 };

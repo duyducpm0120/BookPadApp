@@ -53,7 +53,7 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
         }}
         keyExtractor={(item) => item.BookReviewId + item.Owner.NickName}
         onEndReached={() => {
-          loadMoreReview();
+          // loadMoreReview();
         }}
         ListHeaderComponent={listHeader()}
         contentContainerStyle={appStyle.containerPadding16}

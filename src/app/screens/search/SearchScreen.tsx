@@ -38,7 +38,7 @@ export const SearchScreen: React.FC<any> = (props: SearchScreenProps) => {
       return (
         <BPTextInput
           label=""
-          placeholder="Search book name"
+          placeholder="Search by name, author,..."
           style={{
             width: "70%",
             backgroundColor: COLORS.transparent,

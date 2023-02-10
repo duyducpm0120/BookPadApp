@@ -42,6 +42,7 @@ export const searchBookByCategory = async ({
       },
     }
   );
+  console.log("get book by cartegoryasdasd", res);
   const bookData = safeGetArray(res, "data.books", []);
   const returnData = BookModel.instantiateList(bookData);
   return returnData;

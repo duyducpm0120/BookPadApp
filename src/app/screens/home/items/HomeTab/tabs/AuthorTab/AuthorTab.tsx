@@ -24,7 +24,7 @@ export const AuthorTab = (props: any) => {
   };
   const navigateToSearch = (item: BookAuthor) => {
     navigateToSearchScreen({
-      type: SearchScreenType.CATEGORY,
+      type: SearchScreenType.AUTHOR,
       keyword: item.AuthorName,
       id: Number(item.AuthorId),
     });

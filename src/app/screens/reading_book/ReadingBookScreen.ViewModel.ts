@@ -1,6 +1,6 @@
 import type { BookModel } from "@core";
 import { useMount, useGlobalState } from "@core";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {
   getBookReadStatus,
   saveBookReadStatus,
@@ -15,14 +15,18 @@ export const useViewModel = (params: { bookData: BookModel }) => {
   });
   const { TOKEN } = useGlobalState();
   const [currentLocation, setCurrentLocation] = useState<string>("");
-  const currentProcess = useRef<number>(0);
-
+  const [currentProgress, setCurrentProgress] = useState<number>(0);
   const [bookDownloadLink, setBookDownloadLink] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
   const getReadStatus = async () => {
     try {
       const status = await getBookReadStatus({ bookId: BookId });
       setCurrentLocation(status.currentLocation);
+      setCurrentProgress(status.progress);
+      setTotalPage(status.totalLocation);
+      setCurrentPage(status.currentPage);
     } catch (err) {
       // console.log("get read status err", err);
     }
@@ -31,12 +35,16 @@ export const useViewModel = (params: { bookData: BookModel }) => {
   const saveReadStatus = async (_params: {
     currentLocation: string;
     progress: number;
+    totalLocation: number;
+    currentPage: number;
   }) => {
     try {
       await saveBookReadStatus({
         bookId: BookId,
         currentLocation: _params.currentLocation,
         progress: _params.progress,
+        totalLocation: _params.totalLocation,
+        currentPage: _params.currentPage,
       });
     } catch (err) {
       console.log("saveReadStatus err", err);
@@ -54,6 +62,11 @@ export const useViewModel = (params: { bookData: BookModel }) => {
     saveReadStatus,
     getReadStatus,
     currentLocation,
-    currentProcess,
+    currentProgress,
+    setCurrentLocation,
+    currentPage,
+    totalPage,
+    setCurrentPage,
+    setTotalPage,
   };
 };

@@ -11,19 +11,26 @@ export interface BookReadStatus {
   bookId: string;
   currentLocation: string;
   progress: number;
+  totalLocation: number;
+  currentPage: number;
 }
 
 export const saveBookReadStatus = async (params: {
   bookId: string;
   currentLocation: string;
   progress: number;
+  totalLocation: number;
+  currentPage: number;
 }) => {
-  const { bookId, currentLocation, progress } = params;
+  const { bookId, currentLocation, progress, totalLocation, currentPage } =
+    params;
 
   const readStatus: BookReadStatus = {
     bookId,
     currentLocation,
     progress,
+    totalLocation,
+    currentPage,
   };
 
   // console.log("read status asdasd", readStatus);
@@ -44,10 +51,14 @@ export const getBookReadStatus = async (params: { bookId: string }) => {
   const id = safeGetString(json, "bookId", "");
   const currentLocation = safeGetString(json, "currentLocation", "");
   const progress = safeGetNumber(json, "progress", 0);
+  const totalLocation = safeGetNumber(json, "totalLocation", 0);
+  const currentPage = safeGetNumber(json, "currentPage", 0);
   const bookReadStatus: BookReadStatus = {
     bookId: id,
     currentLocation,
     progress,
+    totalLocation,
+    currentPage,
   };
   // console.log("bookReadStatus asdasd", bookReadStatus);
   return bookReadStatus;

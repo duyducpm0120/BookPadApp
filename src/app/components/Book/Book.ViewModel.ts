@@ -11,6 +11,8 @@ export const useViewModel = (params: { data: BookModel }) => {
     bookId: data.BookId,
     progress: 0,
     currentLocation: "",
+    currentPage: 0,
+    totalLocation: 0,
   });
   const getReadStatus = async () => {
     try {

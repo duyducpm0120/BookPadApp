@@ -45,7 +45,6 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
                 }
                 onPress={() => {
                   setCurrentReview(item);
-                  console.log("select review", item);
                 }}
                 key={-index}
                 isSelect={item === currentReview}

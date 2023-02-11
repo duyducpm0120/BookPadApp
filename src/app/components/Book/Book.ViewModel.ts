@@ -17,7 +17,7 @@ export const useViewModel = (params: { data: BookModel }) => {
       const status = await getBookReadStatus({ bookId: data.BookId });
       setReadStatus(status);
     } catch (err) {
-      console.log("get read status err", err);
+      // console.log("get read status err", err);
     }
   };
   useMount(async () => {

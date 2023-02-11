@@ -11,3 +11,4 @@ export * from "./Category";
 export * from "./EmptyScreen";
 export * from "./Review";
 export * from "./Tag";
+export * from "./ReviewTag";

@@ -85,7 +85,7 @@ export class BookModel {
     );
     const languages = safeGet(json, "Languages", []);
     const authors = safeGetArray(json, "Authors", []);
-    const reviewStars = safeGetNumber(json, "ReviewStars", 3.5);
+    const reviewStars = safeGetNumber(json, "ReviewStars", 0);
     const categories = safeGetArray(json, "Categories", []).map((item: any) =>
       CategoryModel.instantiate(item)
     );

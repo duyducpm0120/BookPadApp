@@ -24,7 +24,7 @@ export const useViewModel = (params: { bookData: BookModel }) => {
       const status = await getBookReadStatus({ bookId: BookId });
       setCurrentLocation(status.currentLocation);
     } catch (err) {
-      console.log("get read status err", err);
+      // console.log("get read status err", err);
     }
   };
 

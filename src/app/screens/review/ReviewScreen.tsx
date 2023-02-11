@@ -1,14 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   BaseScreen,
   BlankSpacer,
   Book,
   EmptyScreen,
   Review,
+  ReviewTag,
 } from "@app/components";
 import { appStyle, SPACE } from "@app/styles";
 import { strings, useGlobalNavigation } from "@core";
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, ScrollView } from "react-native";
 import { useViewModel } from "./ReviewScreen.viewModel";
 import type { ReviewScreenProps } from "./type";
 
@@ -20,6 +22,49 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
       bookData,
     });
   const { navigateToWriteReviewScreen } = useGlobalNavigation();
+  const reviewArr = ["All", "1", "2", "3", "4", "5"];
+  const [currentReview, setCurrentReview] = React.useState("All");
+
+  const renderReviewFilter = () => {
+    return (
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {reviewArr.map((item, index) => {
+          return (
+            <>
+              <BlankSpacer width={SPACE.spacing4} />
+              <ReviewTag
+                star={String(item)}
+                total={
+                  item === "All"
+                    ? String(reviews.length)
+                    : String(
+                        reviews.filter(
+                          (i) => i.BookReviewScore === Number(item)
+                        ).length
+                      )
+                }
+                onPress={() => {
+                  setCurrentReview(item);
+                  console.log("select review", item);
+                }}
+                key={-index}
+                isSelect={item === currentReview}
+                hideStar={item === "All"}
+              />
+              <BlankSpacer width={SPACE.spacing4} />
+            </>
+          );
+        })}
+      </ScrollView>
+    );
+  };
+
+  const displayReviews = reviews.filter((item) => {
+    if (currentReview === "All") {
+      return true;
+    }
+    return item.BookReviewScore === Number(currentReview);
+  });
 
   const listHeader = () => {
     return (
@@ -32,6 +77,8 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
           }}
           isHorizontal
         />
+        {renderReviewFilter()}
+        <BlankSpacer height={SPACE.spacing16} />
       </>
     );
   };
@@ -39,7 +86,7 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
   const renderReviewList = () => {
     return (
       <FlatList
-        data={reviews}
+        data={displayReviews}
         renderItem={({ item }) => {
           return (
             <Review
@@ -61,6 +108,7 @@ export const ReviewScreen: React.FC<any> = (props: ReviewScreenProps) => {
       />
     );
   };
+
   return (
     <BaseScreen
       tittle={strings.reviews}
